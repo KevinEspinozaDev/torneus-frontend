@@ -17,6 +17,14 @@
     width: 100%;
 }
 
+.registroLink{
+    color: blue;
+}
+.registroLink:hover{
+    cursor: pointer;
+
+}
+
 /* Mobile */
 @media screen and (max-width: 600px) {
     .login-container{

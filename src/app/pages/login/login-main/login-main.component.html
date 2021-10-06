@@ -1,31 +1,51 @@
 <div class="background">
 
     <div class="login-container p-5">
-        <div class="row mt-4 align-items-center">
+        <div class="row mt-3 align-items-center">
             <h1 class="col-9">Iniciar Sesión</h1>
             <img src="./../../../../assets/images/Logo Torneus 2.svg" widht="60px" height="80px" class="col-3" alt="Logo Torneus">
         </div>
         
-        <div class="row  mt-4">
-            <div class="col-12">
-                <mat-form-field class="input" appearance="fill">
-                    <mat-label>Nombre de Usuario</mat-label>
-                    <input matInput placeholder="Escribe tu nombre de usuario...">
-                </mat-form-field>
+        <form [formGroup]="loginForm">
+            <div class="row  mt-4">
+                <div class="col-12">
+                    <mat-form-field class="input" appearance="fill">
+                        <mat-label>Nombre de Usuario</mat-label>
+                        <input matInput formControlName="nombreUsuario" placeholder="Escribe tu nombre de usuario...">
+                    
+                        <mat-error *ngIf="loginForm.controls.nombreUsuario.errors?.required">
+                            Ingresa un nombre de usuario.
+                        </mat-error>
+                        <mat-error *ngIf="loginForm.controls.nombreUsuario.errors?.minlength">
+                            Ingresa al menos 4 caracteres.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 mt-2">
+                    <mat-form-field class="input" appearance="fill">
+                        <mat-label>Contraseña</mat-label>
+                        <input type="password" matInput formControlName="password" placeholder="Escribe tu contraseña...">
+                    
+                        <mat-error *ngIf="loginForm.controls.password.errors?.required">
+                            Ingresa una contraseña.
+                        </mat-error>
+                        <mat-error *ngIf="loginForm.controls.nombreUsuario.errors?.minlength">
+                            Ingresa al menos 6 caracteres.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 mt-3">
+                    <button mat-raised-button (click)="login()" type="submit" class="input btn-primary">Iniciar Sesión</button>
+                </div>
+
+                <mat-progress-bar *ngIf="loginOk" style="margin-bottom: 16px; margin-top: 16px;" color="primary" mode="indeterminate">
+                </mat-progress-bar>
+
+                <div class="col-12 mt-3 text-center align-items-center">
+                    ¿No tienes cuenta? <span [routerLink]="'/register'" class="link-primary"><b>Regístrate</b></span>
+                </div>
             </div>
-            <div class="col-12 mt-2">
-                <mat-form-field class="input" appearance="fill">
-                    <mat-label>Contraseña</mat-label>
-                    <input type="password" matInput placeholder="Escribe tu contraseña...">
-                </mat-form-field>
-            </div>
-            <div class="col-12 mt-3">
-                <button mat-raised-button class="input" color="primary">Iniciar Sesión</button>
-            </div>
-            <div class="col-12 mt-5 text-center align-items-center">
-                <a href="">Registrarme</a>
-            </div>
-        </div>
+        </form>
         
     </div>
 

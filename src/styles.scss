@@ -1,16 +1,171 @@
 @import "~@angular/material/theming";
 @include mat-core();
+/* html y body de toda la aplicación */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  /* Safari/Chrome, other WebKit */
+  -webkit-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  -moz-box-sizing: border-box;
+  /* Opera/IE 8+ */
+  box-sizing: border-box;
+  margin: 0;
+  overflow: hidden;
+}
 
+/* Tipografía */
+body { margin: 0; font-family: "Nunito", sans-serif !important; }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: "Varela Round", sans-serif !important; }
+$custom-typography: mat-typography-config(
+  $font-family: "'Nunito', sans-serif",
+);
+@include angular-material-typography($custom-typography);
 
+/** APP COLORS **/
+// USO: background-color: var(--primary-color);
 :root {
-    --primary-color: #19458d;
-    --primary-color-013: rgb(100, 136, 106, 0.129);
-    --secundary-color: #00a8e0;
+    --primary-color: #4361EE;
+    --primary-color-013: #003CDD;
+    --secundary-color: #800080;
+    --accent-color: #FFD275;
     --error-color: #d51a67;
     --error-color-013: rgba(238, 46, 49, 0.129);
     --warning-color: #f7c30d;
     --warning-color-013: #ff991421;
-  }
+}
+
+/* Colores en Material */
+$primary: (
+    50 : #e8ecfd,
+    100 : #c7d0fa,
+    200 : #a1b0f7,
+    300 : #7b90f3,
+    400 : #5f79f1,
+    500 : #4361ee,
+    600 : #3d59ec,
+    700 : #344fe9,
+    800 : #2c45e7,
+    900 : #1e33e2,
+    A100 : #ffffff,
+    A200 : #e5e7ff,
+    A400 : #b2b9ff,
+    A700 : #98a2ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+$secundary: (
+    50 : #f0e0f0,
+    100 : #d9b3d9,
+    200 : #c080c0,
+    300 : #a64da6,
+    400 : #932693,
+    500 : #800080,
+    600 : #780078,
+    700 : #6d006d,
+    800 : #630063,
+    900 : #500050,
+    A100 : #ff83ff,
+    A200 : #ff50ff,
+    A400 : #ff1dff,
+    A700 : #ff03ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+$accent: (
+    50 : #fffaee,
+    100 : #fff2d6,
+    200 : #ffe9ba,
+    300 : #ffe09e,
+    400 : #ffd98a,
+    500 : #ffd275,
+    600 : #ffcd6d,
+    700 : #ffc762,
+    800 : #ffc158,
+    900 : #ffb645,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #fff7ec,
+    A700 : #ffedd3,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+// Primary
+$torneus-primary: mat-palette($primary);
+// secundary
+$torneus-secundary: mat-palette($secundary);
+// accent
+$torneus-accent: mat-palette($accent);
+// Warn
+$torneus-warn: mat-palette($accent);
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$torneus-theme: mat-light-theme(
+  (
+    color: (
+      primary: $torneus-primary,
+      secundary: $torneus-secundary,
+      accent: $torneus-accent,
+      warn: $torneus-warn,
+    ),
+  )
+);
+@include angular-material-theme($torneus-theme);
+
+
+/* Colores personalizados de objetos */
+.btn-primary{
+  background-color: var(--primary-color) !important;
+  color: #FFFFFF !important;
+}
+
+.link-primary{
+  color: var(--primary-color) !important;
+}
+.link-primary:hover{
+  color: var(--primary-color-013) !important;
+  cursor: pointer;
+}
