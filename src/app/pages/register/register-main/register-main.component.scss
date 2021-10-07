@@ -5,3 +5,51 @@
     height: 100%;
     display: flex;
 }
+
+.container{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 16px;
+}
+
+.roles{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: stretch;
+    button{
+        width: 30%;
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .container{
+        width: 95%;
+        height: 80%;
+    }
+}
+
+/* Tablets y monitores pequeños */
+@media (min-width: 600px) and (max-width: 920px) {
+    .container{
+        width: 80%;
+        height: 75%;
+    }
+}
+
+/* PC */
+@media (min-width: 920px){
+    .container{
+        width: 75%;
+        height: 65%;
+    }
+}
