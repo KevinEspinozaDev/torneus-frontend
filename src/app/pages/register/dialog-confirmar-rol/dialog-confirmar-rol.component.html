@@ -1,0 +1,10 @@
+<div class="container">
+    <h1 mat-dialog-title>Confirmar Rol - {{nombreRol}}</h1>
+    <div mat-dialog-content>
+        ¿Estás seguro/a de que te quieres registrar como <b>{{nombreRol}}</b> ?
+    </div>
+    <div mat-dialog-actions class="containerAcciones">
+        <button mat-button mat-dialog-close>Cancelar</button>
+        <button [routerLink]="'/register/register-formulario'" (click)="confirmar()" mat-raised-button color="primary">Confirmar</button>
+    </div>
+</div>

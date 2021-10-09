@@ -13,9 +13,15 @@
 }
 
 .title{
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    flex-direction: row;
     margin-bottom: 16px;
+    align-items: center !important;
+
+    .tituloCardRol{
+        margin-right: auto;
+        margin-left: auto;
+    }
 }
 
 .roles{
@@ -23,10 +29,36 @@
     display: flex;
     justify-content: space-between;
     align-content: stretch;
-    button{
+    .buttonRol{
         width: 30%;
         margin-top: 6px;
         margin-bottom: 6px;
+
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        opacity: 0.75;
+        .nombreRolButton{
+            opacity: 2;
+            text-shadow: -1px 1px 0 #000,
+                          1px 1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px -1px 0 #000;
+        }
+    }
+
+    .buttonRol:hover{
+        opacity: 1 !important;
+    }
+
+    #jugador{
+        background-image: url("../../../../assets/images/jugador2.jpg");
+    }
+    #equipo{
+        background-image: url("../../../../assets/images/equipo2.jpg");
+    }
+    #organizador{
+        background-image: url("../../../../assets/images/organizador2.jpeg");
     }
 }
 
@@ -36,6 +68,15 @@
         width: 95%;
         height: 80%;
     }
+    .roles{
+        display: flex;
+        flex-direction: column;
+
+        .buttonRol{
+            width: 100% !important;
+            height: 100%;
+        }
+    }
 }
 
 /* Tablets y monitores pequeños */
@@ -44,12 +85,21 @@
         width: 80%;
         height: 75%;
     }
+    .roles{
+        display: flex;
+        flex-direction: column;
+
+        .buttonRol{
+            width: 100% !important;
+            height: 100%;
+        }
+    }
 }
 
 /* PC */
 @media (min-width: 920px){
     .container{
         width: 75%;
-        height: 65%;
+        height: 55%;
     }
 }
