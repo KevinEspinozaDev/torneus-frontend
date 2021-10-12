@@ -1,0 +1,37 @@
+.land-paneles{
+    width:100%;
+    background:url("/assets/images/landing-3.jpg");
+    background-size: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 10% 0;
+}
+.land-accordion{
+    width:70%;
+}
+
+h1, h2, h3, h4, h5, h6{
+    margin:0;
+}
+.land-toggle-title{
+    background:rgba(0, 0, 0, 0.5);
+}
+.land-toggle-title h1,
+.land-toggle-title p{
+    color:white;
+}
+.land-toggle-title p{
+    padding-top: 3%;
+}
+/*Solo escritorio*/
+@media only screen and (min-width:720px){
+    .land-paneles{
+        height:100%;
+    }
+}
+/*Celulares*/
+@media only screen and (max-width:720px){
+    .land-accordion{
+        width:90%;
+    }
+}
