@@ -1,0 +1,29 @@
+.land-ventajas{
+    width:100%;
+    margin:0;
+    background:#2c1e4f;
+    padding:50px;
+}
+.contenedor-ventajas{
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+.contenedor-ventajas h3{
+    color:#FFD275;
+}
+/*Solo escritorio*/
+@media only screen and (min-width:720px){
+    .contenedor-ventajas{
+        padding: 0 100px;
+    }
+    .land-ventajas{
+        height:110%;
+    }
+}
+/*Celulares*/
+@media only screen and (max-width:720px){
+    .contenedor-ventajas{
+        margin-bottom:50px;
+    }
+}

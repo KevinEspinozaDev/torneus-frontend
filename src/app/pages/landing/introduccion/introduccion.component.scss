@@ -1,0 +1,64 @@
+.land-intro{
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/login-background.png');
+    overflow-x: hidden;
+}
+.land-row{
+    width:100%;
+}
+.land-intro .logo-torneus{
+    width:200px;
+    margin:30px 100px;
+}
+
+.land-text{
+    padding:0 50px;
+}
+.torneus-subtitle{
+    font-size:40px;
+    font-weight:bold;
+}
+.torneus-desc{
+    font-size:30px;
+}
+
+.land-intro-right{
+    position:relative;
+    align-items: center;
+}
+
+/*Solo Escritorio*/
+@media only screen and (min-width:768px) {
+    .land-intro-right img{
+        position:absolute;
+        right:-80px;
+        height:400px;
+        margin-top:130px;
+        box-shadow: 0px 7px 10px 2px black;
+        border-radius: 10px;
+    }
+}
+
+/*Celulares*/
+@media only screen and (max-width:768px) {
+    .land-intro .logo-torneus{
+        width:100px;
+        margin:10% auto;
+        display:block;
+    }
+    .torneus-subtitle{
+        font-size:24px;
+    }
+    .torneus-desc{
+        font-size:20px;
+    }
+    .land-intro-right img{
+        width:100%;
+        height:auto;
+        margin-left: 3%;
+        margin-top: 20%;
+        box-shadow: 0px 7px 10px 2px black;
+        border-radius: 10px;
+    }
+}
