@@ -26,7 +26,6 @@ export class RegisterMainComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.idRolElegido = null;
-      console.log('Rol elegido: '+this.idRolElegido);
     });
   }
 

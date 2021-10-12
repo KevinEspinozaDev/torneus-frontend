@@ -9,8 +9,8 @@ const routes: Routes = [
         path: '', component: RegisterMainComponent
     },
     {
-      path: 'register-formulario', component: RegisterFormularioComponent
-    }
+      path: 'register-formulario/:id', component: RegisterFormularioComponent, pathMatch : 'full'
+    },
 ];
 
 @NgModule({
