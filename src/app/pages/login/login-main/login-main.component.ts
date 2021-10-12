@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-main',
@@ -7,7 +8,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginMainComponent implements OnInit {
 
-  constructor() { }
+  loginForm: FormGroup;
+  loginOk: any;
+
+  constructor(
+    private formBuilder: FormBuilder,
+  ) {
+    this.loginForm = this.formBuilder.group({
+      email: new FormControl('', [
+        Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3}$"),
+        Validators.required
+      ]),
+      password: new FormControl('', [
+        Validators.minLength(6),
+        Validators.required
+      ]),
+      remember: new FormControl('',[]),
+    });
+   }
+
+  login() : any{
+    this.loginOk = true;
+    /*
+    this.loginIn = true;
+    this.authService.login(this.loginForm.controls.dni.value, this.loginForm.controls.userPass.value)
+      .subscribe(
+        res => {
+          this.loginIn = false;
+          this.authService.setDataLogin(res.data.access_token);
+          this.router.navigateByUrl('');
+        },
+        err => {
+          this.loginIn = false;
+          console.log(err);
+          this.loginError = err.message;
+        }
+
+    ) */
+  }
 
   ngOnInit(): void {
   }

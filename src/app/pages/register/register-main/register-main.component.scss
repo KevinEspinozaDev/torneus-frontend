@@ -1,0 +1,107 @@
+.background{
+    background-image: url('./../../../../assets/images/login-background.png');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.container{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
+    align-items: center !important;
+
+    .tituloCardRol{
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+.roles{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: stretch;
+    .buttonRol{
+        width: 30%;
+        margin-top: 6px;
+        margin-bottom: 6px;
+
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        opacity: 0.75;
+        .nombreRolButton{
+            opacity: 2;
+            text-shadow: -1px 1px 0 #000,
+                          1px 1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px -1px 0 #000;
+        }
+    }
+
+    .buttonRol:hover{
+        opacity: 1 !important;
+    }
+
+    #jugador{
+        background-image: url("../../../../assets/images/jugador2.jpg");
+    }
+    #equipo{
+        background-image: url("../../../../assets/images/equipo2.jpg");
+    }
+    #organizador{
+        background-image: url("../../../../assets/images/organizador2.jpeg");
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .container{
+        width: 95%;
+        height: 80%;
+    }
+    .roles{
+        display: flex;
+        flex-direction: column;
+
+        .buttonRol{
+            width: 100% !important;
+            height: 100%;
+            opacity: 1;
+        }
+    }
+}
+
+/* Tablets y monitores pequeños */
+@media (min-width: 768px) and (max-width: 920px) {
+    .container{
+        width: 80%;
+        height: 75%;
+    }
+    .roles{
+        display: flex;
+        flex-direction: column;
+
+        .buttonRol{
+            width: 100% !important;
+            height: 100%;
+            opacity: 1;
+        }
+    }
+}
+
+/* PC */
+@media (min-width: 920px){
+    .container{
+        width: 75%;
+        height: 55%;
+    }
+}

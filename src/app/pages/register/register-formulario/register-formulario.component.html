@@ -1,0 +1,33 @@
+<div class="background">
+    <mat-card class="container">
+        <div class="title">
+            <app-button-back [ruta]="'/register'"></app-button-back>
+            <h3 class="tituloCard">Registrarse como {{nombreRol}}</h3>
+        </div>
+
+        <div *ngIf="idRol == 1" class="content">
+            <form formGroup="register">
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Nombre de Usuario</mat-label>
+                    <input matInput type="text" placeholder="Escribe un nombre de usuario">
+                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Nombre Torneus</mat-label>
+                    <input matTooltip="Nombre que te identificará dentro de la plataforma." matInput type="text" placeholder="Escribe un nombre de Torneus">
+                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" placeholder="Escribe un VÁLIDO (ejemplo: tuemail@ejemplo.com)">
+                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Fecha de nacimiento (DD-MM-AAAA)</mat-label>
+                    <input matInput type="date" max="{{currentDate | date:'yyyy-MM-dd'}}" placeholder="Indica tu fecha de nacimiento">
+                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+                </mat-form-field>
+            </form>
+        </div>
+    </mat-card>
+</div>
