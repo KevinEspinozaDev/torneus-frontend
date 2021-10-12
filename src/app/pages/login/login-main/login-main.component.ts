@@ -15,8 +15,8 @@ export class LoginMainComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {
     this.loginForm = this.formBuilder.group({
-      nombreUsuario: new FormControl('', [
-        Validators.minLength(4),
+      email: new FormControl('', [
+        Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3}$"),
         Validators.required
       ]),
       password: new FormControl('', [

@@ -63,7 +63,7 @@
 }
 
 /* Mobile */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .container{
         width: 95%;
         height: 80%;
@@ -75,12 +75,13 @@
         .buttonRol{
             width: 100% !important;
             height: 100%;
+            opacity: 1;
         }
     }
 }
 
 /* Tablets y monitores pequeños */
-@media (min-width: 600px) and (max-width: 920px) {
+@media (min-width: 768px) and (max-width: 920px) {
     .container{
         width: 80%;
         height: 75%;
@@ -92,6 +93,7 @@
         .buttonRol{
             width: 100% !important;
             height: 100%;
+            opacity: 1;
         }
     }
 }
