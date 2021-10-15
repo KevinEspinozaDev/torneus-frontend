@@ -4,6 +4,11 @@ import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+interface Paises{
+  valor: string,
+  nombre: string
+}
+
 @Component({
   selector: 'app-register-formulario',
   templateUrl: './register-formulario.component.html',
@@ -14,6 +19,9 @@ export class RegisterFormularioComponent implements OnInit {
   nombreRol:string;
   idRol:any;
   currentDate = new Date();
+  paises:any;
+  provincias:any;
+  ciudades:any;
 
   registerJugadorOrganizadorForm: FormGroup;
   registerEquipoForm: FormGroup;
@@ -21,9 +29,38 @@ export class RegisterFormularioComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {
     this.nombreRol = "";
+    this.paises = [
+      {
+        id: 1,
+        nombre: 'Argentina'
+      },
+      {
+        id: 2,
+        nombre: 'Brasil'
+      },
+      {
+        id: 3,
+        nombre: 'Japón'
+      }
+    ];
+    this.provincias = [
+      {
+        id: 1,
+        idPais: 1,
+        nombre: 'Río Negro'
+      }
+    ];
+    this.ciudades = [
+      {
+        id: 1,
+        idProvincia: 1,
+        idPais: 1,
+        nombre: 'Bariloche'
+      }
+    ];
 
     this.registerJugadorOrganizadorForm = this.formBuilder.group({
       nombre: new FormControl('',[
@@ -51,6 +88,16 @@ export class RegisterFormularioComponent implements OnInit {
       fechaNacimiento: new FormControl('', [
         Validators.required,
       ]),
+      
+      pais: new FormControl('', [
+        Validators.required,
+      ]),
+      provincia: new FormControl('', [
+        Validators.required,
+      ]),
+      ciudad: new FormControl('', [
+        Validators.required,
+      ]),
     });
 
     this.registerEquipoForm = this.formBuilder.group({
@@ -71,6 +118,15 @@ export class RegisterFormularioComponent implements OnInit {
         Validators.required
       ]),
       fechaNacimiento: new FormControl('', [
+        Validators.required,
+      ]),
+      pais: new FormControl('', [
+        Validators.required,
+      ]),
+      provincia: new FormControl('', [
+        Validators.required,
+      ]),
+      ciudad: new FormControl('', [
         Validators.required,
       ]),
     });
@@ -97,6 +153,10 @@ export class RegisterFormularioComponent implements OnInit {
 
   registrarUsuario(){
     console.log(this.registerJugadorOrganizadorForm.value);
+  }
+
+  test(param:any){
+    console.log(param);
   }
 
 }
