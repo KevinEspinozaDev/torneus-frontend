@@ -12,6 +12,14 @@
 .contenedor-ventajas h3{
     color:#FFD275;
 }
+
+.iconos-landing .mat-icon{
+    transform: scale(4);
+}
+.iconos-landing{
+    margin-top:50px;
+    margin-bottom:50px;
+}
 /*Solo escritorio*/
 @media only screen and (min-width:720px){
     .contenedor-ventajas{
