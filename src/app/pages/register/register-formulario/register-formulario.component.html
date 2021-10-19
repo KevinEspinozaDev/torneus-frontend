@@ -5,28 +5,197 @@
             <h3 class="tituloCard">Registrarse como {{nombreRol}}</h3>
         </div>
 
-        <div *ngIf="idRol == 1" class="content">
-            <form formGroup="register">
+        <!-- Formulario registro para jugador u organizador -->
+        <div *ngIf="idRol == 1 || idRol == 3" class="content">
+            <form [formGroup]="registerJugadorOrganizadorForm">
                 <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Nombre de Usuario</mat-label>
-                    <input matInput type="text" placeholder="Escribe un nombre de usuario">
-                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+                    <mat-label>Tu Nombre</mat-label>
+                    <input matInput type="text" formControlName="nombre" placeholder="Escribe tu nombre">
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.nombre.errors?.required">
+                        Ingresa tu nombre.
+                    </mat-error>
                 </mat-form-field>
+
                 <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Nombre Torneus</mat-label>
-                    <input matTooltip="Nombre que te identificará dentro de la plataforma." matInput type="text" placeholder="Escribe un nombre de Torneus">
-                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+                    <mat-label>Tu Apellido</mat-label>
+                    <input matInput type="text" formControlName="apellido" placeholder="Escribe tu apellido">
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.apellido.errors?.required">
+                        Ingresa tu apellido.
+                    </mat-error>
                 </mat-form-field>
+
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput type="email" placeholder="Escribe un VÁLIDO (ejemplo: tuemail@ejemplo.com)">
+                    <input matInput type="email" formControlName="email" placeholder="Escribe un email VÁLIDO (ejemplo: tuemail@ejemplo.com)">
                     <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.email.errors?.required">
+                        Ingresa un email.
+                    </mat-error>
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.email.errors?.pattern">
+                        Ingresa un email válido: (ejemplo@ejemplo.com)
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>País de Residencia</mat-label>
+                    <mat-select formControlName="pais">
+                      <mat-option *ngFor="let pais of paises" (click)="test(pais)" [value]="pais.id">
+                        {{pais.nombre}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.pais.errors?.required">
+                        Selecciona un país
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Fecha de nacimiento (DD-MM-AAAA)</mat-label>
-                    <input matInput type="date" max="{{currentDate | date:'yyyy-MM-dd'}}" placeholder="Indica tu fecha de nacimiento">
-                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+                    <mat-label>Provincia de Residencia</mat-label>
+                    <mat-select formControlName="provincia">
+                      <mat-option *ngFor="let provincia of provincias" (click)="test(provincia)" [value]="provincia.id">
+                        {{provincia.nombre}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.provincia.errors?.required">
+                        Selecciona una provincia
+                    </mat-error>
                 </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Ciudad de Residencia</mat-label>
+                    <mat-select formControlName="ciudad">
+                      <mat-option *ngFor="let ciudad of ciudades" (click)="test(ciudad)" [value]="ciudad.id">
+                        {{ciudad.nombre}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.ciudad.errors?.required">
+                        Selecciona una ciudad
+                    </mat-error>
+                </mat-form-field>
+
+                <!--
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Fecha de nacimiento (DD-MM-AAAA)</mat-label>
+                    <input matInput formControlName="fechaNacimiento" type="date" max="{{currentDate | date:'yyyy-MM-dd'}}" placeholder="Indica tu fecha de nacimiento">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                </mat-form-field>  
+                -->
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Nombre de Usuario</mat-label>
+                    <input matInput type="text" formControlName="nombreUsuario" placeholder="Escribe un nombre de usuario">
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.nombreUsuario.errors?.required">
+                        Ingresa un nombre de usuario.
+                    </mat-error>
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.nombreUsuario.errors?.minLength">
+                        Al menos 5 caracteres.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Nombre Torneus</mat-label>
+                    <input  matTooltip="Nombre que te identificará dentro de la plataforma."
+                    formControlName="nombreTorneus" matInput type="text" placeholder="Escribe un nombre de Torneus">
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.nombreTorneus.errors?.required">
+                        Ingresa el nombre Torneus que quieres tener en la plataforma.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput formControlName="password" type="password" placeholder="Escribe una contraseña (al menos 1 número)">
+                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.password.errors?.required">
+                        Ingresa una contraseña.
+                    </mat-error>
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.password.errors?.pattern">
+                        Al menos un número y 8 o más caracteres.
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="buttonsContainer mt-3">
+                    <button mat-raised-button color="default" type="reset">Limpiar</button>
+                    <button (click)="registrarUsuario()" mat-raised-button color="primary" type="submit">Registrarse</button>
+                </div>
+            </form>
+        </div>
+
+        <!------------------------------------------------------------------------------------- -->
+
+        <!-- Formulario registra para equipo -->
+        <div *ngIf="idRol == 2" class="content">
+            <form [formGroup]="registerEquipoForm">
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Nombre de Usuario</mat-label>
+                    <input matInput type="text" formControlName="nombreUsuario" placeholder="Escribe un nombre de usuario">
+                    <mat-error *ngIf="registerEquipoForm.controls.nombreUsuario.errors?.required">
+                        Ingresa un nombre de usuario.
+                    </mat-error>
+                    <mat-error *ngIf="registerEquipoForm.controls.nombreUsuario.errors?.minLength">
+                        Al menos 5 caracteres.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Nombre Torneus / Nombre del Equipo</mat-label>
+                    <input matTooltip="Nombre de tu Equipo."
+                    formControlName="nombreTorneus" matInput type="text" placeholder="Escribe el nombre del Equipo">
+                    <mat-error *ngIf="registerEquipoForm.controls.nombreTorneus.errors?.required">
+                        Ingresa tu nombre.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" placeholder="Escribe un email VÁLIDO (ejemplo: tuemail@ejemplo.com)">
+                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+                    <mat-error *ngIf="registerEquipoForm.controls.email.errors?.required">
+                        Ingresa un email.
+                    </mat-error>
+                    <mat-error *ngIf="registerEquipoForm.controls.email.errors?.pattern">
+                        Ingresa un email válido: (ejemplo@ejemplo.com)
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>País del Equipo</mat-label>
+                    <mat-select formControlName="pais">
+                      <mat-option *ngFor="let pais of paises" (click)="test(pais)" [value]="pais.id">
+                        {{pais.nombre}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Provincia del Equipo</mat-label>
+                    <mat-select formControlName="provincia">
+                      <mat-option *ngFor="let provincia of provincias" (click)="test(provincia)" [value]="provincia.id">
+                        {{provincia.nombre}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Ciudad del Equipo</mat-label>
+                    <mat-select formControlName="ciudad">
+                      <mat-option *ngFor="let ciudad of ciudades" (click)="test(ciudad)" [value]="ciudad.id">
+                        {{ciudad.nombre}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput formControlName="password" type="password" placeholder="Escribe una contraseña (al menos 1 número)">
+                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+                    <mat-error *ngIf="registerEquipoForm.controls.password.errors?.required">
+                        Ingresa una contraseña.
+                    </mat-error>
+                    <mat-error *ngIf="registerEquipoForm.controls.password.errors?.pattern">
+                        Al menos un número y 8 o más caracteres.
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="buttonsContainer mt-3">
+                    <button mat-raised-button color="default" type="reset">Limpiar</button>
+                    <button (click)="registrarUsuario()" mat-raised-button color="primary" type="submit">Registrarse</button>
+                </div>
             </form>
         </div>
     </mat-card>

@@ -6,6 +6,7 @@ import { IntroduccionComponent } from './landing/introduccion/introduccion.compo
 import { VentajasComponent } from './landing/ventajas/ventajas.component';
 import { PanelesDropdownComponent } from './landing/paneles-dropdown/paneles-dropdown.component';
 import { InvitarJugadoresMainComponent } from './invitar-jugadores/invitar-jugadores-main/invitar-jugadores-main.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -14,10 +15,12 @@ import { InvitarJugadoresMainComponent } from './invitar-jugadores/invitar-jugad
     VentajasComponent,
     PanelesDropdownComponent,
     InvitarJugadoresMainComponent
+
   ],
   imports: [
     CommonModule,
-    PagesRoutingModule
+    PagesRoutingModule,
+    SharedModule
   ]
 })
 export class PagesModule { }

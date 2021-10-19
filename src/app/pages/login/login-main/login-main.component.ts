@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../shared/services/authentication.service';
 
 @Component({
   selector: 'app-login-main',
@@ -10,9 +12,12 @@ export class LoginMainComponent implements OnInit {
 
   loginForm: FormGroup;
   loginOk: any;
+  loginStatus: any;
 
   constructor(
     private formBuilder: FormBuilder,
+    private authService: AuthenticationService,
+    private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', [
@@ -27,24 +32,17 @@ export class LoginMainComponent implements OnInit {
     });
    }
 
-  login() : any{
+  login() : void{
     this.loginOk = true;
-    /*
-    this.loginIn = true;
-    this.authService.login(this.loginForm.controls.dni.value, this.loginForm.controls.userPass.value)
-      .subscribe(
-        res => {
-          this.loginIn = false;
-          this.authService.setDataLogin(res.data.access_token);
-          this.router.navigateByUrl('');
-        },
-        err => {
-          this.loginIn = false;
-          console.log(err);
-          this.loginError = err.message;
-        }
-
-    ) */
+    
+    this.loginStatus = this.authService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
+    console.log(this.loginStatus);
+    if (this.loginStatus != false) {
+      this.authService.setDataLogin(this.loginStatus);
+      this.router.navigateByUrl('/home');
+    }else if(this.loginStatus == false){
+      this.loginOk = false;
+    }
   }
 
   ngOnInit(): void {

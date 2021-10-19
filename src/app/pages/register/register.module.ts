@@ -6,6 +6,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { RegisterRoutingModule } from './register-router';
 import { DialogConfirmarRolComponent } from './dialog-confirmar-rol/dialog-confirmar-rol.component';
 import { RegisterFormularioComponent } from './register-formulario/register-formulario.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,9 @@ import { RegisterFormularioComponent } from './register-formulario/register-form
   imports: [
     CommonModule,
     SharedModule,
-    RegisterRoutingModule
+    RegisterRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class RegisterModule { }

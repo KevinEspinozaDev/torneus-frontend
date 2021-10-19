@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from './layout/layout.module';
 import { MatDialogModule } from '@angular/material/dialog'; 
 import { MatIconModule } from '@angular/material/icon';
+import { FormBuilder } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
   ],
   providers: [
-    HttpClientModule
+    HttpClientModule,
+    FormBuilder
   ],
   bootstrap: [AppComponent]
 })
