@@ -70,11 +70,13 @@
                     </mat-error>
                 </mat-form-field>
 
+                <!--
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Fecha de nacimiento (DD-MM-AAAA)</mat-label>
                     <input matInput formControlName="fechaNacimiento" type="date" max="{{currentDate | date:'yyyy-MM-dd'}}" placeholder="Indica tu fecha de nacimiento">
-                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-                </mat-form-field>
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                </mat-form-field>  
+                -->
 
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Nombre de Usuario</mat-label>
@@ -151,12 +153,6 @@
                     <mat-error *ngIf="registerEquipoForm.controls.email.errors?.pattern">
                         Ingresa un email válido: (ejemplo@ejemplo.com)
                     </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Fecha de nacimiento (DD-MM-AAAA)</mat-label>
-                    <input matInput formControlName="fechaNacimiento" type="date" max="{{currentDate | date:'yyyy-MM-dd'}}" placeholder="Indica tu fecha de nacimiento">
-                    <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
                 </mat-form-field>
 
                 <mat-form-field class="form-field" appearance="outline">

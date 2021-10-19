@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   enable-background="new 0 0 24 24"
+   height="24px"
+   viewBox="0 0 24 24"
+   width="24px"
+   fill="#000000"
+   version="1.1"
+   id="svg1821"
+   sodipodi:docname="logo torneus.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata1827">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs1825">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient2394-9">
+      <stop
+         style="stop-color:#4361ee;stop-opacity:1"
+         offset="0"
+         id="stop2390" />
+      <stop
+         style="stop-color:#800080;stop-opacity:1"
+         offset="1"
+         id="stop2392" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2394-9"
+       id="linearGradient2396"
+       x1="3.2230482"
+       y1="20.788105"
+       x2="21.089218"
+       y2="3.1226761"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2394-9"
+       id="linearGradient862"
+       x1="3.2098849"
+       y1="24.015947"
+       x2="32.461319"
+       y2="23.95286"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0,-0.78859491)" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview1823"
+     showgrid="false"
+     inkscape:zoom="11.208334"
+     inkscape:cx="14.211895"
+     inkscape:cy="11.480694"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g851"
+     inkscape:document-rotation="0" />
+  <rect
+     fill="none"
+     height="24"
+     width="24"
+     id="rect1817"
+     style="opacity:1" />
+  <g
+     id="g851"
+     style="opacity:1">
+    <g
+       id="g846">
+      <g
+         id="g1517-4"
+         style="fill:#f2b942;fill-opacity:1"
+         transform="matrix(0.17789876,-0.29137062,0.29137062,0.17789876,7.9990052,4.3810954)"
+         inkscape:transform-center-x="-0.27428511"
+         inkscape:transform-center-y="0.078702186">
+        <path
+           class="st1"
+           d="m 12,17.3 4.1,2.5 c 0.8,0.5 1.7,-0.2 1.5,-1.1 L 16.5,14 20.2,10.8 C 20.9,10.2 20.5,9.1 19.6,9 L 14.8,8.6 12.9,4.1 C 12.6,3.3 11.4,3.3 11.1,4.1 L 9.2,8.6 4.4,9 C 3.5,9.1 3.2,10.2 3.8,10.8 L 7.5,14 6.4,18.7 c -0.2,0.9 0.7,1.5 1.5,1.1 z"
+           id="path1515-8"
+           style="fill:#f2b942;fill-opacity:1" />
+      </g>
+      <g
+         id="g1517"
+         style="fill:#ffd275;fill-opacity:1"
+         transform="matrix(0.32757623,-0.09611773,0.09611773,0.32757623,5.3904059,0.84875437)"
+         inkscape:transform-center-x="0.26765804"
+         inkscape:transform-center-y="0.133829">
+        <path
+           class="st1"
+           d="m 12,17.3 4.1,2.5 c 0.8,0.5 1.7,-0.2 1.5,-1.1 L 16.5,14 20.2,10.8 C 20.9,10.2 20.5,9.1 19.6,9 L 14.8,8.6 12.9,4.1 C 12.6,3.3 11.4,3.3 11.1,4.1 L 9.2,8.6 4.4,9 C 3.5,9.1 3.2,10.2 3.8,10.8 L 7.5,14 6.4,18.7 c -0.2,0.9 0.7,1.5 1.5,1.1 z"
+           id="path1515"
+           style="fill:#ffd275;fill-opacity:1" />
+      </g>
+      <path
+         d="M19,5h-2V4c0-0.55-0.45-1-1-1H8C7.45,3,7,3.45,7,4v1H5C3.9,5,3,5.9,3,7v1c0,2.55,1.92,4.63,4.39,4.94 c0.63,1.5,1.98,2.63,3.61,2.96V19H8c-0.55,0-1,0.45-1,1v0c0,0.55,0.45,1,1,1h8c0.55,0,1-0.45,1-1v0c0-0.55-0.45-1-1-1h-3v-3.1 c1.63-0.33,2.98-1.46,3.61-2.96C19.08,12.63,21,10.55,21,8V7C21,5.9,20.1,5,19,5z M5,8V7h2v3.82C5.84,10.4,5,9.3,5,8z M19,8 c0,1.3-0.84,2.4-2,2.82V7h2V8z"
+         id="path1819"
+         style="fill-opacity:1;fill:url(#linearGradient2396)" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:3.73333px;line-height:1.25;font-family:sans-serif;fill:url(#linearGradient862);fill-opacity:1;stroke:none"
+       x="3.2098849"
+       y="24.543352"
+       id="text2433"><tspan
+         sodipodi:role="line"
+         id="tspan2431"
+         x="3.2098849"
+         y="24.543352"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.73333px;font-family:Nunito;-inkscape-font-specification:'Nunito Bold';fill:url(#linearGradient862);fill-opacity:1">TORNEUS</tspan></text>
+  </g>
+</svg>

@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor() { }
+  user:any;
+
+  constructor(
+    private userService: UserService
+  ) { }
 
   //(email, password): Observable<any>
   login(email:any, password:any): any{
@@ -22,7 +27,7 @@ export class AuthenticationService {
   }
 
   isUserLoged(): boolean {
-    const token: any = localStorage.getItem('cpen-token');
+    const token: any = localStorage.getItem('torneus-token');
     //const isExpired = this.jwtHelper.isTokenExpired(accessToken);
     //console.log(accessToken)
     if (token) {
@@ -32,8 +37,35 @@ export class AuthenticationService {
       return false;
     }
   }
+  
 
+  /* data del usuario se guarda en localStorage */
   setDataLogin(token:any): any{
     localStorage.setItem('torneus-token', token);
+  }
+  setUser(user:any): void {
+    this.user = user;
+    //this.userService.getUserConfig();
+    this.userService.setCurrentUser(user);
+  }
+
+  logOut(): void {
+    //const query = `usuario/logout`;
+    //const url = this.API_URL + query;
+
+    /*this.http.post<any>(url, {}).subscribe(
+      res => {
+        localStorage.removeItem('cpen-token');
+        this.setUser(undefined);
+        window.location.reload();
+      },
+      err => {
+        localStorage.removeItem('cpen-token');
+        this.setUser(undefined);
+        window.location.reload();
+      }); */
+      localStorage.removeItem('torneus-token');
+      this.setUser(undefined);
+      window.location.reload();
   }
 }
