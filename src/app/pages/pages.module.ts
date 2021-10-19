@@ -11,10 +11,6 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    IntroduccionComponent,
-    VentajasComponent,
-    PanelesDropdownComponent,
-    InvitarJugadoresMainComponent
 
   ],
   imports: [
