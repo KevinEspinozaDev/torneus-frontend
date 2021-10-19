@@ -34,15 +34,19 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-12 mt-3">
+
+                <div style=" margin-bottom: 10px;" *ngIf="loginStatus == false" class="alert alert-danger" role="alert">
+                    Datos erróneos.
+                </div>
+
+                <div class="col-12 mt-2">
                     <button mat-raised-button (click)="login()" type="submit" class="input btn-primary">Iniciar Sesión</button>
                 </div>
 
                 <mat-progress-bar *ngIf="loginOk" style="margin-bottom: 16px; margin-top: 16px;" color="primary" mode="indeterminate">
                 </mat-progress-bar>
-                <!--<div>
-                    <p>No se encontró ningún usuario. Verifica el email y contraseña ingresados.</p>
-                </div> -->
+
+                
 
                 <div class="col-12 mt-3 text-center align-items-center">
                     ¿No tienes cuenta? <span [routerLink]="'/register'" class="link-primary"><b>Regístrate</b></span>
