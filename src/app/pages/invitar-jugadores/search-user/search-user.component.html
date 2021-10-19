@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6 border-end px-4">
+      <h4 class="text-center">Jugadores disponibles</h4>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <mat-icon>filter_alt</mat-icon>
+        </span>
+        <input type="text" class="form-control" placeholder="Filtrar por nombre" [(ngModel)]="term">
+      </div>
+      <div class="border text-muted p-4 m-5 text-center" *ngIf="usuarios.length == 0">
+        No se han encontrado jugadores.
+      </div>
+      <div *ngFor = "let item of usuarios |filter:term" >
+        <div class="row">
+          <div class="col-10">
+            {{item.name}}
+          </div>
+          <div class="col-2">
+            <a (click)="addDeleteUser(newUser)" #newUser [attr.data-userid]="item.id" [attr.data-add_del]="'add'" href="javascript:void(0)">
+              <mat-icon>add_circle</mat-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6 px-4">
+      <h4 class="text-center">Jugadores seleccionados</h4>
+      <div class="border text-muted p-4 text-center m-5" *ngIf="usuariosSeleccionados.length == 0">
+        No hay jugadores seleccionados.
+      </div>
+      <div *ngFor = "let selectedItem of usuariosSeleccionados" >
+        <div class="row">
+          <div class="col-10">
+            {{selectedItem.name}}
+          </div>
+          <div class="col-2">
+            <a (click)="addDeleteUser(delUser)" #delUser [attr.data-userid]="selectedItem.id" [attr.data-add_del]="'del'" href="javascript:void(0)">
+              <mat-icon>remove_circle</mat-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+      <button class="w-100" mat-flat-button color="primary" [disabled]="usuariosSeleccionados.length == 0">Enviar solicitudes</button>
+    </div>
+  </div>
+  
+</div>  

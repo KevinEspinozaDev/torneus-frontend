@@ -16,7 +16,10 @@ const routes: Routes = [
   },
   {
     path: 'landing', loadChildren: () => import('./pages/landing/landing.module').then(m => m.LandingModule)
-  }
+  },
+  {
+    path: 'invitar-jugadores', loadChildren: () => import('./pages/invitar-jugadores/invitar-jugadores.module').then(m => m.InvitarJugadoresModule)
+  },
 ];
 
 @NgModule({

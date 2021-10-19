@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from './layout/layout.module';
+import { MatDialogModule } from '@angular/material/dialog'; 
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { LayoutModule } from './layout/layout.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    LayoutModule
+    LayoutModule,
+    MatDialogModule,
+    MatIconModule,
   ],
   providers: [
     HttpClientModule
