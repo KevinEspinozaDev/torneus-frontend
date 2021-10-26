@@ -39,7 +39,7 @@ export class LoginMainComponent implements OnInit {
     console.log(this.loginStatus);
     if (this.loginStatus != false) {
       this.authService.setDataLogin(this.loginStatus);
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/');
     }else if(this.loginStatus == false){
       this.loginOk = false;
     }

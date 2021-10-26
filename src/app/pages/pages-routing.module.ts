@@ -3,12 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeMainComponent } from './home/home-main/home-main.component';
 
 const routes: Routes = [
-  {
-    path: 'home', component: HomeMainComponent
-  },
+  { path: '', redirectTo: 'torneos', pathMatch: 'full' },
+  
   {
     path: 'torneos',
     loadChildren: () => import('./torneos/torneos.module').then(m => m.TorneosModule)
+  },
+  {
+    path: 'invitar-jugadores', 
+    loadChildren: () => import('./invitar-jugadores/invitar-jugadores.module').then(m => m.InvitarJugadoresModule)
   },
   {
     path: 'perfil',

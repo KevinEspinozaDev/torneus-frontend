@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
   selector: 'app-introduccion',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntroduccionComponent implements OnInit {
 
-  constructor() { }
+  flag: boolean;
+
+  constructor(
+    private authenticationService: AuthenticationService,
+  ) {
+    this.flag = false;
+   }
 
   ngOnInit(): void {
+  }
+
+  isUserLoged(): boolean{
+    this.flag = this.authenticationService.isUserLoged();
+
+    return this.flag;
   }
 
 }
