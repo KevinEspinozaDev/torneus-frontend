@@ -12,7 +12,8 @@ export class LoginMainComponent implements OnInit {
 
   loginForm: FormGroup;
   loginOk: any;
-  loginStatus: any;
+  
+  loginData: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,12 +36,12 @@ export class LoginMainComponent implements OnInit {
   login() : void{
     this.loginOk = true;
     
-    this.loginStatus = this.authService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
-    console.log(this.loginStatus);
-    if (this.loginStatus != false) {
-      this.authService.setDataLogin(this.loginStatus);
+    this.loginData = this.authService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
+    console.log(this.loginData);
+    if (this.loginData != false) {
+      this.authService.setDataLogin(this.loginData);
       this.router.navigateByUrl('/');
-    }else if(this.loginStatus == false){
+    }else if(this.loginData == false){
       this.loginOk = false;
     }
   }

@@ -7,23 +7,27 @@
 
     <hr>
 
-    <div class="invitaciones d-flex flex-column text-white">
+    <div class="d-flex flex-column">
+        <p *ngFor="let equipo of equiposUsuario">Jugador en: {{equipo.nombre}}</p>
+    </div>
+
+    <div *ngIf="invitaciones" class="invitaciones d-flex flex-column text-white">
         <div class="invitacionesTitulo">
             <h3>Invitaciones de Equipos</h3>
         </div>
 
         <div class="cardsInvitaciones container-fluid d-flex">
-            <mat-card class="cardInvitacion text-center">
+            <mat-card *ngFor="let inv of invitaciones" class="cardInvitacion text-center">
                 <mat-card-header>
-                    <mat-card-title [routerLink]="'/perfil'" class="link ">STK T1</mat-card-title>
-                    <mat-card-subtitle>Te invita a su equipo y espera por tu respuesta.</mat-card-subtitle>
+                    <mat-card-title [routerLink]="'/perfil'" class="link ">{{inv.nombreEquipo}}</mat-card-title>
+                    <mat-card-subtitle>"{{inv.descripcion}}" - <i>{{inv.nombreEquipo}}</i></mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
                 
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button class="btnInvitacion btn btn-danger">Rechazar</button>
-                    <button mat-raised-button class="btnInvitacion btn btn-success">Aceptar</button>
+                    <button mat-raised-button (click)="rechazarInvitacion(inv.id)" class="btnInvitacion btn btn-danger">Rechazar</button>
+                    <button mat-raised-button (click)="aceptarInvitacion(inv.id)" class="btnInvitacion btn btn-success">Aceptar</button>
                 </mat-card-actions>
             </mat-card>
         </div>

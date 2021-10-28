@@ -19,7 +19,15 @@ export class AuthenticationService {
     //const url = this.API_URL + query;
 
     if (email == "email@gmail.com" && password == 123456789) {
-      return "torneus-token";
+      /* TOKEN */
+      return [
+        {
+          token: "torneus-token",
+          idRol: 2,
+          nombre: "Kevin",
+          apellido: "Espinoza"
+        }
+      ];
     }else{
       return false;
     }
@@ -40,8 +48,8 @@ export class AuthenticationService {
   
 
   /* data del usuario se guarda en localStorage */
-  setDataLogin(token:any): any{
-    localStorage.setItem('torneus-token', token);
+  setDataLogin(data:any): any{
+    localStorage.setItem('torneus-token', data[0].token);
   }
   setUser(user:any): void {
     this.user = user;
