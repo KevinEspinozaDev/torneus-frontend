@@ -8,16 +8,18 @@ import { UserService } from '../../../shared/services/user.service';
 })
 export class PerfilMainComponent implements OnInit {
 
+  usuarioActual:any;
   invitaciones:any;
-  equiposUsuario:any
+  equiposUsuario:any;
 
   constructor(
     private userService: UserService
   ) { }
 
   ngOnInit(): void {
+    this.usuarioActual = this.userService.getCurrentUser();
     this.invitaciones = this.userService.getInvitacionesEquipos();
-    //console.log(this.invitaciones);
+    console.log(this.usuarioActual);
   }
 
 
@@ -30,6 +32,10 @@ export class PerfilMainComponent implements OnInit {
 
   rechazarInvitacion(id:any){
     this.invitaciones = false;
+  }
+
+  test(){
+    console.log('Testing');
   }
 
 }

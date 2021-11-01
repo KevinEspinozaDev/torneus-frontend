@@ -37,7 +37,7 @@ export class LoginMainComponent implements OnInit {
     this.loginOk = true;
     
     this.loginData = this.authService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
-    console.log(this.loginData);
+    //console.log(this.loginData);
     if (this.loginData != false) {
       this.authService.setDataLogin(this.loginData);
       this.router.navigateByUrl('/');

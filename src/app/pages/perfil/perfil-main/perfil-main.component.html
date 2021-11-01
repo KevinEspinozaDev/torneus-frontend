@@ -33,6 +33,9 @@
         </div>
     </div>
 
+
+
+    <!-- datos -->
     <div class="datos d-flex flex-column mt-4">
         <div class="datosTitulo">
             <h3>Mis Datos</h3>
@@ -40,25 +43,25 @@
         <mat-form-field class="bg-white" appearance="outline">
             <mat-label>Nombre Torneus</mat-label>
             <input matInput placeholder="Nombre Torneus" value="KevinMekuru">
-            <mat-icon matSuffix>save</mat-icon>
+            <mat-icon matSuffix (click)="test()" class="btn-save">save</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="bg-white" appearance="outline">
             <mat-label>Nombre</mat-label>
             <input matInput placeholder="Nombre" value="Kevin">
-            <mat-icon matSuffix>save</mat-icon>
+            <mat-icon matSuffix (click)="test()" class="btn-save">save</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="bg-white" appearance="outline">
             <mat-label>Apellido</mat-label>
             <input matInput placeholder="Apellido" value="Pancracio">
-            <mat-icon matSuffix>save</mat-icon>
+            <mat-icon matSuffix (click)="test()" class="btn-save">save</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="bg-white" appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput placeholder="Email" value="kevin@gmail.com">
-            <mat-icon matSuffix>save</mat-icon>
+            <mat-icon matSuffix (click)="test()" class="btn-save">save</mat-icon>
         </mat-form-field>
     </div>
 </div>

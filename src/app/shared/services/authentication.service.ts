@@ -20,7 +20,7 @@ export class AuthenticationService {
 
     if (email == "email@gmail.com" && password == 123456789) {
       /* TOKEN */
-      return [
+      let userData = [
         {
           token: "torneus-token",
           idRol: 2,
@@ -28,6 +28,10 @@ export class AuthenticationService {
           apellido: "Espinoza"
         }
       ];
+
+      this.setUser(userData);
+
+      return userData;
     }else{
       return false;
     }
