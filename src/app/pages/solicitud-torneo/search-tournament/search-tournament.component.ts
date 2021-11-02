@@ -102,10 +102,10 @@ export class SearchTournamentComponent implements OnInit {
   }
 
   enviarSolicitud(solicitudTorneo: any){
-    
+    console.log(solicitudTorneo)
     let arregloNuevo: Tournament[] = [];
-    var tournamentNombre = this.searchTournamentById(this.torneos, solicitudTorneo.dataset.tournamentid);   
-    var tournamentId =  solicitudTorneo.dataset.tournamentid;
+    var tournamentNombre = this.searchTournamentById(this.torneos, solicitudTorneo.id);   
+    var tournamentId =  solicitudTorneo.id;
 
     for (let i=0; i<this.torneos.length; i++){
       if (tournamentId == this.torneos[i].id){

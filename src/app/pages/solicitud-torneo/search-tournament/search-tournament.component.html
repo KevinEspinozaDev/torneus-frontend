@@ -15,7 +15,7 @@
                 {{item.name}}
             </div>
             <div class="col-2">
-                <a (click)="enviarSolicitud(solicitudTorneo)" #solicitudTorneo [attr.data-tournamentid]="item.id" href="javascript:void(0)">
+                <a (click)="enviarSolicitud(item)" #solicitudTorneo [attr.data-tournamentid]="item.id" href="javascript:void(0)">
                     <mat-icon>add_circle</mat-icon>
                 </a>            
             </div>
