@@ -1,0 +1,81 @@
+<div class="background">
+    <mat-card class="container">
+        <div class="title">
+            <app-button-back [ruta]="'/crear-torneo'"></app-button-back>
+            <h3 class="tituloCard">Crear un torneo de tipo {{nombreTipoTorneo}}</h3>
+        </div>
+
+        <!-- Formulario registro para el tipo de torneo -->
+        <div class="content"> <!--*ngIf="idTipoTorneo == 1 || idTipoTorneo == 3"-->
+            <form [formGroup]="registerTipoTorneoForm">
+
+                <!-- Nombre del torneo -->
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Nombre del torneo</mat-label>
+                    <input matInput type="text" formControlName="nombre" placeholder="Escribe el nombre del torneo">
+                    <mat-error *ngIf="registerTipoTorneoForm.controls.nombre.errors?.required">
+                        Ingresa el nombre del torneo.
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <!-- Fecha de inicio del torneo -->
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>Fecha de inicio</mat-label>
+                            <input matInput [(ngModel)]="startDate" [matDatepicker]="pickerInicio" formControlName="fechaInicio"  placeholder="DD-MM-AAAA"> <!--[max]="currentDate | date:'yyyy-MM-dd'"-->
+                            <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerInicio></mat-datepicker>
+                            <mat-error *ngIf="registerTipoTorneoForm.controls.fechaInicio.errors?.required">
+                                Selecciona la fecha de inicio del torneo.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6 col-12">
+                        <!-- Fecha de fin del torneo -->
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>Fecha de fin</mat-label>
+                            <input matInput [disabled]="!startDate" [value]="!startDate ? '' : null" [min]="startDate" [matDatepicker]="pickerFin" formControlName="fechaFin" placeholder="DD-MM-AAAA">
+                            <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerFin></mat-datepicker>
+                            <mat-error *ngIf="registerTipoTorneoForm.controls.fechaFin.errors?.required">
+                                Selecciona la fecha de fin del torneo.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!--
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Fecha de nacimiento (DD-MM-AAAA)</mat-label>
+                    <input matInput formControlName="fechaNacimiento" type="date" max="{{currentDate | date:'yyyy-MM-dd'}}" placeholder="Indica tu fecha de nacimiento">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                </mat-form-field>  
+                -->
+
+                <!-- Recompensa del torneo (puntos) -->
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Recompensa (puntos)</mat-label>
+                    <input matInput type="number" formControlName="recompensa" placeholder="Ingrese la recompensa (en puntos)">
+                    <mat-error *ngIf="registerTipoTorneoForm.controls.recompensa.errors?.required">
+                        Ingresa la recompensa del torneo.
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Cantidad maxima de equipos -->
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Cantidad máxima de equipos</mat-label>
+                    <input matInput type="number" formControlName="maxEquipos" placeholder="Ingresa la cantidad máxima de equipos">
+                    <mat-error *ngIf="registerTipoTorneoForm.controls.maxEquipos.errors?.required">
+                        Ingresa la cantidad máxima de equipos.
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="buttonsContainer mt-3">
+                    <button mat-raised-button color="default" type="reset">Limpiar</button>
+                    <button (click)="registrarTorneo()" mat-raised-button color="primary" type="submit">Crear torneo</button>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+</div>

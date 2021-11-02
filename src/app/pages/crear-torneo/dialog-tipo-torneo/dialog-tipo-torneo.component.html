@@ -1,0 +1,10 @@
+<div class="container">
+    <h1 mat-dialog-title>Confirmar Tipo de Torneo - {{nombreTipoTorneo}}</h1>
+    <div mat-dialog-content>
+        ¿Estás seguro/a de que quieres crear un torneo de tipo <b>{{nombreTipoTorneo}}</b>?
+    </div>
+    <div mat-dialog-actions class="containerAcciones">
+        <button mat-button mat-dialog-close>Cancelar</button>
+        <button [routerLink]="'/crear-torneo/crear-torneo-formulario'" (click)="confirmarTipoTorneo()" mat-raised-button color="primary">Confirmar</button>
+    </div>
+</div>

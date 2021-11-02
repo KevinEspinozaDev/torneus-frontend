@@ -1,0 +1,24 @@
+<div class="container">
+    <h4 class="text-center">Torneos disponibles</h4>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+        <mat-icon>filter_alt</mat-icon>
+        </span>
+        <input type="text" class="form-control" placeholder="Filtrar por nombre" [(ngModel)]="term">
+    </div>
+    <div class="border text-muted p-4 m-5 text-center" *ngIf="torneos.length == 0">
+        No se han encontrado torneos.
+    </div>
+    <div *ngFor = "let item of torneos | filter:term" >
+        <div class="row">
+            <div class="col-10">
+                {{item.name}}
+            </div>
+            <div class="col-2">
+                <a (click)="enviarSolicitud(solicitudTorneo)" #solicitudTorneo [attr.data-tournamentid]="item.id" href="javascript:void(0)">
+                    <mat-icon>add_circle</mat-icon>
+                </a>            
+            </div>
+        </div>
+    </div>
+</div>

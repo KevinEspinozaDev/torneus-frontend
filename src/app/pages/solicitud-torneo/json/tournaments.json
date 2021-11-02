@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Copa Piston",
+    "estado": 1,
+    "tipoTorneo": 1,
+    "equipoAplico": 0,
+    "startDate": "2022-04-23T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Copa Fangio",
+    "estado": 0,
+    "tipoTorneo": 1,
+    "equipoAplico": 0,
+    "startDate": "2022-04-23T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "name": "Liga Lorem",
+    "estado": 1,
+    "tipoTorneo": 3,
+    "equipoAplico": 0,
+    "startDate": "2022-04-23T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "name": "Copa ipsum",
+    "estado": 1,
+    "tipoTorneo": 1,
+    "equipoAplico": 1,
+    "startDate": "2022-04-23T00:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "name": "Copa Test",
+    "estado": 0,
+    "tipoTorneo": 1,
+    "equipoAplico": 0,
+    "startDate": "2022-04-23T00:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "name": "Liga Loca",
+    "estado": 0,
+    "tipoTorneo": 3,
+    "equipoAplico": 0,
+    "startDate": "2022-04-23T00:00:00.000Z"
+  },
+  {
+    "id": 7,
+    "name": "Copa Jose",
+    "estado": 1,
+    "tipoTorneo": 1,
+    "equipoAplico": 1,
+    "startDate": "2022-04-23T00:00:00.000Z"
+  },
+  {
+    "id": 8,
+    "name": "Liga Gato",
+    "estado": 1,
+    "tipoTorneo": 3,
+    "equipoAplico": 0,
+    "startDate": "2022-04-23T00:00:00.000Z"
+  },
+  {
+    "id": 9,
+    "name": "Copa Siete",
+    "estado": 0,
+    "tipoTorneo": 1,
+    "equipoAplico": 0,
+    "startDate": "2022-04-23T00:00:00.000Z"
+  },
+  {
+    "id": 10,
+    "name": "Copa Libertadores",
+    "estado": 1,
+    "tipoTorneo": 1,
+    "equipoAplico": 0,
+    "startDate": "2018-12-09T00:00:00.000Z"
+  }
+]
