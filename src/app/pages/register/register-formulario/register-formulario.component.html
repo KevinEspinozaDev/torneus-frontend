@@ -59,14 +59,14 @@
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Ciudad de Residencia</mat-label>
-                    <mat-select formControlName="ciudad">
-                      <mat-option *ngFor="let ciudad of ciudades" (click)="test(ciudad)" [value]="ciudad.id">
-                        {{ciudad.nombre}}
+                    <mat-label>Localidad de Residencia</mat-label>
+                    <mat-select formControlName="localidad">
+                      <mat-option *ngFor="let localidad of localidades" (click)="test(localidad)" [value]="localidad.id">
+                        {{localidad.nombre}}
                       </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.ciudad.errors?.required">
-                        Selecciona una ciudad
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.localidad.errors?.required">
+                        Selecciona una localidad
                     </mat-error>
                 </mat-form-field>
 
@@ -77,17 +77,6 @@
                     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                 </mat-form-field>  
                 -->
-
-                <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Nombre de Usuario</mat-label>
-                    <input matInput type="text" formControlName="nombreUsuario" placeholder="Escribe un nombre de usuario">
-                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.nombreUsuario.errors?.required">
-                        Ingresa un nombre de usuario.
-                    </mat-error>
-                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.nombreUsuario.errors?.minLength">
-                        Al menos 5 caracteres.
-                    </mat-error>
-                </mat-form-field>
 
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Nombre Torneus</mat-label>
@@ -124,22 +113,11 @@
             <form [formGroup]="registerEquipoForm">
 
                 <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Nombre de Usuario</mat-label>
-                    <input matInput type="text" formControlName="nombreUsuario" placeholder="Escribe un nombre de usuario">
-                    <mat-error *ngIf="registerEquipoForm.controls.nombreUsuario.errors?.required">
-                        Ingresa un nombre de usuario.
-                    </mat-error>
-                    <mat-error *ngIf="registerEquipoForm.controls.nombreUsuario.errors?.minLength">
-                        Al menos 5 caracteres.
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Nombre Torneus / Nombre del Equipo</mat-label>
                     <input matTooltip="Nombre de tu Equipo."
-                    formControlName="nombreTorneus" matInput type="text" placeholder="Escribe el nombre del Equipo">
-                    <mat-error *ngIf="registerEquipoForm.controls.nombreTorneus.errors?.required">
-                        Ingresa tu nombre.
+                    formControlName="nametorneus" matInput type="text" placeholder="Escribe el nombre del Equipo">
+                    <mat-error *ngIf="registerEquipoForm.controls.nametorneus.errors?.required">
+                        Ingresa un nombre para tu equipo.
                     </mat-error>
                 </mat-form-field>
 
@@ -172,12 +150,15 @@
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Ciudad del Equipo</mat-label>
-                    <mat-select formControlName="ciudad">
-                      <mat-option *ngFor="let ciudad of ciudades" (click)="test(ciudad)" [value]="ciudad.id">
-                        {{ciudad.nombre}}
+                    <mat-label>Localidad del Equipo</mat-label>
+                    <mat-select formControlName="localidad">
+                      <mat-option *ngFor="let localidad of localidades" (click)="test(localidad)" [value]="localidad.id">
+                        {{localidad.nombre}}
                       </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="registerEquipoForm.controls.localidad.errors?.required">
+                        Selecciona una localidad
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="form-field" appearance="outline">
@@ -188,7 +169,7 @@
                         Ingresa una contraseña.
                     </mat-error>
                     <mat-error *ngIf="registerEquipoForm.controls.password.errors?.pattern">
-                        Al menos un número y 8 o más caracteres.
+                        Más de 8 caracteres alfanuméricos.
                     </mat-error>
                 </mat-form-field>
 
