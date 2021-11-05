@@ -8,6 +8,7 @@ import { InvitarJugadoresRoutingModule } from './invitar-jugadores-router';
 import { InvitarJugadoresMainComponent } from './invitar-jugadores-main/invitar-jugadores-main.component';
 import { SearchUserComponent } from './search-user/search-user.component';
 import { DialogSearchUserComponent } from './dialog-search-user/dialog-search-user.component';
+import { DgEnviarSolicitudComponent } from './dg-enviar-solicitud/dg-enviar-solicitud.component';
 
 
 
@@ -17,6 +18,7 @@ import { DialogSearchUserComponent } from './dialog-search-user/dialog-search-us
     InvitarJugadoresMainComponent,
     SearchUserComponent,
     DialogSearchUserComponent,
+    DgEnviarSolicitudComponent,
   ],
   imports: [
     CommonModule,

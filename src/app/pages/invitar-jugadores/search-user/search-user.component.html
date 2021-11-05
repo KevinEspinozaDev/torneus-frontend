@@ -17,7 +17,7 @@
             {{item.name}}
           </div>
           <div class="col-2">
-            <a (click)="addDeleteUser(newUser)" #newUser [attr.data-userid]="item.id" [attr.data-add_del]="'add'" href="javascript:void(0)">
+            <a (click)="addDeleteUser(item, true)" #newUser [attr.data-userid]="item.id" [attr.data-add_del]="'add'" href="javascript:void(0)">
               <mat-icon>add_circle</mat-icon>
             </a>
           </div>
@@ -36,13 +36,13 @@
             {{selectedItem.name}}
           </div>
           <div class="col-2">
-            <a (click)="addDeleteUser(delUser)" #delUser [attr.data-userid]="selectedItem.id" [attr.data-add_del]="'del'" href="javascript:void(0)">
+            <a (click)="addDeleteUser(selectedItem, false)" #delUser [attr.data-userid]="selectedItem.id" [attr.data-add_del]="'del'" href="javascript:void(0)">
               <mat-icon>remove_circle</mat-icon>
             </a>
           </div>
         </div>
       </div>
-      <button class="w-100" mat-flat-button color="primary" [disabled]="usuariosSeleccionados.length == 0">Enviar solicitudes</button>
+      <button class="w-100" (click)="enviarSolicitudes()" mat-flat-button color="primary" [disabled]="usuariosSeleccionados.length == 0">Enviar solicitudes</button>
     </div>
   </div>
   

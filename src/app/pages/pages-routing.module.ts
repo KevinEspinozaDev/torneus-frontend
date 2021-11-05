@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'solicitud-torneo', 
     loadChildren: () => import('./solicitud-torneo/solicitud-torneo.module').then(m => m.SolicitudTorneoModule)
   },
+  {
+    path: 'mi-torneo', 
+    loadChildren: () => import('./torneos/mi-torneo/mi-torneo.module').then(m => m.MiTorneoModule)
+  },
 
 ];
 

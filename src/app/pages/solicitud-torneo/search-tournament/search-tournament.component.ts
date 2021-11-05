@@ -47,6 +47,48 @@ export class SearchTournamentComponent implements OnInit {
       return 0;
     });
   }
+
+  searchTournamentById(arreglo: Tournament[], tournamentId: Number){
+    var nombre: String = '';
+    for (let i=0; i<arreglo.length; i++){
+      if (arreglo[i].id == tournamentId){
+        nombre = arreglo[i].name;
+      }
+    }
+    return nombre;
+  }
+
+  enviarSolicitud(solicitudTorneo: Tournament){
+    
+    let arregloNuevo: Tournament[] = [];
+    var tournamentNombre = this.searchTournamentById(this.torneos, solicitudTorneo.id);   
+    var tournamentId =  solicitudTorneo.id;
+
+    /* Le asigna el estado "solicitado" al equipo, se hace en el backend
+    for (let i=0; i<this.torneos.length; i++){
+      if (tournamentId == this.torneos[i].id){
+        this.torneos[i].equipoAplico = 1;
+      }
+    }
+    */
+    //this.torneos = this.aplicarFiltrosArreglo(this.torneos);
+    
+    //Falta obtener la id del usuario equipo logueado en el momento
+    console.log(tournamentId);
+    this.openDialog();
+  }
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.maxWidth = "100%";
+    dialogConfig.width = "80%";
+    //dialogConfig.height = "90%";
+
+    this.dialog.open(DialogSolicitudTorneoComponent, dialogConfig);
+  }
+
+  //Logica que va en el backend en realidad
   aplicarFiltrosArreglo(arregloTorneo: Tournament[]){
     arregloTorneo = this.removerItemsEstado(arregloTorneo);
     arregloTorneo = this.removerItemsEquipoAplico(arregloTorneo);
@@ -91,40 +133,7 @@ export class SearchTournamentComponent implements OnInit {
     return arregloNuevo;
   }
 
-  searchTournamentById(arreglo: Tournament[], tournamentId: Number){
-    var nombre: String = '';
-    for (let i=0; i<arreglo.length; i++){
-      if (arreglo[i].id == tournamentId){
-        nombre = arreglo[i].name;
-      }
-    }
-    return nombre;
-  }
-
-  enviarSolicitud(solicitudTorneo: any){
-    console.log(solicitudTorneo)
-    let arregloNuevo: Tournament[] = [];
-    var tournamentNombre = this.searchTournamentById(this.torneos, solicitudTorneo.id);   
-    var tournamentId =  solicitudTorneo.id;
-
-    for (let i=0; i<this.torneos.length; i++){
-      if (tournamentId == this.torneos[i].id){
-        this.torneos[i].equipoAplico = 1;
-      }
-    }
-    //this.torneos = this.aplicarFiltrosArreglo(this.torneos);
-    this.openDialog();
-  }
-
-  openDialog() {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.maxWidth = "100%";
-    dialogConfig.width = "80%";
-    //dialogConfig.height = "90%";
-
-    this.dialog.open(DialogSolicitudTorneoComponent, dialogConfig);
-  }
+  
 
   ngOnInit(): void {
   }

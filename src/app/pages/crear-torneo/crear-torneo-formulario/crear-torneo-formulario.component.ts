@@ -54,7 +54,8 @@ export class CrearTorneoFormularioComponent implements OnInit {
   ngOnInit(): void {
     this.idTipoTorneo = this.route.snapshot.paramMap.get('id');
 
-    if (this.idTipoTorneo >= 1 && this.idTipoTorneo <= 3) {
+    //if (this.idTipoTorneo >= 1 && this.idTipoTorneo <= 3) {
+    if (this.idTipoTorneo == 3) {
       if (this.idTipoTorneo == 1) {
         this.nombreTipoTorneo = "Copa";
       }else if(this.idTipoTorneo == 2){

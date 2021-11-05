@@ -15,14 +15,19 @@
             Torneos
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" [routerLink]="'solicitud-torneo'">Ver Torneos</a></li>
-            <li><a class="dropdown-item" href="#">Mis Torneos</a></li>
             <li><a class="dropdown-item" [routerLink]="'crear-torneo'">Crear Torneo</a></li>
+            <li><a class="dropdown-item" [routerLink]="'torneos'">Ver Torneos</a></li>
+            <li><a class="dropdown-item" href="#">Mis Torneos</a></li>
+            <li><a class="dropdown-item" [routerLink]="'mi-torneo'">Mi Torneo (single)</a></li>
           </ul>
         </li>
         
         <li class="nav-item ">
           <a class="nav-link" aria-current="page" routerLink="/invitar-jugadores">Invitar Jugadores al Equipo</a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link" aria-current="page" routerLink="/solicitud-torneo">Entrar a un torneo</a>
         </li>
 
         <li class="nav-item dropdown ml-auto">

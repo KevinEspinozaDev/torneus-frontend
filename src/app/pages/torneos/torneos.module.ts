@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../shared/shared.module';
 
 import { TorneosRoutingModule } from './torneos-routing.module';
 import { TorneosVerComponent } from './torneos-ver/torneos-ver.component';
@@ -7,11 +8,12 @@ import { TorneosVerComponent } from './torneos-ver/torneos-ver.component';
 
 @NgModule({
   declarations: [
-    TorneosVerComponent
+    TorneosVerComponent,
   ],
   imports: [
     CommonModule,
-    TorneosRoutingModule
+    TorneosRoutingModule,
+    SharedModule
   ]
 })
 export class TorneosModule { }

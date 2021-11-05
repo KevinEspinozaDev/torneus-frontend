@@ -33,7 +33,8 @@ export class DialogTipoTorneoComponent implements OnInit {
   }
 
   confirmarTipoTorneo():any {
-    if (this.data.idTipoTorneo >= 1 && this.data.idTipoTorneo <= 3) {
+    //if (this.data.idTipoTorneo >= 1 && this.data.idTipoTorneo <= 3) {
+    if (this.data.idTipoTorneo == 3) {
       this.dialog.closeAll();
       this.router.navigate(['/crear-torneo/crear-torneo-formulario/'+this.data.idTipoTorneo]);
       console.log("Id correcto");

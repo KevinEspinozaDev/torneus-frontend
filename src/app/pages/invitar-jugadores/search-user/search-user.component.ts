@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
 
 import users from '../json/users.json';
 import selectedUsers from '../json/selected_users.json';
+import { DgEnviarSolicitudComponent } from '../dg-enviar-solicitud/dg-enviar-solicitud.component';
 
 
 interface User {  
@@ -18,7 +21,7 @@ interface User {
 })
 export class SearchUserComponent implements OnInit {
 
-  constructor() { 
+  constructor(public dialog: MatDialog) { 
    
   }
   
@@ -52,31 +55,61 @@ export class SearchUserComponent implements OnInit {
     return nombre;
   }
 
-  addDeleteUser(newUser: any){
-    
-    if(newUser.dataset.add_del == "add"){
-      this.items = this.usuarios;
-      this.selectedItems = this.usuariosSeleccionados;
-    }
-    else if(newUser.dataset.add_del == "del"){
-      this.items = this.usuariosSeleccionados;
-      this.selectedItems = this.usuarios;
-    }
-    var userNombre = this.searchUserById(this.items, newUser.dataset.userid);   
-    var userId =  newUser.dataset.userid;
-    this.selectedItems.push({id: userId, name: userNombre});
-    //console.log(this.items);
+  addDeleteUser(singleUser: User, accionAddDel: Boolean){
+    /*
+    accionAddDel
+      true: add
+      false: delete
+    */
 
-    for (let i=0; i<this.items.length; i++){
-      if (userId == this.items[i].id){
-        this.items.splice(i, 1);
-      }
+    this.items = this.usuarios;
+    this.selectedItems = this.usuariosSeleccionados;
+
+    var userNombre = singleUser.name;   
+    var userId =  singleUser.id;
+    
+    if(accionAddDel){
+      this.selectedItems.push({id: userId, name: userNombre});
+      this.items = this.quitarItems(this.items, singleUser);
     }
+    else{
+      this.items.push({id: userId, name: userNombre});
+      this.selectedItems = this.quitarItems(this.selectedItems, singleUser);
+    }
+    //var userNombre = this.searchUserById(this.items, singleUser.id);   
+    //console.log(this.items);
 
     this.ordenarArreglo(this.items);
     this.ordenarArreglo(this.selectedItems);
 
     return false;
+  }
+
+  quitarItems(arregloUsuarios: User[], objetoUser: User){
+    var userNombre = objetoUser.name;   
+    var userId =  objetoUser.id;
+
+    for (let i=0; i<arregloUsuarios.length; i++){
+      if (userId == arregloUsuarios[i].id){
+        arregloUsuarios.splice(i, 1);
+      }
+    }
+    return arregloUsuarios;
+  }
+
+  enviarSolicitudes(){
+    console.log(this.selectedItems);
+    this.openDialog();
+  }
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.maxWidth = "100%";
+    dialogConfig.width = "80%";
+    //dialogConfig.height = "90%";
+
+    this.dialog.open(DgEnviarSolicitudComponent, dialogConfig);
   }
   
   ngOnInit(): void {
