@@ -31,27 +31,15 @@ export class AuthenticationService {
 
   //(email, password): Observable<any>
   login(email:any, password:any): any{
-    //const query = `autenticar/login`;
-    //const url = this.API_URL + query;
+    const query = `auth/login`;
+    const url = this.API_URL + query;
 
-    if (email == "email@gmail.com" && password == 123456789) {
-      /* TOKEN */
-      let userData = [
-        {
-          token: "torneus-token",
-          idRol: 2,
-          nombre: "Kevin",
-          apellido: "Espinoza"
-        }
-      ];
-
-      this.setUser(userData);
-
-      return userData;
-    }else{
-      return false;
+    const formData = {
+      email : email,
+      password : password
     }
-    //return this.http.post<any>(url, formData, {'headers':this.headers});
+
+    return this.httpClient.post<any>(url, formData, {'headers':this.headers});
   }
 
   isUserLoged(): boolean {
