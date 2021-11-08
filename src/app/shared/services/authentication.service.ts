@@ -47,7 +47,7 @@ export class AuthenticationService {
     //const isExpired = this.jwtHelper.isTokenExpired(accessToken);
     //console.log(accessToken)
     if (token) {
-      this.setDataLogin(token);
+      this.setToken(token);
       return true;
     } else {
       return false;
@@ -56,8 +56,9 @@ export class AuthenticationService {
   
 
   /* data del usuario se guarda en localStorage */
-  setDataLogin(data:any): any{
-    localStorage.setItem('torneus-token', data[0].token);
+  setToken(data:any): any{
+    localStorage.setItem('torneus-token', data);
+    //localStorage.setItem('nametorneus', data.access_token);
   }
   setUser(user:any): void {
     this.user = user;

@@ -44,6 +44,21 @@
         display: flex;
         justify-content: space-between;
     }
+
+    .successCuadro{
+        display: flex;
+        margin: 10px 0px 10px 0px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--success-color);
+        padding: 6px 0px;
+        border-radius: 8px;
+
+        .successCuadroText{
+            color:white
+        }
+    }
 }
 
 

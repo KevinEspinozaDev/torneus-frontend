@@ -24,6 +24,8 @@ export class RegisterFormularioComponent implements OnInit {
   provincias:any;
   localidades:any;
 
+  successCuadro:boolean;
+
   registerJugadorOrganizadorForm: FormGroup;
   registerEquipoForm: FormGroup;
 
@@ -36,6 +38,7 @@ export class RegisterFormularioComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {
     this.nombreRol = "";
+    this.successCuadro = false;
     this.paises = [
       {
         id: 1,
@@ -85,10 +88,6 @@ export class RegisterFormularioComponent implements OnInit {
         Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[com]{3}$"),
         Validators.required
       ]),
-      fechaNacimiento: new FormControl('', [
-        Validators.required,
-      ]),
-      
       pais: new FormControl('', [
         Validators.required,
       ]),
@@ -154,26 +153,28 @@ export class RegisterFormularioComponent implements OnInit {
         idprovincia: this.registerEquipoForm.controls.provincia.value,
         idlocalidad: this.registerEquipoForm.controls.localidad.value,
         password: this.registerEquipoForm.controls.password.value,
+        idRol: this.idRol
       };
+    }else if(this.idRol == 1 || this.idRol == 3){
+      this.body = {
+        nametorneus: this.registerJugadorOrganizadorForm.controls.nametorneus.value,
+        name: this.registerJugadorOrganizadorForm.controls.nombre.value,
+        apellido: this.registerJugadorOrganizadorForm.controls.apellido.value
+      }
     }
     
     this.authenticationService.register(this.body).subscribe(
       (response) => {
-        // response.data[0]
-        // Post de titulo nuevo no implementado en back aún
         if (response) {
           console.log(response);
-          /*this._snackBar.open(
-            this.edit
-              ? 'Se ha actualizado exitosamente'
-              : 'Se ha creado el título correctamente.',
-            null,
-            {
-              duration: 2000,
-            }
-          );
-          this.dialogRef.close();*/
           console.log('se registró al usuario correctamente!');
+
+          this.successCuadro = true;
+
+          setTimeout(() => {
+            this.router.navigateByUrl("/login");
+          }, 3000);
+          
         } else {
           /*
           this._snackBar.open('No se ha podido crear el titulo.', null, {

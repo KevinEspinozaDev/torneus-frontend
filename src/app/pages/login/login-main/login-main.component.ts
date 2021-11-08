@@ -34,14 +34,12 @@ export class LoginMainComponent implements OnInit {
    }
 
   login() : void{
-    this.loginOk = true;
-    
     this.loginData = this.authService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
     .subscribe(
       (res:any) => {
-        this.loginOk = false;
+        this.loginOk = true;
         console.log(res);
-        this.authService.setDataLogin(res.data.access_token);
+        this.authService.setToken(res.access_token);
         this.router.navigateByUrl('/');
       },
       (err:any) => {

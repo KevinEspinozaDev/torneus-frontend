@@ -99,9 +99,13 @@
                     </mat-error>
                 </mat-form-field>
 
+                <div *ngIf="successCuadro == true" class="successCuadro">
+                    <p class="successCuadroText">Usuario Creado correctamente! Serás redirigido/a para Iniciar Sesión.</p>
+                </div>
+
                 <div class="buttonsContainer mt-3">
                     <button mat-raised-button color="default" type="reset">Limpiar</button>
-                    <button (click)="registrarUsuario()" mat-raised-button color="primary" type="submit">Registrarse</button>
+                    <button [disabled]="this.registerJugadorOrganizadorForm.invalid" (click)="registrarUsuario()" mat-raised-button color="primary" type="submit">Registrarse</button>
                 </div>
             </form>
         </div>
@@ -173,9 +177,19 @@
                     </mat-error>
                 </mat-form-field>
 
+                <div *ngIf="successCuadro == true"  class="successCuadro">
+                    <p class="successCuadroText">Usuario Creado correctamente! Serás redirigido/a para Iniciar Sesión.</p>
+                </div>
+
+                <!--
+                <div *ngIf="!loginOk" class="alert alert-success" role="success">
+                    Usuario Creado correctamente! Serás redirigido/a para Iniciar Sesión.
+                </div>
+                -->
+
                 <div class="buttonsContainer mt-3">
                     <button mat-raised-button color="default" type="reset">Limpiar</button>
-                    <button (click)="registrarUsuario()" mat-raised-button color="primary" type="submit">Registrarse</button>
+                    <button [disabled]="this.registerEquipoForm.invalid" (click)="registrarUsuario()" mat-raised-button color="primary" type="submit">Registrarse</button>
                 </div>
             </form>
         </div>
