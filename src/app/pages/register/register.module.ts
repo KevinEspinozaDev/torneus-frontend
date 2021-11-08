@@ -7,6 +7,7 @@ import { RegisterRoutingModule } from './register-router';
 import { DialogConfirmarRolComponent } from './dialog-confirmar-rol/dialog-confirmar-rol.component';
 import { RegisterFormularioComponent } from './register-formulario/register-formulario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RegisterRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class RegisterModule { }

@@ -29,21 +29,24 @@ export class LoginMainComponent implements OnInit {
         Validators.minLength(6),
         Validators.required
       ]),
-      remember: new FormControl('',[]),
+      //remember: new FormControl('',[]),
     });
    }
 
   login() : void{
-    this.loginOk = true;
-    
-    this.loginData = this.authService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
-    //console.log(this.loginData);
-    if (this.loginData != false) {
-      this.authService.setDataLogin(this.loginData);
-      this.router.navigateByUrl('/');
-    }else if(this.loginData == false){
-      this.loginOk = false;
-    }
+    this.loginData = this.authService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
+    .subscribe(
+      (res:any) => {
+        this.loginOk = true;
+        console.log(res);
+        this.authService.setToken(res.access_token);
+        this.router.navigateByUrl('/');
+      },
+      (err:any) => {
+        this.loginOk = false;
+        console.log('Error al iniciar sesión. Credenciales inválidas.');
+      }
+    );
   }
 
   ngOnInit(): void {

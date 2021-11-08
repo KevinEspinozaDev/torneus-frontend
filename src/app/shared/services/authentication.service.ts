@@ -1,5 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -8,34 +10,36 @@ import { UserService } from './user.service';
 export class AuthenticationService {
 
   user:any;
+  //_options:any;
+  private API_URL: string = environment.apiUrl;
+
+  headers = new HttpHeaders()
+  .set('Content-Type', 'application/json')
+  .set('Access-Control-Allow-Origin', '*')
+  .set("Access-Control-Allow-Headers", "Origin, Content-Type");
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private httpClient: HttpClient,
+    /*
+    this._accessToken = this.util.getAccessToken();
+    this._headers = { Authorization: `Bearer ${this._accessToken}` };
+    this._options = { headers: this._headers };
+
+    */
   ) { }
 
   //(email, password): Observable<any>
   login(email:any, password:any): any{
-    //const query = `autenticar/login`;
-    //const url = this.API_URL + query;
+    const query = `auth/login`;
+    const url = this.API_URL + query;
 
-    if (email == "email@gmail.com" && password == 123456789) {
-      /* TOKEN */
-      let userData = [
-        {
-          token: "torneus-token",
-          idRol: 2,
-          nombre: "Kevin",
-          apellido: "Espinoza"
-        }
-      ];
-
-      this.setUser(userData);
-
-      return userData;
-    }else{
-      return false;
+    const formData = {
+      email : email,
+      password : password
     }
-    //return this.http.post<any>(url, formData, {'headers':this.headers});
+
+    return this.httpClient.post<any>(url, formData, {'headers':this.headers});
   }
 
   isUserLoged(): boolean {
@@ -43,7 +47,7 @@ export class AuthenticationService {
     //const isExpired = this.jwtHelper.isTokenExpired(accessToken);
     //console.log(accessToken)
     if (token) {
-      this.setDataLogin(token);
+      this.setToken(token);
       return true;
     } else {
       return false;
@@ -52,8 +56,9 @@ export class AuthenticationService {
   
 
   /* data del usuario se guarda en localStorage */
-  setDataLogin(data:any): any{
-    localStorage.setItem('torneus-token', data[0].token);
+  setToken(data:any): any{
+    localStorage.setItem('torneus-token', data);
+    //localStorage.setItem('nametorneus', data.access_token);
   }
   setUser(user:any): void {
     this.user = user;
@@ -79,5 +84,15 @@ export class AuthenticationService {
       localStorage.removeItem('torneus-token');
       this.setUser(undefined);
       window.location.reload();
+  }
+
+
+  /* REGISTRO DE USUARIOS */
+  register(registerBody:any){
+    return this.httpClient.post(
+      `${this.API_URL}auth/register`,
+      registerBody,
+      {'headers':this.headers}
+    );
   }
 }

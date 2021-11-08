@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../../shared/services/authentication.service';
 
 interface Paises{
   valor: string,
@@ -21,17 +22,23 @@ export class RegisterFormularioComponent implements OnInit {
   currentDate = new Date();
   paises:any;
   provincias:any;
-  ciudades:any;
+  localidades:any;
+
+  successCuadro:boolean;
 
   registerJugadorOrganizadorForm: FormGroup;
   registerEquipoForm: FormGroup;
+
+  body:any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService
   ) {
     this.nombreRol = "";
+    this.successCuadro = false;
     this.paises = [
       {
         id: 1,
@@ -53,7 +60,7 @@ export class RegisterFormularioComponent implements OnInit {
         nombre: 'Río Negro'
       }
     ];
-    this.ciudades = [
+    this.localidades = [
       {
         id: 1,
         idProvincia: 1,
@@ -69,11 +76,7 @@ export class RegisterFormularioComponent implements OnInit {
       apellido: new FormControl('',[
         Validators.required,
       ]),
-      nombreUsuario: new FormControl('',[
-        Validators.required,
-        Validators.minLength(5),
-      ]),
-      nombreTorneus: new FormControl('', [
+      nametorneus: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
       ]),
@@ -85,27 +88,19 @@ export class RegisterFormularioComponent implements OnInit {
         Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[com]{3}$"),
         Validators.required
       ]),
-      fechaNacimiento: new FormControl('', [
-        Validators.required,
-      ]),
-      
       pais: new FormControl('', [
         Validators.required,
       ]),
       provincia: new FormControl('', [
         Validators.required,
       ]),
-      ciudad: new FormControl('', [
+      localidad: new FormControl('', [
         Validators.required,
       ]),
     });
 
     this.registerEquipoForm = this.formBuilder.group({
-      nombreUsuario: new FormControl('',[
-        Validators.required,
-        Validators.minLength(5),
-      ]),
-      nombreTorneus: new FormControl('', [
+      nametorneus: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
       ]),
@@ -117,16 +112,13 @@ export class RegisterFormularioComponent implements OnInit {
         Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[com]{3}$"),
         Validators.required
       ]),
-      fechaNacimiento: new FormControl('', [
-        Validators.required,
-      ]),
       pais: new FormControl('', [
         Validators.required,
       ]),
       provincia: new FormControl('', [
         Validators.required,
       ]),
-      ciudad: new FormControl('', [
+      localidad: new FormControl('', [
         Validators.required,
       ]),
     });
@@ -152,7 +144,55 @@ export class RegisterFormularioComponent implements OnInit {
   }
 
   registrarUsuario(){
-    console.log(this.registerJugadorOrganizadorForm.value);
+    if (this.idRol == 2) {
+      this.body = {
+        nametorneus: this.registerEquipoForm.controls.nametorneus.value,
+        name: 'Equipo',
+        email: this.registerEquipoForm.controls.email.value,
+        idpais: this.registerEquipoForm.controls.pais.value,
+        idprovincia: this.registerEquipoForm.controls.provincia.value,
+        idlocalidad: this.registerEquipoForm.controls.localidad.value,
+        password: this.registerEquipoForm.controls.password.value,
+        idRol: this.idRol
+      };
+    }else if(this.idRol == 1 || this.idRol == 3){
+      this.body = {
+        nametorneus: this.registerJugadorOrganizadorForm.controls.nametorneus.value,
+        name: this.registerJugadorOrganizadorForm.controls.nombre.value,
+        apellido: this.registerJugadorOrganizadorForm.controls.apellido.value
+      }
+    }
+    
+    this.authenticationService.register(this.body).subscribe(
+      (response) => {
+        if (response) {
+          console.log(response);
+          console.log('se registró al usuario correctamente!');
+
+          this.successCuadro = true;
+
+          setTimeout(() => {
+            this.router.navigateByUrl("/login");
+          }, 3000);
+          
+        } else {
+          /*
+          this._snackBar.open('No se ha podido crear el titulo.', null, {
+            duration: 2000,
+          });
+          */
+         console.log('No se ha podido registrar al usuario.')
+        }
+      },
+      (error) => {
+        console.log(error);
+        /*
+        this._snackBar.open('No se ha podido crear el titulo.', null, {
+          duration: 2000,
+        });
+        */
+      }
+    );
   }
 
   test(param:any){

@@ -1,7 +1,7 @@
 <div class="background">
 
-    <div class="login-container px-5 py-3">
-        <div class="row mt-3 align-items-center">
+    <div class="login-container px-4 py-3">
+        <div class="row mt-2 align-items-center">
             <h1 class="col-9">Iniciar Sesión</h1>
             <img src="./../../../../assets/images/logo-torneus-main.svg" widht="60px" height="80px" class="col-3" alt="Logo Torneus">
         </div>
@@ -46,9 +46,13 @@
                 <mat-progress-bar *ngIf="loginOk" style="margin-bottom: 16px; margin-top: 16px;" color="primary" mode="indeterminate">
                 </mat-progress-bar>
 
+                <div *ngIf="loginOk == false" style="margin-bottom: 0 !important;" class="alert alert-danger mt-2" role="alert">
+                    Inicio de sesión fallido. Reinténtalo.
+                </div>
+
                 
 
-                <div class="col-12 mt-3 text-center align-items-center">
+                <div class="col-12 mt-2 text-center align-items-center">
                     ¿No tienes cuenta? <span [routerLink]="'/register'" class="link-primary"><b>Regístrate</b></span>
                 </div>
             </div>
