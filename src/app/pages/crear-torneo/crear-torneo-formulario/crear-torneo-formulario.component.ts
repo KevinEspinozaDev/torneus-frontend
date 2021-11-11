@@ -24,6 +24,8 @@ export class CrearTorneoFormularioComponent implements OnInit {
 
   registerTipoTorneoForm: FormGroup;
 
+  createdOk:boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -53,7 +55,7 @@ export class CrearTorneoFormularioComponent implements OnInit {
         Validators.required,
       ]),
       idtipotorneo: new FormControl(1),
-      idorganizador: new FormControl(this.idOrganizador),
+      idorganizador: new FormControl(''),
     });
   }
 
@@ -74,13 +76,19 @@ export class CrearTorneoFormularioComponent implements OnInit {
   }
 
   registrarTorneo():any{
+    this.registerTipoTorneoForm.controls.idorganizador.setValue(this.idOrganizador);
+
+    let nuevaFechaInicio = new Date(this.registerTipoTorneoForm.controls.fechainicio.value).toJSON().slice(0, 10);
+    this.registerTipoTorneoForm.controls.fechainicio.setValue(nuevaFechaInicio);
+
+    let nuevaFechaFin = new Date(this.registerTipoTorneoForm.controls.fechafin.value).toJSON().slice(0, 10);
+    this.registerTipoTorneoForm.controls.fechafin.setValue(nuevaFechaFin);
 
     this.torneosService.crearTorneo(this.registerTipoTorneoForm)
     .subscribe(
       (res) => {
-        let nuevaFecha = new Date(res.value.fechaInicio).toJSON().slice(0, 10);
-        res.value.fechaInicio = nuevaFecha;
-        console.log(res.value)
+        console.log(res);
+        this.createdOk = true;
       },
       error => {
 
