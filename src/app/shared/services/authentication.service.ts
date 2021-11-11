@@ -56,14 +56,29 @@ export class AuthenticationService {
   
 
   /* data del usuario se guarda en localStorage */
-  setToken(data:any): any{
-    localStorage.setItem('torneus-token', data);
+  setSessionData(data:any): any{
+    localStorage.setItem('torneus-id', '1');
+    localStorage.setItem('torneus-username', 'KevinMekuru');
+    this.setToken(data.access_token)
     //localStorage.setItem('nametorneus', data.access_token);
+  }
+  getSessionData():any{
+    const data = {
+      idusuario : localStorage.getItem('torneus-id'),
+      username : localStorage.getItem('torneus-username'),
+      token : localStorage.getItem('torneus-token'),
+    } 
+
+    return data;
   }
   setUser(user:any): void {
     this.user = user;
     //this.userService.getUserConfig();
     this.userService.setCurrentUser(user);
+  }
+
+  setToken(token:any): void{
+    localStorage.setItem('torneus-token', token);
   }
 
   logOut(): void {
@@ -82,6 +97,9 @@ export class AuthenticationService {
         window.location.reload();
       }); */
       localStorage.removeItem('torneus-token');
+      localStorage.removeItem('torneus-id');
+      localStorage.removeItem('torneus-username');
+
       this.setUser(undefined);
       window.location.reload();
   }

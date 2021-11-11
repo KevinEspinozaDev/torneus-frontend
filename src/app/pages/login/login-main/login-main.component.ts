@@ -39,7 +39,7 @@ export class LoginMainComponent implements OnInit {
       (res:any) => {
         this.loginOk = true;
         console.log(res);
-        this.authService.setToken(res.access_token);
+        this.authService.setSessionData(res);
         this.router.navigateByUrl('/');
       },
       (err:any) => {

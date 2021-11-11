@@ -24,17 +24,15 @@ export class DialogTipoTorneoComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.idTipoTorneo == 1) {
-      this.nombreTipoTorneo = "Copa";
-    }else if(this.data.idTipoTorneo == 2){
-      this.nombreTipoTorneo = "Fase de Grupos";
-    }else if(this.data.idTipoTorneo == 3){
       this.nombreTipoTorneo = "Liga";
+    }else if(this.data.idTipoTorneo == 2){
+      this.nombreTipoTorneo = "Copa";
     }
   }
 
   confirmarTipoTorneo():any {
     //if (this.data.idTipoTorneo >= 1 && this.data.idTipoTorneo <= 3) {
-    if (this.data.idTipoTorneo == 3) {
+    if (this.data.idTipoTorneo == 1) {
       this.dialog.closeAll();
       this.router.navigate(['/crear-torneo/crear-torneo-formulario/'+this.data.idTipoTorneo]);
       console.log("Id correcto");
