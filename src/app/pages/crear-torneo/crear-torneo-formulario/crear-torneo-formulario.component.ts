@@ -78,6 +78,8 @@ export class CrearTorneoFormularioComponent implements OnInit {
     this.torneosService.crearTorneo(this.registerTipoTorneoForm)
     .subscribe(
       (res) => {
+        let nuevaFecha = new Date(res.value.fechaInicio).toJSON().slice(0, 10);
+        res.value.fechaInicio = nuevaFecha;
         console.log(res.value)
       },
       error => {
