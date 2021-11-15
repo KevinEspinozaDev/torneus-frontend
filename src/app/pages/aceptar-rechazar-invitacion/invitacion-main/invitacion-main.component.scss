@@ -14,9 +14,18 @@
     margin-bottom: 32px;
     display: flex;
     flex-direction: column;
+    /*
     overflow: scroll;
     overflow-x: unset;
+    */
 }
 hr{
     margin:0;
+}
+.mensaje-invitacion{
+    background:#f0f0f0;
+    padding:1%;
+    margin:1% auto;
+    max-width:500px;
+    border:1px solid gray;
 }

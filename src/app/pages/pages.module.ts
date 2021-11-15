@@ -11,7 +11,6 @@ import { DialogTipoTorneoComponent } from './crear-torneo/dialog-tipo-torneo/dia
 import { CrearTorneoMainComponent } from './crear-torneo/crear-torneo-main/crear-torneo-main.component';
 import { CrearTorneoFormularioComponent } from './crear-torneo/crear-torneo-formulario/crear-torneo-formulario.component';
 import { SolicitudTorneoMainComponent } from './solicitud-torneo/solicitud-torneo-main/solicitud-torneo-main.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,8 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     PagesRoutingModule,
-    SharedModule,
-    ReactiveFormsModule
+    SharedModule
   ]
 })
 export class PagesModule { }

@@ -1,13 +1,48 @@
+.background{
+    background-image: url('/assets/images/login-background.png');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-attachment: fixed;
+}
+
+.container{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    overflow-x: unset;
+}
+
+table{
+    width:100%;
+    text-align: left;
+}
+
+.boton-accion{
+    font-size:28px!important;
+}
+
+.edit-link{
+    font-size:12px;
+}
+
 .containerFotoPerfil{
     margin: auto;
+    border-style: solid;
+    /*border-color: var(--primary-color);*/
+    border-color:white;
+    border-width: 6px;
+    width: 250px;
+    height: 250px;
+    background-size: cover;
 
     .fotoPerfil{
-        border-style: solid;
-        border-color: var(--primary-color);
-        border-width: 2px;
-        width: 250px;
-        height: 250px;
-
+        
     }
 }
 
@@ -42,9 +77,6 @@
 
 .link:hover{
     color: var(--primary-color);
-}
-.btn-save:hover{
-    cursor: pointer;
 }
 
 /* Mobile */

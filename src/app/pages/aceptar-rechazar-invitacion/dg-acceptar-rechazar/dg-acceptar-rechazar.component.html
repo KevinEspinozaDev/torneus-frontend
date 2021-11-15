@@ -1,0 +1,15 @@
+<div class="container">
+    <h1 mat-dialog-title>Invitacion {{accionInvitacionString}}</h1><!--Confirmar Rol - {{nombreRol}}-->
+    <div *ngIf="accionInvitacionBoolean; then solicitudAceptada else solicitudRechazada"></div>
+    <div mat-dialog-content>
+        <ng-template #solicitudAceptada>
+            Felicidades. Eres parte del equipo <b>{{nombreEquipo}}</b>.
+        </ng-template>
+        <ng-template #solicitudRechazada>
+            Rechazaste la solicitud al equipo <b>{{nombreEquipo}}</b>.
+        </ng-template>
+    </div>
+    <div mat-dialog-actions class="containerAcciones">
+        <button mat-button mat-dialog-close>Cerrar</button>
+    </div>
+</div>

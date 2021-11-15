@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TorneoService } from '../../../shared/services/torneo.service';
 
 @Component({
   selector: 'app-torneos-ver',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TorneosVerComponent implements OnInit {
 
-  constructor() { }
+  listaTorneos:any;
+  constructor(private torneoService: TorneoService) { }
 
   ngOnInit(): void {
+    this.listaTorneos = this.torneoService.getListaTorneos();
+    //console.log(this.listaTorneos);
   }
 
 }

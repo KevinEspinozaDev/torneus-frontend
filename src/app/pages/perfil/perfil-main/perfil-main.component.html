@@ -1,67 +1,120 @@
-<div class="container d-flex flex-column bg-white text-dark h-100 text-center py-3">
-    <h1>Mi Perfil</h1>
+<div class="background">
+    <div class="container text-dark text-center">
+        <!--<h1>Mi Perfil</h1>-->
+        <div class="row my-4">
+            <div class="col-12 col-md-4">
+                <div class="containerFotoPerfil rounded-circle" [ngStyle]="{'background' : 'url('+usuarioActual.imageUrl+')'}"></div>
+            </div>
 
-    <div class="containerFotoPerfil">
-        <img src="./../../../../assets/images/jugador2.jpg" class="fotoPerfil rounded-circle img-fluid" alt="Foto de perfil">
-    </div>
+            <div class="col-12 col-md-8">
+                <mat-card class="h-100 mh-100">
+                    <h2>Datos del Usuario</h2>
+                    <div class="d-flex align-items-center">
+                        <mat-icon class="mx-1">account_circle</mat-icon> {{usuarioActual.nombreTorneus}}
+                    </div>
+                    <hr/>
+                    <div class="d-flex align-items-center">
+                        <mat-icon class="mx-1">email</mat-icon> {{usuarioActual.email}}
+                    </div>
+                    <hr/>
+                    <div class="d-flex align-items-center">
+                        <mat-icon class="mx-1">badge</mat-icon> {{usuarioActual.rol}}
+                    </div>
+                    <hr/>
+                    <div class="text-end edit-link">
+                        <a (click)="editarPerfil()" href="javascript:void(0)">Editar</a>
+                    </div>
+                </mat-card>
+            </div>
 
-    <hr>
-
-    <div class="d-flex flex-column">
-        <p *ngFor="let equipo of equiposUsuario">Jugador en: {{equipo.nombre}}</p>
-    </div>
-
-    <div *ngIf="invitaciones" class="invitaciones d-flex flex-column text-white">
-        <div class="invitacionesTitulo">
-            <h3>Invitaciones de Equipos</h3>
         </div>
 
-        <div class="cardsInvitaciones container-fluid d-flex">
-            <mat-card *ngFor="let inv of invitaciones" class="cardInvitacion text-center">
-                <mat-card-header>
-                    <mat-card-title [routerLink]="'/perfil'" class="link ">{{inv.nombreEquipo}}</mat-card-title>
-                    <mat-card-subtitle>"{{inv.descripcion}}" - <i>{{inv.nombreEquipo}}</i></mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                
-                </mat-card-content>
-                <mat-card-actions>
-                    <button mat-raised-button (click)="rechazarInvitacion(inv.id)" class="btnInvitacion btn btn-danger">Rechazar</button>
-                    <button mat-raised-button (click)="aceptarInvitacion(inv.id)" class="btnInvitacion btn btn-success">Aceptar</button>
-                </mat-card-actions>
-            </mat-card>
+        <mat-card class="h-100 mh-100 my-2">
+            <h2>Equipos a los que pertenece</h2>
+            <div class="d-flex flex-column">
+                <div *ngIf="equiposUsuario; then perteneceEquipo else noPerteneceEquipo"></div>
+                <ng-template #perteneceEquipo>
+                    <div *ngFor="let equipo of equiposUsuario">
+                        {{equipo.nombre}}
+                        <hr />
+                    </div>
+                </ng-template>
+                <ng-template #noPerteneceEquipo>
+                    El usuario no pertenece a ningún equipo.
+                </ng-template>
+            </div>
+        </mat-card>
+
+        <div *ngIf="invitaciones" class="invitaciones d-flex flex-column text-white">
+            <div class="invitacionesTitulo">
+                <h3>Invitaciones de Equipos</h3>
+            </div>
+
+            <div class="container">
+                <mat-card>
+                    <table mat-table [dataSource]="invitaciones" >
+                        <!-- Nombre Equipo Column -->
+                        <ng-container matColumnDef="nombreEquipo">
+                            <th mat-header-cell *matHeaderCellDef> Equipo </th>
+                            <td mat-cell *matCellDef="let inv"> 
+                                <a [routerLink]="'/perfil'">{{inv.nombreEquipo}}</a>
+                            </td>
+                        </ng-container>
+
+                        <!-- Mensaje Column -->
+                        <ng-container matColumnDef="descripcion">
+                            <th mat-header-cell *matHeaderCellDef> Mensaje </th>
+                            <td mat-cell *matCellDef="let inv">
+                                <a class="px-1 text-center" (click)="abrirMensaje(inv)" href="javascript:void(0)">
+                                    <mat-icon class="boton-accion" [inline]="true">
+                                        message
+                                    </mat-icon>
+                                </a>
+                            </td>
+                        </ng-container>
+
+                        <!-- Acciones Column -->
+                        <ng-container matColumnDef="accion">
+                            <th mat-header-cell *matHeaderCellDef> Acción </th>
+                            <td mat-cell *matCellDef="let inv"> 
+                                <a class="px-1 text-center" (click)="aceptarInvitacion(inv.id)" href="javascript:void(0)">
+                                    <mat-icon class="text-success boton-accion" [inline]="true">
+                                        check_circle_outline
+                                    </mat-icon>
+                                </a>
+                                <a class="px-1 text-center" (click)="rechazarInvitacion(inv.id)" href="javascript:void(0)">
+                                    <mat-icon class="text-danger boton-accion" [inline]="true">
+                                        highlight_off
+                                    </mat-icon>
+                                </a>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </mat-card>
+            </div>
+            <!--
+            <div class="cardsInvitaciones container-fluid d-flex">
+                <mat-card *ngFor="let inv of invitaciones" class="cardInvitacion text-center">
+                    <mat-card-header>
+                        <mat-card-title [routerLink]="'/perfil'" class="link ">{{inv.nombreEquipo}}</mat-card-title>
+                        <mat-card-subtitle>"{{inv.descripcion}}" - <i>{{inv.nombreEquipo}}</i></mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                    
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button (click)="rechazarInvitacion(inv.id)" class="btnInvitacion btn btn-danger">Rechazar</button>
+                        <button mat-raised-button (click)="aceptarInvitacion(inv.id)" class="btnInvitacion btn btn-success">Aceptar</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            -->
+
         </div>
-    </div>
 
-
-
-    <!-- datos -->
-    <div class="datos d-flex flex-column mt-4">
-        <div class="datosTitulo">
-            <h3>Mis Datos</h3>
-        </div>
-        <mat-form-field class="bg-white" appearance="outline">
-            <mat-label>Nombre Torneus</mat-label>
-            <input matInput placeholder="Nombre Torneus" value="KevinMekuru">
-            <mat-icon matSuffix (click)="test()" class="btn-save">save</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field class="bg-white" appearance="outline">
-            <mat-label>Nombre</mat-label>
-            <input matInput placeholder="Nombre" value="Kevin">
-            <mat-icon matSuffix (click)="test()" class="btn-save">save</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field class="bg-white" appearance="outline">
-            <mat-label>Apellido</mat-label>
-            <input matInput placeholder="Apellido" value="Pancracio">
-            <mat-icon matSuffix (click)="test()" class="btn-save">save</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field class="bg-white" appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" value="kevin@gmail.com">
-            <mat-icon matSuffix (click)="test()" class="btn-save">save</mat-icon>
-        </mat-form-field>
+       
     </div>
 </div>

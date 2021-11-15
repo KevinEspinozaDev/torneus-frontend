@@ -29,6 +29,10 @@ const routes: Routes = [
     path: 'mi-torneo', 
     loadChildren: () => import('./torneos/mi-torneo/mi-torneo.module').then(m => m.MiTorneoModule)
   },
+  {
+    path: 'aceptar-invitacion', 
+    loadChildren: () => import('./aceptar-rechazar-invitacion/aceptar-rechazar-invitacion.module').then(m => m.AceptarRechazarInvitacionModule)
+  },
 
 ];
 

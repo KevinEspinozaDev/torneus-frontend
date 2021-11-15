@@ -1,1 +1,44 @@
-<p>torneos-ver works!</p>
+<div class="background">
+    <div class="container">
+        <mat-card class="my-2 px-4">
+            <h4 class="text-center">Mis torneos en curso</h4>
+            <div class="row w-100">
+                <div class="col-6">
+                    Nombre
+                </div>
+                <div class="col-6">
+                    Fecha
+                </div>
+                <hr/>
+                <ng-container *ngFor="let torneo of listaTorneos">
+                    <div *ngIf="torneo.estado == 1">
+                        <div class="col-12 py-2">
+                            <a [routerLink]="'/mi-torneo'" >{{torneo.nombreTorneo}}</a>
+                        </div>
+                        <hr />
+                    </div>
+                </ng-container>
+            </div>
+        </mat-card>
+        <mat-card class="my-2 px-4">
+            <h4 class="text-center">Mis torneos finalizados</h4>
+            <div class="row w-100">
+                <div class="col-6">
+                    Nombre
+                </div>
+                <div class="col-6">
+                    Fecha
+                </div>
+                <hr/>
+                <ng-container *ngFor="let torneo of listaTorneos">
+                    <div *ngIf="torneo.estado == 0">
+                        <div class="col-12 py-2">
+                            <a [routerLink]="'/mi-torneo'" >{{torneo.nombreTorneo}}</a>
+                        </div>
+                        <hr />
+                    </div>
+                </ng-container>
+            </div>
+        </mat-card>
+    </div>
+</div>

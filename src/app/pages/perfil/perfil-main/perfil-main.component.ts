@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserService } from '../../../shared/services/user.service';
+import { DgEditarPerfilComponent } from '../dg-editar-perfil/dg-editar-perfil.component';
+import { DgMensajeEquipoComponent } from '../dg-mensaje-equipo/dg-mensaje-equipo.component';
 
 @Component({
   selector: 'app-perfil-main',
@@ -8,18 +11,20 @@ import { UserService } from '../../../shared/services/user.service';
 })
 export class PerfilMainComponent implements OnInit {
 
-  usuarioActual:any;
   invitaciones:any;
+  usuarioActual:any;
   equiposUsuario:any;
+  displayedColumns: string[] = ['nombreEquipo', 'descripcion', 'accion'];
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.usuarioActual = this.userService.getCurrentUser();
     this.invitaciones = this.userService.getInvitacionesEquipos();
-    console.log(this.usuarioActual);
+    this.usuarioActual = this.userService.getCurrentUser();
+    //console.log(this.invitaciones);
   }
 
 
@@ -34,8 +39,26 @@ export class PerfilMainComponent implements OnInit {
     this.invitaciones = false;
   }
 
-  test(){
-    console.log('Testing');
+  editarPerfil(){
+    this.openDialog();
+  }
+
+  openDialog(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = "100%";
+    dialogConfig.width = "80%";
+    //dialogConfig.data = this.usuarioActual;
+
+    this.dialog.open(DgEditarPerfilComponent, dialogConfig);
+  }
+
+  abrirMensaje(objetoEquipo: any){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = "100%";
+    dialogConfig.width = "80%";
+    dialogConfig.data = objetoEquipo;
+
+    this.dialog.open(DgMensajeEquipoComponent, dialogConfig);
   }
 
 }

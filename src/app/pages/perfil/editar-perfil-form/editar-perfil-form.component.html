@@ -1,0 +1,33 @@
+<div class="datos">
+    <div class="datosTitulo">
+        <h3>Editar Perfil</h3>
+    </div>
+    <mat-form-field class="bg-white w-100" appearance="outline">
+        <mat-label>Nombre Torneus</mat-label>
+        <input matInput placeholder="Nombre Torneus" value="{{usuarioActual.nombreTorneus}}">
+        <mat-icon matSuffix>save</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="bg-white w-100" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Nombre" value="{{usuarioActual.nombre}}">
+        <mat-icon matSuffix>save</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="bg-white w-100" appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput placeholder="Apellido" value="{{usuarioActual.apellido}}">
+        <mat-icon matSuffix>save</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="bg-white w-100" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" value="{{usuarioActual.email}}">
+        <mat-icon matSuffix>save</mat-icon>
+    </mat-form-field>
+
+    <div mat-dialog-actions class="containerAcciones">
+        <button (click)="guardarDatos()" mat-raised-button color="primary">Guardar</button>
+        <button mat-button mat-dialog-close>Cancelar</button>
+    </div>
+</div>

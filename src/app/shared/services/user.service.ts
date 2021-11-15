@@ -14,6 +14,17 @@ export class UserService {
   }
 
   getCurrentUser(): any {
+    const usuarioActual = {
+      id: "1",
+      nombre: "Kevin",
+      apellido: "Pancracio",
+      nombreTorneus: "KevinMekuru",
+      email: "kevin@gmail.com",
+      rol: "Organizador",
+      imageUrl: "/assets/images/jugador2.jpg",
+    };
+    this.setCurrentUser(usuarioActual);
+   
     return this.currentUser;
   }
 
@@ -29,6 +40,19 @@ export class UserService {
     ];
 
     return invitaciones;
+  }
+
+  getInvitacionEquipo():any{
+    const invitacion = 
+      {
+        id: "1",
+        idEquipo: "1",
+        nombreEquipo: "SKT T1",
+        estado: "1",
+        descripcion: "Hola! Por favor únete a nuestro equipo!"
+      };
+
+    return invitacion;
   }
 
   aceptarInvitacionEquipo(id:any): any{

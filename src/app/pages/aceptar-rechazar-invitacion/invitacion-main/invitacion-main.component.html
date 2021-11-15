@@ -1,0 +1,19 @@
+<div class="background">
+    <div class="container">
+        <mat-card class="my-2 px-4 text-center">
+            <h2>Solicitud de ingreso a equipo</h2>
+            <p>El equipo <b>{{invitacion.nombreEquipo}}</b> te ha enviado una solicitud para ingresar al mismo.</p>
+            <div class="mensaje-invitacion">
+                {{invitacion.descripcion}}
+            </div>
+            <div class="row">
+                <div class="col-6 text-center">
+                    <button mat-stroked-button (click)="accionSolicitud(true)" class="btn btn-success">Aceptar</button>
+                </div>
+                <div class="col-6 text-center">
+                    <button mat-stroked-button (click)="accionSolicitud(false)" class="btn btn-danger">Rechazar</button>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
