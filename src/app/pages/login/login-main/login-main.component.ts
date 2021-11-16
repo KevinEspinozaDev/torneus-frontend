@@ -38,7 +38,7 @@ export class LoginMainComponent implements OnInit {
     .subscribe(
       (res:any) => {
         this.loginOk = true;
-        console.log(res);
+        //console.log(res);
         this.authService.setSessionData(res);
         this.router.navigateByUrl('/');
       },

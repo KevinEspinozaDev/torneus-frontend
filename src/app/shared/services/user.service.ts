@@ -17,7 +17,6 @@ export class UserService {
     const usuarioActual = {
       id: "1",
       nombre: "Kevin",
-      apellido: "Pancracio",
       nombreTorneus: "KevinMekuru",
       email: "kevin@gmail.com",
       rol: "Organizador",

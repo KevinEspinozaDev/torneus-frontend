@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { UserService } from '../../../shared/services/user.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TorneosService {
+export class InvitarJugadoresService {
 
   headers = new HttpHeaders()
   .set('Content-Type', 'application/json')
@@ -18,16 +17,32 @@ export class TorneosService {
   private API_URL: string = environment.apiUrl;
 
   constructor(
-    private httpClient: HttpClient,
+    public httpClient:HttpClient
   ) { }
 
 
-  crearTorneo(dataTorneo:any): Observable<any>{
-    //console.log(dataTorneo)
+  getJugadores():any{
+    const jugadores = [
+      {
+        'idusuario':2,
+        'nametorneus':'Jugador Testing',
+        'name':'Jugador Testing',
+      },
+      /*
+      {
+        'idusuario': 6,
+        'nametorneus':'RoweeClaw99',
+        'name':'Roweena Ravenclaw',
+      }*/
+    ]
 
-    const query = 'torneos'; 
+    return jugadores;
+  }
+
+  enviarInvitaciones(jugadores:any):Observable<any>{
+    const query = 'invitaralequipo'; 
     return this.httpClient
-    .post(`${this.API_URL}${query}`, dataTorneo.value,
+    .post(`${this.API_URL}${query}`, jugadores,
       {headers: this.headers}
     );
   }

@@ -6,21 +6,13 @@
         </div>
 
         <!-- Formulario registro para jugador u organizador -->
-        <div *ngIf="idRol == 1 || idRol == 3" class="content">
+        <div *ngIf="idRol == 2 || idRol == 4" class="content">
             <form [formGroup]="registerJugadorOrganizadorForm">
                 <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Tu Nombre</mat-label>
-                    <input matInput type="text" formControlName="nombre" placeholder="Escribe tu nombre">
+                    <mat-label>Tu Nombre y apellido</mat-label>
+                    <input matInput type="text" formControlName="nombre" placeholder="Escribe tu nombre y apellido">
                     <mat-error *ngIf="registerJugadorOrganizadorForm.controls.nombre.errors?.required">
-                        Ingresa tu nombre.
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Tu Apellido</mat-label>
-                    <input matInput type="text" formControlName="apellido" placeholder="Escribe tu apellido">
-                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.apellido.errors?.required">
-                        Ingresa tu apellido.
+                        Ingresa tu nombre y apellido.
                     </mat-error>
                 </mat-form-field>
 
@@ -81,8 +73,8 @@
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Nombre Torneus</mat-label>
                     <input  matTooltip="Nombre que te identificará dentro de la plataforma."
-                    formControlName="nombreTorneus" matInput type="text" placeholder="Escribe un nombre de Torneus">
-                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.nombreTorneus.errors?.required">
+                    formControlName="nametorneus" matInput type="text" placeholder="Escribe un nombre de Torneus">
+                    <mat-error *ngIf="registerJugadorOrganizadorForm.controls.nametorneus.errors?.required">
                         Ingresa el nombre Torneus que quieres tener en la plataforma.
                     </mat-error>
                 </mat-form-field>
@@ -113,7 +105,7 @@
         <!------------------------------------------------------------------------------------- -->
 
         <!-- Formulario registra para equipo -->
-        <div *ngIf="idRol == 2" class="content">
+        <div *ngIf="idRol == 3" class="content">
             <form [formGroup]="registerEquipoForm">
 
                 <mat-form-field class="form-field" appearance="outline">

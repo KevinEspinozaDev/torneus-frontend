@@ -57,14 +57,24 @@ export class AuthenticationService {
 
   /* data del usuario se guarda en localStorage */
   setSessionData(data:any): any{
-    localStorage.setItem('torneus-id', '1');
-    localStorage.setItem('torneus-username', 'KevinMekuru');
-    this.setToken(data.access_token)
+    console.log(data[1])
+    localStorage.setItem('torneus-id', data[1].idusuario);
+    localStorage.setItem('torneus-username', data[1].nametorneus);
+    
+    if (data[1].nametorneus == 'JugadorTestingPro') {
+      localStorage.setItem('torneus-idrol', '2');
+    }else if(data[1].nametorneus == 'Equipo Testing'){
+      localStorage.setItem('torneus-idrol', '3');
+
+    }
+    
+    this.setToken(data[0].original.access_token);
     //localStorage.setItem('nametorneus', data.access_token);
   }
   getSessionData():any{
     const data = {
       idusuario : localStorage.getItem('torneus-id'),
+      idrol : localStorage.getItem('torneus-idrol'),
       username : localStorage.getItem('torneus-username'),
       token : localStorage.getItem('torneus-token'),
     } 
@@ -98,6 +108,7 @@ export class AuthenticationService {
       }); */
       localStorage.removeItem('torneus-token');
       localStorage.removeItem('torneus-id');
+      localStorage.removeItem('torneus-idrol');
       localStorage.removeItem('torneus-username');
 
       this.setUser(undefined);

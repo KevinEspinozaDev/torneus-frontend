@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
-
-import users from '../json/users.json';
-import selectedUsers from '../json/selected_users.json';
 import { DgEnviarSolicitudComponent } from '../dg-enviar-solicitud/dg-enviar-solicitud.component';
+import { InvitarJugadoresService } from '../services/invitar-jugadores.service';
 
 
 interface User {  
-  id: Number;  
+  idusuario: Number;
+  nametorneus: String;  
   name: String;  
   //username: String;  
   //email: String;  
@@ -21,16 +21,30 @@ interface User {
 })
 export class SearchUserComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { 
-   
-  }
-  
   //items: object[] = [{ name: 'archie' }, { name: 'jake' }, { name: 'richard' }];
-  usuarios: User[] = users;
-  usuariosSeleccionados: User[] = selectedUsers;
+  jugadores: User[] = [];
+  usuariosSeleccionados: User[] = [];
   term: string = '';
   items: User[] = [];
   selectedItems: User[] = [];
+
+  invitacionOk:boolean;
+
+  constructor(
+    public dialog: MatDialog,
+    private invitarJugadoresService : InvitarJugadoresService,
+    private router: Router
+    ) { 
+      this.jugadores = [];
+      this.invitacionOk = false;
+  }
+  
+  
+
+  ngOnInit(): void {
+    this.jugadores = this.invitarJugadoresService.getJugadores();
+    //console.log(this.jugadores)
+  }
 
   ordenarArreglo(arreglo: User[]){
     arreglo.sort(function (a, b){
@@ -46,13 +60,13 @@ export class SearchUserComponent implements OnInit {
   }
 
   searchUserById(arreglo: User[], userId: Number){
-    var nombre: String = '';
+    var name: String = '';
     for (let i=0; i<arreglo.length; i++){
-      if (arreglo[i].id == userId){
-        nombre = arreglo[i].name;
+      if (arreglo[i].idusuario == userId){
+        name = arreglo[i].name;
       }
     }
-    return nombre;
+    return name;
   }
 
   addDeleteUser(singleUser: User, accionAddDel: Boolean){
@@ -62,18 +76,19 @@ export class SearchUserComponent implements OnInit {
       false: delete
     */
 
-    this.items = this.usuarios;
+    this.items = this.jugadores;
     this.selectedItems = this.usuariosSeleccionados;
 
-    var userNombre = singleUser.name;   
-    var userId =  singleUser.id;
+    let userNombre = singleUser.name;   
+    let userId =  singleUser.idusuario;
+    let userNombreTorneus = singleUser.nametorneus
     
     if(accionAddDel){
-      this.selectedItems.push({id: userId, name: userNombre});
+      this.selectedItems.push({idusuario: userId, name: userNombre, nametorneus:userNombreTorneus});
       this.items = this.quitarItems(this.items, singleUser);
     }
     else{
-      this.items.push({id: userId, name: userNombre});
+      this.items.push({idusuario: userId, name: userNombre, nametorneus:userNombreTorneus});
       this.selectedItems = this.quitarItems(this.selectedItems, singleUser);
     }
     //var userNombre = this.searchUserById(this.items, singleUser.id);   
@@ -87,18 +102,47 @@ export class SearchUserComponent implements OnInit {
 
   quitarItems(arregloUsuarios: User[], objetoUser: User){
     var userNombre = objetoUser.name;   
-    var userId =  objetoUser.id;
+    var userId =  objetoUser.idusuario;
 
     for (let i=0; i<arregloUsuarios.length; i++){
-      if (userId == arregloUsuarios[i].id){
+      if (userId == arregloUsuarios[i].idusuario){
         arregloUsuarios.splice(i, 1);
       }
     }
     return arregloUsuarios;
   }
 
-  enviarSolicitudes(){
-    console.log(this.selectedItems);
+  enviarSolicitudes(invitados:any){
+
+    invitados.forEach((element:any) => {
+      console.log(element)
+      const idRolUser = localStorage.getItem('torneus-idrol');
+
+      /* SÓLO si se es equipo, se pueden enviar invitaciones para unirse a uno*/
+      if (idRolUser == '3') {
+        element.idequipo = localStorage.getItem('torneus-id');
+        element.descripcion = "'¡Te invitamos a unirte a nuestro equipo!'";
+        element.idjugador = element.idusuario;
+
+        this.invitarJugadoresService.enviarInvitaciones(JSON.stringify(element))
+        .subscribe(
+          (res) => {
+            if (res) {
+              console.log(res);
+              this.invitacionOk = true;
+            }
+          },
+          (error) => {
+            console.log(error);
+          });
+      }else{
+        this.router.navigateByUrl('/');
+      }
+      console.log(element)
+    });
+    
+    
+    //console.log(invitados);
     this.openDialog();
   }
 
@@ -110,9 +154,6 @@ export class SearchUserComponent implements OnInit {
     //dialogConfig.height = "90%";
 
     this.dialog.open(DgEnviarSolicitudComponent, dialogConfig);
-  }
-  
-  ngOnInit(): void {
   }
 
 }

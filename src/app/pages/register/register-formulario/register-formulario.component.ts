@@ -73,9 +73,6 @@ export class RegisterFormularioComponent implements OnInit {
       nombre: new FormControl('',[
         Validators.required,
       ]),
-      apellido: new FormControl('',[
-        Validators.required,
-      ]),
       nametorneus: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -127,12 +124,12 @@ export class RegisterFormularioComponent implements OnInit {
   ngOnInit(): void {
     this.idRol = this.route.snapshot.paramMap.get('id');
 
-    if (this.idRol >= 1 && this.idRol <= 3) {
-      if (this.idRol == 1) {
+    if (this.idRol >= 2 && this.idRol <= 4) {
+      if (this.idRol == 2) {
         this.nombreRol = "Jugador";
-      }else if(this.idRol == 2){
-        this.nombreRol = "Equipo";
       }else if(this.idRol == 3){
+        this.nombreRol = "Equipo";
+      }else if(this.idRol == 4){
         this.nombreRol = "Organizador";
       }
     }else{
@@ -144,29 +141,38 @@ export class RegisterFormularioComponent implements OnInit {
   }
 
   registrarUsuario(){
-    if (this.idRol == 2) {
+    // Si Equipo
+    if (this.idRol == 3) {
       this.body = {
         nametorneus: this.registerEquipoForm.controls.nametorneus.value,
-        name: 'Equipo',
+        name: this.registerEquipoForm.controls.nametorneus.value,
         email: this.registerEquipoForm.controls.email.value,
-        idpais: this.registerEquipoForm.controls.pais.value,
-        idprovincia: this.registerEquipoForm.controls.provincia.value,
-        idlocalidad: this.registerEquipoForm.controls.localidad.value,
+        idpais: 1,
+        idprovincia: 1,
+        idlocalidad: 1,
         password: this.registerEquipoForm.controls.password.value,
-        idRol: this.idRol
+        idrol: this.idRol
       };
-    }else if(this.idRol == 1 || this.idRol == 3){
+      // 2 jugador, 4 organizador
+    }else if(this.idRol == 2 || this.idRol == 4){
       this.body = {
         nametorneus: this.registerJugadorOrganizadorForm.controls.nametorneus.value,
         name: this.registerJugadorOrganizadorForm.controls.nombre.value,
-        apellido: this.registerJugadorOrganizadorForm.controls.apellido.value
+        email: this.registerJugadorOrganizadorForm.controls.email.value,
+        password: this.registerJugadorOrganizadorForm.controls.password.value,
+        idpais: 1,
+        idprovincia: 1,
+        idlocalidad: 1,
+        idrol: this.idRol
       }
+
+      console.log(this.body)
     }
     
     this.authenticationService.register(this.body).subscribe(
       (response) => {
         if (response) {
-          console.log(response);
+          //console.log(response);
           console.log('se registró al usuario correctamente!');
 
           this.successCuadro = true;

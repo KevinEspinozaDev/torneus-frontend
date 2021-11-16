@@ -8,16 +8,16 @@
         </span>
         <input type="text" class="form-control" placeholder="Filtrar por nombre" [(ngModel)]="term">
       </div>
-      <div class="border text-muted p-4 m-5 text-center" *ngIf="usuarios.length == 0">
+      <div class="border text-muted p-4 m-5 text-center" *ngIf="jugadores.length == 0">
         No se han encontrado jugadores.
       </div>
-      <div *ngFor = "let item of usuarios |filter:term" >
+      <div *ngFor = "let item of jugadores |filter:term" >
         <div class="row">
           <div class="col-10">
-            {{item.name}}
+            <b>{{item.nametorneus}}</b> - {{item.name}}
           </div>
           <div class="col-2">
-            <a (click)="addDeleteUser(item, true)" #newUser [attr.data-userid]="item.id" [attr.data-add_del]="'add'" href="javascript:void(0)">
+            <a (click)="addDeleteUser(item, true)" #newUser [attr.data-userid]="item.idusuario" [attr.data-add_del]="'add'" href="javascript:void(0)">
               <mat-icon>add_circle</mat-icon>
             </a>
           </div>
@@ -33,16 +33,17 @@
       <div *ngFor = "let selectedItem of usuariosSeleccionados" >
         <div class="row">
           <div class="col-10">
+            <b>{{selectedItem.nametorneus}}</b> - 
             {{selectedItem.name}}
           </div>
           <div class="col-2">
-            <a (click)="addDeleteUser(selectedItem, false)" #delUser [attr.data-userid]="selectedItem.id" [attr.data-add_del]="'del'" href="javascript:void(0)">
+            <a (click)="addDeleteUser(selectedItem, false)" #delUser [attr.data-userid]="selectedItem.idusuario" [attr.data-add_del]="'del'" href="javascript:void(0)">
               <mat-icon>remove_circle</mat-icon>
             </a>
           </div>
         </div>
       </div>
-      <button class="w-100" (click)="enviarSolicitudes()" mat-flat-button color="primary" [disabled]="usuariosSeleccionados.length == 0">Enviar solicitudes</button>
+      <button class="w-100" (click)="enviarSolicitudes(usuariosSeleccionados)" mat-flat-button color="primary" [disabled]="usuariosSeleccionados.length == 0">Enviar solicitudes</button>
     </div>
   </div>
   
