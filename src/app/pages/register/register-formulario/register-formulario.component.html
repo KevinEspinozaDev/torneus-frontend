@@ -28,6 +28,13 @@
                     </mat-error>
                 </mat-form-field>
 
+                <div *ngIf="idRol == 4" class="alert alert-warning" role="alert">
+                    <strong>Atención: </strong>Te recomendamos utilizar un email al que tengas acceso y consultes
+                    activamente, para así estar al tanto de las novedades de tus torneos.
+                </div>
+
+                <hr>
+
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>País de Residencia</mat-label>
                     <mat-select formControlName="pais">
