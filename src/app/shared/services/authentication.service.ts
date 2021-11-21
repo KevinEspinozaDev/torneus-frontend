@@ -60,13 +60,7 @@ export class AuthenticationService {
     console.log(data[1])
     localStorage.setItem('torneus-id', data[1].idusuario);
     localStorage.setItem('torneus-username', data[1].nametorneus);
-    
-    if (data[1].nametorneus == 'JugadorTestingPro') {
-      localStorage.setItem('torneus-idrol', '2');
-    }else if(data[1].nametorneus == 'Equipo Testing'){
-      localStorage.setItem('torneus-idrol', '3');
-
-    }
+    localStorage.setItem('torneus-idrol', data[2][0].role_id);
     
     this.setToken(data[0].original.access_token);
     //localStorage.setItem('nametorneus', data.access_token);
@@ -110,6 +104,7 @@ export class AuthenticationService {
       localStorage.removeItem('torneus-id');
       localStorage.removeItem('torneus-idrol');
       localStorage.removeItem('torneus-username');
+      localStorage.removeItem('torneus-idrol');
 
       this.setUser(undefined);
       window.location.reload();
