@@ -47,7 +47,7 @@ export class AuthenticationService {
     //const isExpired = this.jwtHelper.isTokenExpired(accessToken);
     //console.log(accessToken)
     if (token) {
-      this.setToken(token);
+      this.userService.setToken(token);
       return true;
     } else {
       return false;
@@ -57,32 +57,18 @@ export class AuthenticationService {
 
   /* data del usuario se guarda en localStorage */
   setSessionData(data:any): any{
-    console.log(data[1])
-    localStorage.setItem('torneus-id', data[1].idusuario);
-    localStorage.setItem('torneus-username', data[1].nametorneus);
-    localStorage.setItem('torneus-idrol', data[2][0].role_id);
+    this.userService.setCurrentUser(data);
     
-    this.setToken(data[0].original.access_token);
+    this.userService.setToken(data[0].original.access_token);
     //localStorage.setItem('nametorneus', data.access_token);
   }
   getSessionData():any{
-    const data = {
-      idusuario : localStorage.getItem('torneus-id'),
-      idrol : localStorage.getItem('torneus-idrol'),
-      username : localStorage.getItem('torneus-username'),
-      token : localStorage.getItem('torneus-token'),
-    } 
-
-    return data;
+    return this.userService.getCurrentUser();
   }
+
   setUser(user:any): void {
     this.user = user;
-    //this.userService.getUserConfig();
     this.userService.setCurrentUser(user);
-  }
-
-  setToken(token:any): void{
-    localStorage.setItem('torneus-token', token);
   }
 
   logOut(): void {
@@ -102,7 +88,7 @@ export class AuthenticationService {
       }); */
       localStorage.removeItem('torneus-token');
       localStorage.removeItem('torneus-id');
-      localStorage.removeItem('torneus-idrol');
+      localStorage.removeItem('torneus-name');
       localStorage.removeItem('torneus-username');
       localStorage.removeItem('torneus-idrol');
 

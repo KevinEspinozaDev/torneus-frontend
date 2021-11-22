@@ -9,22 +9,42 @@ export class UserService {
 
   constructor() { }
 
-  setCurrentUser(user:any): void {
-    this.currentUser = user;
+  setCurrentUser(data:any): void {
+    console.log(data[1])
+    localStorage.setItem('torneus-id', data[1].idusuario);
+    localStorage.setItem('torneus-username', data[1].nametorneus);
+    localStorage.setItem('torneus-name', data[1].name);
+
+    localStorage.setItem('torneus-idrol', data[2][0].role_id);
   }
 
   getCurrentUser(): any {
-    const usuarioActual = {
-      id: "1",
-      nombre: "Kevin",
-      nombreTorneus: "KevinMekuru",
-      email: "kevin@gmail.com",
-      rol: "Organizador",
-      imageUrl: "/assets/images/jugador2.jpg",
-    };
-    this.setCurrentUser(usuarioActual);
-   
-    return this.currentUser;
+    const user = {
+      idusuario : localStorage.getItem('torneus-id'),
+      idrol : localStorage.getItem('torneus-idrol'),
+      username : localStorage.getItem('torneus-username'),
+      name : localStorage.getItem('torneus-name'),
+      token : localStorage.getItem('torneus-token'),
+    } 
+
+    return user;
+  }
+
+  getRolPalabras():string{
+    const user = this.getCurrentUser();
+    let rolPalabra:string = '';
+
+    if (user.idrol == 1) {
+      rolPalabra = 'SysAdmin';
+    }else if(user.idrol == 2){
+      rolPalabra = 'Jugador';
+    }else if(user.idrol == 3){
+      rolPalabra = 'Equipo';
+    }else if(user.idrol == 4){
+      rolPalabra = 'Organizador';
+    }
+
+    return rolPalabra;
   }
 
   getInvitacionesEquipos():any{
@@ -63,5 +83,9 @@ export class UserService {
     ];
 
     return equipos;
+  }
+
+  setToken(token:any): void{
+    localStorage.setItem('torneus-token', token);
   }
 }

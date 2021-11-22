@@ -1,26 +1,17 @@
 .appContent{
-    overflow-y: scroll;
+    overflow-y: hidden;
     height: calc(100% - 58px);
-    padding-left: 18px 80px 18px 80px;
+    //padding-left: 18px 80px 18px 80px;
 }
 
 /* Mobile */
 @media screen and (max-width: 600px) {
-    .appContent{
-        padding: 12px;
-    }
 }
 
 /* Tablets y monitores pequeños */
 @media (min-width: 600px) and (max-width: 920px) {
-    .appContent{
-        padding: 18px;
-    }
 }
 
 /* PC */
 @media (min-width: 920px){
-    .appContent{
-        padding: 18px 80px 18px 80px;
-    }
 }

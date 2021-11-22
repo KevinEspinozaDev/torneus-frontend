@@ -10,35 +10,18 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
-        <li class="nav-item dropdown ml-auto">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Torneos
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" [routerLink]="'crear-torneo'">Crear Torneo</a></li>
-            <li><a class="dropdown-item" [routerLink]="'torneos'">Ver Torneos</a></li>
-            <li><a class="dropdown-item" href="#">Mis Torneos</a></li>
-            <li><a class="dropdown-item" [routerLink]="'mi-torneo'">Mi Torneo (single)</a></li>
-          </ul>
-        </li>
-        
-        <li class="nav-item ">
-          <a class="nav-link" aria-current="page" routerLink="/invitar-jugadores">Invitar Jugadores al Equipo</a>
-        </li>
 
-        <li class="nav-item ">
-          <a class="nav-link" aria-current="page" routerLink="/solicitud-torneo">Entrar a un torneo</a>
-        </li>
+        <div *ngFor="let item of menu" class="cadaItem">
+          <li *ngIf="item.length > 1" class="nav-item dropdown ml-auto">
 
-        <li class="nav-item dropdown ml-auto">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{sessionData.username}}
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" [routerLink]="'/perfil'">Mi Perfil</a></li>
-            <li><a class="dropdown-item text-danger" (click)="logout()">Cerrar Sesión</a></li>
-          </ul>
-        </li>
+          </li>
+
+          <li *ngIf="item.length == 1" class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="{{item.url}}">{{item}}</a>
+          </li>
+        </div>
+
+        <p *ngFor="let item of menu"> {{item.data.nombre}}</p>
 
       </ul>
 

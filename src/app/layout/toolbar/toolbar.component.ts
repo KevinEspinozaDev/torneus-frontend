@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router,  NavigationStart, NavigationEnd } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { UserService } from '../../shared/services/user.service';
+import { MenuService } from '../../shared/services/menu.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -15,19 +16,25 @@ export class ToolbarComponent implements OnInit {
   currentSection:any;
   sessionData:any;
 
+  rolUsuario:string;
+  menu:any;
+
   loadingModule = false;
   message:any;
 
   constructor(
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private router: Router
+    private menuService : MenuService,
   ) { 
     this.currentSession = false;
+    this.rolUsuario = this.userService.getRolPalabras();
   }
 
   ngOnInit(): void {
     this.sessionData = this.authenticationService.getSessionData();
+    this.menu = this.menuService.getMenu();
+    console.log(this.menu);
   }
 
   
