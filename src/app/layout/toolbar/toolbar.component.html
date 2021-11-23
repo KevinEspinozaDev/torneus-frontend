@@ -12,11 +12,11 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
 
         <!-- Por cada opcion padre -->
-        <li *ngFor="let item of menu" class="nav-item" [ngClass]="'{dropdown : item.submenus.length > 0, 
-          ml-auto : item-submenus.length > 0}'">
+        <li *ngFor="let item of menu" class="nav-item" [class.dropdown]="item.submenus.length > 0"
+          [class.ml-auto]="item.submenus.length > 0">
 
           <!-- Opcion simple, sin submenus-->
-          <a *ngIf="item.submenus.length == 0" class="nav-link" [routerLink]="'{{item.url}}'">{{item.nombre}}</a>
+          <a *ngIf="item.submenus.length == 0" class="nav-link" [routerLink]="item.url">{{item.nombre}}</a>
 
           <!-- Opcion son submenus -->
           <a  *ngIf="item.submenus.length > 0" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -18,24 +18,91 @@ export class MenuService {
 
     if (this.usuario.idrol == 1) {
       // Sysadmin
-      menu = { }
+      menu = { };
 
       // Jugador
     } else if (this.usuario.idrol == 2) {
       menu = [
         {
-          'url' : '/',
-          'nombre' : 'Mis Invitaciones a Equipos',
+          'url' : '',
+          'nombre' : 'Torneos',
           'click' : '',
           'submenus' : [
             {
-              'url' : '/perfil',
-              'nombre' : 'Crear Torneo',
-              'click' : 'test()',
+              'url' : '/torneos',
+              'nombre' : 'Ver Torneos',
+              'click' : '',
             }
           ]
         },
-      ]
+        {
+          'url' : '/perfil',
+          'nombre' : 'Mis Invitaciones a Equipos',
+          'click' : '',
+          'submenus' : []
+        }
+      ];
+
+      // Equipo
+    } else if (this.usuario.idrol == 3){
+      menu = [
+        {
+          'url' : '',
+          'nombre' : 'Torneos',
+          'click' : '',
+          'submenus' : [
+            {
+              'url' : '/torneos',
+              'nombre' : 'Ver Torneos',
+              'click' : '',
+            },
+            {
+              'url' : '/solicitud-torneo',
+              'nombre' : 'Entrar a un Torneo',
+              'click' : ''
+            }
+          ]
+        },
+        {
+          'url' : '/invitar-jugadores',
+          'nombre' : 'Invitar Jugadores al Equipo',
+          'click' : '',
+          'submenus' : []
+        }
+      ];
+
+      // Organizador
+    } else if (this.usuario.idrol == 4){
+      menu = [
+        {
+          'url' : '',
+          'nombre' : 'Torneos',
+          'click' : '',
+          'submenus' : [
+            {
+              'url' : '/crear-torneo',
+              'nombre' : 'Crear Torneo',
+              'click' : '',
+            },
+            {
+              'url' : '/torneos',
+              'nombre' : 'Ver Torneos',
+              'click' : '',
+            },
+            {
+              'url' : '/mi-torneo',
+              'nombre' : 'Mis Torneos',
+              'click' : ''
+            }
+          ]
+        },
+        {
+          'url' : '',
+          'nombre' : 'Invitar Equipos a un Torneo',
+          'click' : '',
+          'submenus' : []
+        }
+      ];
     }
 
     return menu;
