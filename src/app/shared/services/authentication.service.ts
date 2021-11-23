@@ -92,7 +92,6 @@ export class AuthenticationService {
       localStorage.removeItem('torneus-username');
       localStorage.removeItem('torneus-idrol');
 
-      this.setUser(undefined);
       window.location.reload();
   }
 

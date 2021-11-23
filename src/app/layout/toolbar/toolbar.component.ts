@@ -11,7 +11,6 @@ import { MenuService } from '../../shared/services/menu.service';
 })
 export class ToolbarComponent implements OnInit {
 
-  currentSession:boolean;
   currentUrl: any;
   currentSection:any;
   sessionData:any;
@@ -27,21 +26,22 @@ export class ToolbarComponent implements OnInit {
     private userService: UserService,
     private menuService : MenuService,
   ) { 
-    this.currentSession = false;
     this.rolUsuario = this.userService.getRolPalabras();
   }
 
   ngOnInit(): void {
     this.sessionData = this.authenticationService.getSessionData();
     this.menu = this.menuService.getMenu();
-    console.log(this.menu);
+    console.log(this.menu[0].submenus.length);
   }
 
+  test():void{
+    console.log('Test()');
+  }
   
 
   logout(): void {
     this.authenticationService.logOut();
-    this.currentSession = false;
   }
 
 }

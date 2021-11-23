@@ -17,41 +17,24 @@ export class MenuService {
     let menu = {};
 
     if (this.usuario.idrol == 1) {
-      menu = {
-        'usuario' : {
-          'perfil' : {
-            'url' : '/perfil',
-            'nombre' : 'Mi Perfil',
-            'click' : 'logout()'
-          }
-        }
-      }
+      // Sysadmin
+      menu = { }
+
       // Jugador
     } else if (this.usuario.idrol == 2) {
       menu = [
         {
-          data : {
-            data : {
+          'url' : '/',
+          'nombre' : 'Mis Invitaciones a Equipos',
+          'click' : '',
+          'submenus' : [
+            {
               'url' : '/perfil',
-              'nombre' : 'Mi Perfil',
-              'click' : ''
+              'nombre' : 'Crear Torneo',
+              'click' : 'test()',
             }
-          }
+          ]
         },
-        {
-          data : {
-            'url' : '',
-            'nombre' : 'Cerrar Sesión',
-            'click' : 'logout()'
-          }
-        },
-        {
-          'entrarAUnTorneo' : {
-            'url' : '/solicitud-torneo',
-            'nombre' : 'Entrar a un Torneo',
-            'click' : ''
-          }
-        }
       ]
     }
 
