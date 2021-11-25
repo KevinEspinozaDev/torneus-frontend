@@ -7,6 +7,9 @@ import { CrearTorneoRoutingModule } from './crear-torneo-router';
 import { DialogTipoTorneoComponent } from './dialog-tipo-torneo/dialog-tipo-torneo.component';
 import { CrearTorneoFormularioComponent } from './crear-torneo-formulario/crear-torneo-formulario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import { DateFormat } from 'src/app/DateFormat';
 
 
 
@@ -25,5 +28,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
+  providers : [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: DateFormat },
+  ]
 })
 export class CrearTorneoModule { }

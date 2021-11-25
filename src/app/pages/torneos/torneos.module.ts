@@ -4,11 +4,13 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { TorneosRoutingModule } from './torneos-routing.module';
 import { TorneosVerComponent } from './torneos-ver/torneos-ver.component';
+import { TorneosOrganizadorComponent } from './torneos-organizador/torneos-organizador.component';
 
 
 @NgModule({
   declarations: [
     TorneosVerComponent,
+    TorneosOrganizadorComponent,
   ],
   imports: [
     CommonModule,

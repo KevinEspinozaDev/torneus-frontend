@@ -20,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
   exports: [
     MaterialModule,
     ButtonBackComponent,
-    HttpClientModule
+    HttpClientModule,
   ]
 })
 export class SharedModule { }

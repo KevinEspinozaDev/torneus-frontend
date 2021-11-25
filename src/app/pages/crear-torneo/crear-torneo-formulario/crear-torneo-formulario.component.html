@@ -23,7 +23,8 @@
                         <!-- Fecha de inicio del torneo -->
                         <mat-form-field class="form-field" appearance="outline">
                             <mat-label>Fecha de inicio</mat-label>
-                            <input matInput [matDatepicker]="pickerInicio" formControlName="fechainicio"  placeholder="DD-MM-AAAA"> <!--[max]="currentDate | date:'yyyy-MM-dd'"-->
+                            <input matInput [matDatepicker]="pickerInicio" [min]="currentDate" formControlName="fechainicio"  
+                            placeholder="DD-MM-AAAA"> <!--[max]="currentDate | date:'yyyy-MM-dd'"-->
                             <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
                             <mat-datepicker #pickerInicio></mat-datepicker>
                             <mat-error *ngIf="registerTipoTorneoForm.controls.fechainicio.errors?.required">
@@ -36,7 +37,10 @@
                         <!-- Fecha de fin del torneo -->
                         <mat-form-field class="form-field" appearance="outline">
                             <mat-label>Fecha de fin</mat-label>
-                            <input matInput [disabled]="registerTipoTorneoForm.controls.fechainicio.errors?.required" [value]="!registerTipoTorneoForm.controls.fechainicio.value ? '' : null" [min]="registerTipoTorneoForm.controls.fechainicio.value" [matDatepicker]="pickerFin" formControlName="fechafin" placeholder="DD-MM-AAAA">
+                            <input matInput 
+                            [value]="!registerTipoTorneoForm.controls.fechainicio.value ? '' : null" 
+                            [min]="registerTipoTorneoForm.controls.fechainicio.value" [matDatepicker]="pickerFin" 
+                            formControlName="fechafin" placeholder="DD-MM-AAAA">
                             <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
                             <mat-datepicker #pickerFin></mat-datepicker>
                             <mat-error *ngIf="registerTipoTorneoForm.controls.fechafin.errors?.required">
@@ -45,13 +49,6 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <!--
-                <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Fecha de nacimiento (DD-MM-AAAA)</mat-label>
-                    <input matInput formControlName="fechaNacimiento" type="date" max="{{currentDate | date:'yyyy-MM-dd'}}" placeholder="Indica tu fecha de nacimiento">
-                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                </mat-form-field>  
-                -->
 
                 <!-- Recompensa del torneo (puntos) -->
                 <mat-form-field class="form-field" appearance="outline">
@@ -76,6 +73,16 @@
                     <button (click)="registrarTorneo()" [disabled]="this.registerTipoTorneoForm.invalid" mat-raised-button color="primary" type="submit">Crear torneo</button>
                 </div>
             </form>
+
+            <div class="alert alert-success my-3" role="alert">
+                Torneo creado!
+                <p>
+                    Copia el nombre de tu torneo y envíaselo a quienes desees que participen en él:
+                    <br>
+                    <b>{{registerTipoTorneoForm.controls.nombre.value}}</b>
+                    
+                </p>
+            </div>
         </div>
     </mat-card>
 </div>

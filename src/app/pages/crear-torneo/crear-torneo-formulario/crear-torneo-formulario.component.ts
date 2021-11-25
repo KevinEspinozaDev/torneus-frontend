@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
-import { TorneosService } from '../services/torneos.service';
-import { MatDatepicker } from '@angular/material/datepicker';
+import { DatePipe } from '@angular/common';
+import { CrearTorneosService } from '../services/crear-torneos.service';
 
 @Component({
   selector: 'app-crear-torneo-formulario',
@@ -15,6 +13,12 @@ import { MatDatepicker } from '@angular/material/datepicker';
 export class CrearTorneoFormularioComponent implements OnInit {
 
   startDate: string = '';
+
+  hoy: Date = new Date();
+  anioActual: number = this.hoy.getFullYear();
+  mesActual: number = this.hoy.getMonth();
+  diaActual: number = this.hoy.getDate();
+  pipe = new DatePipe('en-US');
 
   nombreTipoTorneo:string;
   idTipoTorneo:any;
@@ -32,7 +36,7 @@ export class CrearTorneoFormularioComponent implements OnInit {
     private formBuilder: FormBuilder,
 
     private dateAdapter: DateAdapter<Date>,
-    private torneosService: TorneosService,
+    private crearTorneosService: CrearTorneosService,
   ) 
   {
     this.dateAdapter.setLocale('en-US'); //Formato de fecha para el datepicker
@@ -84,7 +88,7 @@ export class CrearTorneoFormularioComponent implements OnInit {
     let nuevaFechaFin = new Date(this.registerTipoTorneoForm.controls.fechafin.value).toJSON().slice(0, 10);
     this.registerTipoTorneoForm.controls.fechafin.setValue(nuevaFechaFin);
 
-    this.torneosService.crearTorneo(this.registerTipoTorneoForm)
+    this.crearTorneosService.crearTorneo(this.registerTipoTorneoForm)
     .subscribe(
       (res) => {
         console.log(res);
@@ -95,6 +99,7 @@ export class CrearTorneoFormularioComponent implements OnInit {
       }
     );
   }
+
 
   test(param:any){
     console.log(param);

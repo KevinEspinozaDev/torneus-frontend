@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TorneosService {
+export class CrearTorneosService {
 
   headers = new HttpHeaders()
   .set('Content-Type', 'application/json')
