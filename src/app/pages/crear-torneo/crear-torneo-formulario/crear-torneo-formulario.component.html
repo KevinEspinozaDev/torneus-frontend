@@ -55,10 +55,10 @@
 
                 <!-- Recompensa del torneo (puntos) -->
                 <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Recompensa (puntos)</mat-label>
+                    <mat-label>Recompensa a cada jugador del equipo ganador (puntos)</mat-label>
                     <input matInput type="number" formControlName="recompensa" placeholder="Ingrese la recompensa (en puntos)">
                     <mat-error *ngIf="registerTipoTorneoForm.controls.recompensa.errors?.required">
-                        Ingresa la recompensa del torneo.
+                        Ingresa la recompensa de puntos para cada jugador al ganar el torneo.
                     </mat-error>
                 </mat-form-field>
 
