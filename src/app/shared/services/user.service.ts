@@ -10,7 +10,6 @@ export class UserService {
   constructor() { }
 
   setCurrentUser(data:any): void {
-    console.log(data[1])
     localStorage.setItem('torneus-id', data[1].idusuario);
     localStorage.setItem('torneus-username', data[1].nametorneus);
     localStorage.setItem('torneus-name', data[1].name);

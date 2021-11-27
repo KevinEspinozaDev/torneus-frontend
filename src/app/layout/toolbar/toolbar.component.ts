@@ -32,7 +32,6 @@ export class ToolbarComponent implements OnInit {
   ngOnInit(): void {
     this.sessionData = this.authenticationService.getSessionData();
     this.menu = this.menuService.getMenu();
-    console.log(this.menu[0].submenus.length);
   }
 
   test():void{

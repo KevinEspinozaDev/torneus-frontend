@@ -80,7 +80,7 @@ export class MenuService {
           'click' : '',
           'submenus' : [
             {
-              'url' : '/crear-torneo',
+              'url' : '/torneos/crear-torneo',
               'nombre' : 'Crear Torneo',
               'click' : '',
             },
@@ -90,7 +90,7 @@ export class MenuService {
               'click' : '',
             },
             {
-              'url' : '/mi-torneo',
+              'url' : '/torneos/mis-torneos',
               'nombre' : 'Mis Torneos',
               'click' : ''
             }

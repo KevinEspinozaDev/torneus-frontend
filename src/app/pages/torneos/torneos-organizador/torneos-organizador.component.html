@@ -1,1 +1,40 @@
-<p>torneos-organizador works!</p>
+<div class="background">
+    <div class="container">
+        <mat-card class="my-2 px-4">
+            <h4 class="text-center">Mis torneos en curso</h4>
+            <div class="row w-100">
+                <div *ngIf="dataReady == true && listaTorneos.length > 0">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Fecha Inicio</th>
+                                <th scope="col">Fecha Fin</th>
+                                <th scope="col">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cadaTorneo" *ngFor="let torneo of listaTorneos" (click)="objetoTorneo(torneo)">
+                                <th scope="row">{{torneo.nombre}}</th>
+                                <td>{{torneo.fechainicio}}</td>
+                                <td>{{torneo.fechafin}}</td>
+                                <td *ngIf="torneoExpirado(torneo) == true" class="text-danger">Finalizado</td>
+                                <td *ngIf="torneoExpirado(torneo) == false" class="text-success">Abierto</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Si no hay torneos -->
+                <div *ngIf="listaTorneos.length == 0">
+                    <ng-container>
+                        <i>Aún no creaste ningún torneo...</i> 
+                        <span [routerLink]="'/torneos/crear-torneo'" class="link-primary"><b>Crear Torneo</b></span>
+                    </ng-container>
+                </div>
+                
+            </div>
+        </mat-card>
+
+        <!--<button mat-raised-button (click)="setearObjeto()">Enviar id a perfil</button> -->
+    </div>
+</div>

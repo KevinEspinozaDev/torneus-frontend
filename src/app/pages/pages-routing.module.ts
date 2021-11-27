@@ -18,16 +18,8 @@ const routes: Routes = [
     loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilModule)
   },
   {
-    path: 'crear-torneo', 
-    loadChildren: () => import('./crear-torneo/crear-torneo.module').then(m => m.CrearTorneoModule)
-  },
-  {
     path: 'solicitud-torneo', 
     loadChildren: () => import('./solicitud-torneo/solicitud-torneo.module').then(m => m.SolicitudTorneoModule)
-  },
-  {
-    path: 'mi-torneo', 
-    loadChildren: () => import('./torneos/mi-torneo/mi-torneo.module').then(m => m.MiTorneoModule)
   },
   {
     path: 'aceptar-invitacion', 
