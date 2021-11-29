@@ -1,0 +1,50 @@
+<mat-card *ngIf="sessionData.idrol == 2"> <!--Agregar id usuario-->
+    <h2 class="text-center">Invitaciones de Equipos</h2>
+
+    <table mat-table [dataSource]="invitaciones" >
+        <!-- Nombre Equipo Column -->
+        <ng-container matColumnDef="nametorneus">
+            <th mat-header-cell *matHeaderCellDef> Equipo </th>
+            <td mat-cell *matCellDef="let inv"> 
+                <a [routerLink]="'/perfil'">{{inv.nametorneus}}</a>
+            </td>
+        </ng-container>
+
+        <!-- Mensaje Column -->
+        <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef> Mensaje </th>
+            <td mat-cell *matCellDef="let inv">
+                <a class="px-1 text-center" (click)="abrirMensaje(inv)" href="javascript:void(0)">
+                    <mat-icon class="boton-accion" [inline]="true">
+                        message
+                    </mat-icon>
+                </a>
+            </td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="accion">
+            <th mat-header-cell *matHeaderCellDef> Acción </th>
+            <td mat-cell *matCellDef="let inv"> 
+                <a class="px-1 text-center" (click)="aceptarInvitacion(inv)" href="javascript:void(0)">
+                    <mat-icon class="text-success boton-accion" [inline]="true">
+                        check_circle_outline
+                    </mat-icon>
+                </a>
+                <a class="px-1 text-center" (click)="rechazarInvitacion(inv)" href="javascript:void(0)">
+                    <mat-icon class="text-danger boton-accion" [inline]="true">
+                        highlight_off
+                    </mat-icon>
+                </a>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="9999">
+                No existen invitaciones disponibles.
+            </td>
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</mat-card>

@@ -1,0 +1,61 @@
+<mat-card class="lista-aplicantes px-4">
+    <h2 class="text-center py-2">Enfrentamientos</h2>
+    <div class="w-100 h-100" *ngIf="test.length == 0">
+        <div class="w-50 h-50 m-auto p-3 text-center fixture-cartel">
+            <div>
+                Lista de enfrentamientos en construcción.
+            </div>
+            <div *ngIf="sessionData.idrol == 4" class="edit-link">
+                <!-- Debe controlar por idusuario y si no hay fixture -->
+                <a (click)="generarFixture();" href="javascript:void(0)">Generar enfrentamientos</a>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="test.length != 0">
+        <div *ngFor="let singleTest of test; let i = index">
+            <h3>Fecha {{i+1}}</h3>
+            <table mat-table [dataSource]="singleTest" >
+                <!-- Nombre Equipo Column -->
+                <ng-container matColumnDef="idequipo1">
+                    <th mat-header-cell *matHeaderCellDef> Equipo local </th>
+                    <td mat-cell *matCellDef="let equipo"> 
+                        <a [routerLink]="'/perfil'">{{equipo.idequipo1}}</a>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="idequipo2">
+                    <th mat-header-cell *matHeaderCellDef> Equipo visitante </th>
+                    <td mat-cell *matCellDef="let equipo"> 
+                        <a [routerLink]="'/perfil'">{{equipo.idequipo2}}</a>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                    <td mat-cell *matCellDef="let equipo"> 
+                        {{equipo.fecha}} 
+                        <a href="javascript:void(0);">
+                            <mat-icon>edit</mat-icon>
+                        </a>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="informar_resultado"> <!--Esto lo ve equipos nomas-->
+                    <th mat-header-cell *matHeaderCellDef> Informar resultado </th>
+                    <td mat-cell *matCellDef="let equipo"> 
+                        <a href="javascript:void(0);">
+                            Informar
+                        </a>
+                    </td>
+                </ng-container>
+        
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <!--
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="9999">
+                        Este usuario no pertenece a ningún equipo.
+                    </td>
+                </tr>
+                -->
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+</mat-card>
