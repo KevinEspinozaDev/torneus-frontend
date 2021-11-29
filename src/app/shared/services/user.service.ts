@@ -1,13 +1,25 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  headers = new HttpHeaders()
+  .set('Content-Type', 'application/json')
+  .set('Access-Control-Allow-Origin', '*')
+  .set("Access-Control-Allow-Headers", "Origin, Content-Type");
+
+  private API_URL = environment.apiUrl;
+
   currentUser:any;
 
-  constructor() { }
+  constructor(
+    private httpClient : HttpClient
+  ) { }
 
   setCurrentUser(data:any): void {
     localStorage.setItem('torneus-id', data[1].idusuario);
@@ -86,5 +98,13 @@ export class UserService {
 
   setToken(token:any): void{
     localStorage.setItem('torneus-token', token);
+  }
+
+  getAllJugadores():Observable<any>{
+    const query = `alljugadores`;
+
+    const url = this.API_URL + query;
+
+    return this.httpClient.post<any>(url, {'headers':this.headers});
   }
 }
