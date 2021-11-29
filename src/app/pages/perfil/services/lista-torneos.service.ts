@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class PerfilService {
+export class ListaTorneosService {
 
   headers = new HttpHeaders()
   .set('Content-Type', 'application/json')
@@ -18,15 +18,30 @@ export class PerfilService {
 
   constructor(public httpClient:HttpClient) { }
 
-  getUserPorId(idusuario:any):Observable<any>{
-    const query = 'getuserdata/'+idusuario; 
+  getListaTorneosByUserId(idequipo:any)/*:Observable<any>*/{
+    const query = 'torneosdondeparticipo'; 
     //let params = new HttpParams().set('idusuario', idusuario);
-    let dataUsuario = this.httpClient
+    let listaTorneos = this.httpClient
     .post(
-      `${this.API_URL}${query}`, {idusuario: idusuario},
+      `${this.API_URL}${query}`, {idequipo: idequipo},
       {headers: this.headers}
     );
-    console.log(dataUsuario);
-    return dataUsuario;
+    console.log(listaTorneos);
+    
+    /*
+    let dataUsuario = [
+      {
+        idtorneo: 1,
+        nombre: 'Torneo1',
+        fechainicio: '2021-12-12',
+        fechafin: '2022-12-12',
+        recompensa: '20',
+        nroequipos: '20',
+        idtipotorneo: 2,
+        idorganizador: 2,
+      }
+    ];
+    */
+    return listaTorneos;
   }
 }

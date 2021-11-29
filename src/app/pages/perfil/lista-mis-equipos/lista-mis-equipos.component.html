@@ -1,0 +1,21 @@
+<mat-card class="" *ngIf="sessionData.idrol == 2">
+    <h2 class="text-center">Mis equipos</h2>
+
+    <table mat-table [dataSource]="equiposUsuario" >
+        <!-- Nombre Equipo Column -->
+        <ng-container matColumnDef="nametorneus">
+            <th mat-header-cell *matHeaderCellDef> Equipo </th>
+            <td mat-cell *matCellDef="let equipo"> 
+                <a [routerLink]="'/perfil'">{{equipo.nametorneus}}</a>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="9999">
+                Este usuario no pertenece a ningún equipo.
+            </td>
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</mat-card>

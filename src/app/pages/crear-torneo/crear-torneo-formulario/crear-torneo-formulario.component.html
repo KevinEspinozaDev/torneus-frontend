@@ -23,7 +23,7 @@
                         <!-- Fecha de inicio del torneo -->
                         <mat-form-field class="form-field" appearance="outline">
                             <mat-label>Fecha de inicio</mat-label>
-                            <input matInput [matDatepicker]="pickerInicio" formControlName="fechainicio"  placeholder="DD-MM-AAAA"> <!--[max]="currentDate | date:'yyyy-MM-dd'"-->
+                            <input matInput [matDatepicker]="pickerInicio" [min]="currentDate" formControlName="fechainicio"  placeholder="DD-MM-AAAA"> <!--[max]="currentDate | date:'yyyy-MM-dd'"-->
                             <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
                             <mat-datepicker #pickerInicio></mat-datepicker>
                             <mat-error *ngIf="registerTipoTorneoForm.controls.fechainicio.errors?.required">
@@ -55,21 +55,38 @@
 
                 <!-- Recompensa del torneo (puntos) -->
                 <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Recompensa a cada jugador del equipo ganador (puntos)</mat-label>
-                    <input matInput type="number" formControlName="recompensa" placeholder="Ingrese la recompensa (en puntos)">
+                    <mat-label>Recompensa (puntos)</mat-label>
+                    <input matInput type="number" [min]="1" (keypress)="($event.charCode >= 48 && $event.charCode < 58)" formControlName="recompensa" placeholder="Ingrese la recompensa (en puntos)">
                     <mat-error *ngIf="registerTipoTorneoForm.controls.recompensa.errors?.required">
-                        Ingresa la recompensa de puntos para cada jugador al ganar el torneo.
+                        Ingresa la recompensa del torneo.
+                    </mat-error>
+                    <mat-error *ngIf="registerTipoTorneoForm.controls.recompensa.errors?.min">
+                        La cantidad mínima de puntos es 1.
                     </mat-error>
                 </mat-form-field>
 
-                <!-- Cantidad maxima de equipos -->
-                <mat-form-field class="form-field" appearance="outline">
+                <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Cantidad máxima de equipos</mat-label>
-                    <input matInput type="number" formControlName="nroequipos" placeholder="Ingresa la cantidad máxima de equipos">
+                    <mat-select formControlName="nroequipos">
+                        <mat-option *ngFor="let numero of listaNumeroEquipos" [value]="numero">
+                            {{numero}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Cantidad maxima de equipos -->
+                <!--<mat-form-field class="form-field" appearance="outline">
+                    
+                    
+                    <input matInput type="number" [min]="2" (keypress)="($event.charCode >= 48 && $event.charCode < 58)" formControlName="nroequipos" placeholder="Ingresa la cantidad máxima de equipos">
                     <mat-error *ngIf="registerTipoTorneoForm.controls.nroequipos.errors?.required">
                         Ingresa la cantidad máxima de equipos.
                     </mat-error>
-                </mat-form-field>
+                    <mat-error *ngIf="registerTipoTorneoForm.controls.nroequipos.errors?.min">
+                        La cantidad mínima de equipos es 2.
+                    </mat-error>
+                    
+                </mat-form-field>-->
 
                 <div class="buttonsContainer mt-3">
                     <button mat-raised-button color="default" type="reset">Limpiar</button>

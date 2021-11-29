@@ -27,6 +27,7 @@
     "moment": "^2.29.1",
     "ng2-search-filter": "^0.5.1",
     "rxjs": "~6.6.0",
+    "sports-schedule-generator": "^0.0.7",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },

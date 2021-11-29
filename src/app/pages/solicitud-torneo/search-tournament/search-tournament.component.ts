@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 
+import { TorneosService } from '../services/torneos.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import tournaments from '../json/tournaments.json';
 import { DialogSolicitudTorneoComponent } from '../dialog-solicitud-torneo/dialog-solicitud-torneo.component'
 
 interface Tournament {  
-  id: Number;  
-  name: String;  
-  estado: Number;
-  tipoTorneo: Number;
-  equipoAplico: Number;
-  startDate: string;
+  nombre: string;  
+  fechainicio: string;
+  fechafin: string;
 }
 
 @Component({
@@ -18,25 +18,51 @@ interface Tournament {
   templateUrl: './search-tournament.component.html',
   styleUrls: ['./search-tournament.component.scss']
 })
+
 export class SearchTournamentComponent implements OnInit {
 
+  sessionData:any;
+
+  torneos: any;
+  term: string = '';
+  items: any;
+  rolEquipo: any;
+  
+  dataSource = new MatTableDataSource();
+  displayedColumns: string[] = ['nombre', 'fechainicio', 'fechafin'];
+
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private torneosService: TorneosService,
+    private authenticationService: AuthenticationService,
   ) 
   {
     
     //this.torneos = this.aplicarFiltrosArreglo(this.torneos);
-    this.ordenarArreglo(this.torneos);
+    //this.ordenarArreglo(this.torneos);
     //console.log(this.torneos);
 
   }
 
-  torneos: Tournament[] = tournaments;
-  term: string = '';
-  items: Tournament[] = [];
+  checkRolEquipo(user: any){
+    console.log(user);
+    let esEquipo = false;
+    if(user.idrol == 3){
+      esEquipo = true;
+      this.displayedColumns.push('accion');
+    }
+    
+    return esEquipo;
+  }
 
-  ordenarArreglo(arreglo: Tournament[]){
-    arreglo.sort(function (a, b){
+  applyFilter(event: Event) {
+    this.dataSource = new MatTableDataSource(this.torneos);
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  ordenarArreglo(arreglo: any){
+    arreglo.sort(function (a:any, b:any){
       if (a.name > b.name) {
         return 1;
       }
@@ -48,7 +74,7 @@ export class SearchTournamentComponent implements OnInit {
     });
   }
 
-  searchTournamentById(arreglo: Tournament[], tournamentId: Number){
+  searchTournamentById(arreglo: any, tournamentId: Number){
     var nombre: String = '';
     for (let i=0; i<arreglo.length; i++){
       if (arreglo[i].id == tournamentId){
@@ -58,23 +84,23 @@ export class SearchTournamentComponent implements OnInit {
     return nombre;
   }
 
-  enviarSolicitud(solicitudTorneo: Tournament){
+  enviarSolicitud(objetoTorneo: any){
     
-    let arregloNuevo: Tournament[] = [];
-    var tournamentNombre = this.searchTournamentById(this.torneos, solicitudTorneo.id);   
-    var tournamentId =  solicitudTorneo.id;
+    //let arregloNuevo: any = [];
+    //var tournamentNombre = this.searchTournamentById(this.torneos, objetoTorneo.id);   
+    //var tournamentId =  objetoTorneo.id;
 
-    /* Le asigna el estado "solicitado" al equipo, se hace en el backend
-    for (let i=0; i<this.torneos.length; i++){
-      if (tournamentId == this.torneos[i].id){
-        this.torneos[i].equipoAplico = 1;
-      }
-    }
-    */
-    //this.torneos = this.aplicarFiltrosArreglo(this.torneos);
-    
-    //Falta obtener la id del usuario equipo logueado en el momento
-    console.log(tournamentId);
+    this.torneosService.storeParticipacion(objetoTorneo, this.sessionData)
+    .subscribe(
+      (torneos) => {                           //next() callback
+        console.log(torneos);
+        //return this.torneos = torneos;
+      },
+      (error) => {                              //error() callback
+        console.error(error)
+      },
+    );
+
     this.openDialog();
   }
 
@@ -89,15 +115,15 @@ export class SearchTournamentComponent implements OnInit {
   }
 
   //Logica que va en el backend en realidad
-  aplicarFiltrosArreglo(arregloTorneo: Tournament[]){
+  aplicarFiltrosArreglo(arregloTorneo: any){
     arregloTorneo = this.removerItemsEstado(arregloTorneo);
     arregloTorneo = this.removerItemsEquipoAplico(arregloTorneo);
     arregloTorneo = this.removerItemsStartDate(arregloTorneo);
     return arregloTorneo;
   }
   /* Remover torneos inactivos */
-  removerItemsEstado(arregloTorneo: Tournament[]){
-    let arregloNuevo: Tournament[] = [];
+  removerItemsEstado(arregloTorneo: any){
+    let arregloNuevo: any = [];
     for (let i=0; i<arregloTorneo.length; i++){
       if (arregloTorneo[i].estado != 0){
         //arregloTorneo.splice(i-1, 1);
@@ -108,8 +134,8 @@ export class SearchTournamentComponent implements OnInit {
   }
 
   /* Remover torneos donde el equipo ya aplico */
-  removerItemsEquipoAplico(arregloTorneo: Tournament[]){
-    let arregloNuevo: Tournament[] = [];
+  removerItemsEquipoAplico(arregloTorneo: any){
+    let arregloNuevo: any = [];
     for (let i=0; i<arregloTorneo.length; i++){
       if (arregloTorneo[i].equipoAplico != 1){
         //arregloTorneo.splice(i, 1);
@@ -120,9 +146,9 @@ export class SearchTournamentComponent implements OnInit {
   }
 
   /* Remover torneos cuya fecha de inicio ya transcurrio */
-  removerItemsStartDate(arregloTorneo: Tournament[]){
+  removerItemsStartDate(arregloTorneo: any){
     let fechaActual: Date = new Date();
-    let arregloNuevo: Tournament[] = [];
+    let arregloNuevo: any = [];
     for (let i=0; i<arregloTorneo.length; i++){
       let fechaInicio: Date = new Date(arregloTorneo[i].startDate);
       if (fechaActual < fechaInicio){
@@ -136,6 +162,25 @@ export class SearchTournamentComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.sessionData = this.authenticationService.getSessionData();
+    this.rolEquipo = this.checkRolEquipo(this.sessionData);
+    //this.invitaciones = this.userService.getInvitacionesEquipos();
+
+    this.torneosService.getListadoTorneos()
+    .subscribe(
+      (torneos) => {                           //next() callback
+        console.log(torneos);
+        this.torneos = torneos;
+        this.dataSource.data = this.torneos;
+        //return this.torneos = torneos;
+      },
+      (error) => {                              //error() callback
+        console.error(error)
+      },
+    );
+    this.dataSource.data = this.torneos;
   }
+
+
 
 }

@@ -25,6 +25,7 @@ export class CrearTorneoFormularioComponent implements OnInit {
   registerTipoTorneoForm: FormGroup;
 
   createdOk:boolean = false;
+  listaNumeroEquipos:any;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +36,7 @@ export class CrearTorneoFormularioComponent implements OnInit {
     private torneosService: TorneosService,
   ) 
   {
-    this.dateAdapter.setLocale('en-US'); //Formato de fecha para el datepicker
+    this.dateAdapter.setLocale('es-AR'); //Formato de fecha para el datepicker
 
     this.nombreTipoTorneo = '';
     this.registerTipoTorneoForm = this.formBuilder.group({
@@ -50,9 +51,11 @@ export class CrearTorneoFormularioComponent implements OnInit {
       ),      
       recompensa: new FormControl('',[
         Validators.required,
+        Validators.min(1)
       ]),
       nroequipos: new FormControl('',[
         Validators.required,
+        Validators.min(2)
       ]),
       idtipotorneo: new FormControl(1),
       idorganizador: new FormControl(''),
@@ -60,6 +63,7 @@ export class CrearTorneoFormularioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.listaNumeroEquipos = this.selectNumeroEquipos();
     this.idTipoTorneo = this.route.snapshot.paramMap.get('id');
     //this.registerTipoTorneoForm.controls.idtipotorneo.value == this.idTipoTorneo;
 
@@ -75,11 +79,20 @@ export class CrearTorneoFormularioComponent implements OnInit {
     }
   }
 
+  selectNumeroEquipos(){
+    let selectNroEquipos = [];
+    for (let i = 2; i <= 30; i+=2) {
+      selectNroEquipos.push(i);
+    }
+    return selectNroEquipos;
+  }
+
   registrarTorneo():any{
     this.registerTipoTorneoForm.controls.idorganizador.setValue(this.idOrganizador);
 
     let nuevaFechaInicio = new Date(this.registerTipoTorneoForm.controls.fechainicio.value).toJSON().slice(0, 10);
     this.registerTipoTorneoForm.controls.fechainicio.setValue(nuevaFechaInicio);
+    //console.log(typeof nuevaFechaInicio);
 
     let nuevaFechaFin = new Date(this.registerTipoTorneoForm.controls.fechafin.value).toJSON().slice(0, 10);
     this.registerTipoTorneoForm.controls.fechafin.setValue(nuevaFechaFin);

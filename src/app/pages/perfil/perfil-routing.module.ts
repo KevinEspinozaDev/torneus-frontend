@@ -5,7 +5,13 @@ import { PerfilMainComponent } from './perfil-main/perfil-main.component';
 const routes: Routes = [
   {
     path: '', component: PerfilMainComponent
+  },
+ /*
+  {
+    path: ':iduser',
+    component: PerfilMainComponent
   }
+  */ 
 ];
 
 @NgModule({
