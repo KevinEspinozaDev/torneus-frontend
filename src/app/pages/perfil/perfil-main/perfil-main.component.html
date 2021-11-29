@@ -3,14 +3,15 @@
         <!--<h1>Mi Perfil</h1>-->
         <div class="row my-4">
             <div class="col-12 col-md-4">
-                <div class="containerFotoPerfil rounded-circle" [ngStyle]="{'background' : 'url('+usuarioActual.imageUrl+')'}"></div>
-            </div>
+                <!--<div class="containerFotoPerfil rounded-circle" [ngStyle]="{'background' : 'url('+usuarioActual.imageUrl+')'}"></div>
+                -->
+                </div>
 
             <div class="col-12 col-md-8">
                 <mat-card class="h-100 mh-100">
                     <h2 class="text-center">Datos del Usuario</h2>
                     <div class="d-flex align-items-center">
-                        <mat-icon class="mx-1">account_circle</mat-icon> {{usuarioActual.nametorneus}}
+                        <mat-icon class="mx-1">account_circle</mat-icon> {{usuarioActual.username}}
                     </div>
                     <hr/>
                     <div class="d-flex align-items-center">
@@ -18,7 +19,7 @@
                     </div>
                     <hr/>
                     <div class="d-flex align-items-center">
-                        <mat-icon class="mx-1">badge</mat-icon> {{usuarioActual.rol}}
+                        <mat-icon class="mx-1">badge</mat-icon> {{rolUsuarioActual}}
                     </div>
                     <hr/>
                     <div class="text-end edit-link">

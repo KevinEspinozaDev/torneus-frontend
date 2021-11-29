@@ -28,8 +28,11 @@ export class PerfilMainComponent implements OnInit {
   invitaciones:any;
   dataUsuario:any
   usuarioActual:any;
+  rolUsuarioActual:any;
   equiposUsuario:any;
   displayedColumns: string[] = ['nametorneus', 'descripcion', 'accion'];
+
+  allDataUser:any;
 
   sessionData:any;
 
@@ -77,7 +80,7 @@ export class PerfilMainComponent implements OnInit {
  }
 
   ngOnInit(): void {
-    this.sessionData = this.authenticationService.getSessionData();
+    //this.sessionData = this.authenticationService.getSessionData();
     //this.invitaciones = this.userService.getInvitacionesEquipos();
 
     //this.encuentros = schedule;
@@ -87,7 +90,14 @@ export class PerfilMainComponent implements OnInit {
     
 
     this.usuarioActual = this.userService.getCurrentUser();
+    this.rolUsuarioActual = this.userService.getRolPalabras();
     //console.log(this.invitaciones);
+
+    this.userService.getAllDataUser(this.usuarioActual.idrol)
+    .subscribe(res => {
+      console.log(res);
+      this.allDataUser = res;
+    })
   }
 
 

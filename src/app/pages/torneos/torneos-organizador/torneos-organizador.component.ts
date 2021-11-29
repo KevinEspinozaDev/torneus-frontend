@@ -41,21 +41,11 @@ export class TorneosOrganizadorComponent implements OnInit {
     })
   }
 
-  setearObjeto() {
-
-    let objeto = [
-      {
-        'id' : '10'
-      }
-    ]
-    this.torneosService.setObjetoTorneo(objeto[0]);
-    this.router.navigateByUrl('/perfil')
-  }
-
   objetoTorneo(torneo:any):void{
     console.log(torneo);
-    console.log(this.hoy)
-    console.log(this.fechaFinTorneo)
+    //this.torneosService.setObjetoTorneo(torneo.idtorneo);
+
+    this.router.navigateByUrl('/torneos/mi-torneo/'+torneo.idtorneo);
   }
 
   torneoExpirado(torneo:any):boolean{

@@ -41,6 +41,14 @@ export class UserService {
     return user;
   }
 
+  getAllDataUser(id:any): Observable<any>{
+    const query = ``;
+
+    const url = this.API_URL + query;
+
+    return this.httpClient.post<any>(url, {'headers':this.headers});
+  }
+
   getRolPalabras():string{
     const user = this.getCurrentUser();
     let rolPalabra:string = '';

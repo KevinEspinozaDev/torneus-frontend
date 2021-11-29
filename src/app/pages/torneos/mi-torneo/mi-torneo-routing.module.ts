@@ -5,6 +5,10 @@ import { SingleTorneoMainComponent } from './single-torneo-main/single-torneo-ma
 const routes: Routes = [
   {
     path: '', component: SingleTorneoMainComponent 
+  },
+  {
+    path: ':idtorneo',
+    component: SingleTorneoMainComponent
   }
   
 ];

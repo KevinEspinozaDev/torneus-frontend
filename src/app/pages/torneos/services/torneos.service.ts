@@ -30,6 +30,11 @@ export class TorneosService {
     return this.httpClient.post<any>(url, {'headers':this.headers});
   }
 
+  // Observable<any>
+  getDataTorneo(id:any): any{
+    
+  }
+
   getListaTorneosOrganizador(idusuario:any): Observable<any>{
     const query = `listartorneos`;
 
