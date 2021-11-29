@@ -28,6 +28,8 @@ export class CrearTorneoFormularioComponent implements OnInit {
 
   registerTipoTorneoForm: FormGroup;
 
+  numEquipos:Array<number> = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30];
+
   createdOk:boolean = false;
 
   constructor(
@@ -81,6 +83,7 @@ export class CrearTorneoFormularioComponent implements OnInit {
 
   registrarTorneo():any{
     this.registerTipoTorneoForm.controls.idorganizador.setValue(this.idOrganizador);
+    console.log(this.registerTipoTorneoForm.value);
 
     let nuevaFechaInicio = new Date(this.registerTipoTorneoForm.controls.fechainicio.value).toJSON().slice(0, 10);
     this.registerTipoTorneoForm.controls.fechainicio.setValue(nuevaFechaInicio);

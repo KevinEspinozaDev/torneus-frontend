@@ -22,35 +22,12 @@ export class TorneosService {
     private userService : UserService
   ) { }
 
-  getListaTorneos():any{
-    const torneos = [
-      {
-        id: "1",
-        nombreTorneo: "Copa Piston",
-        estado: "1",
-        //descripcion: "Hola! Por favor únete a nuestro equipo!"
-      },
-      {
-        id: "2",
-        nombreTorneo: "Copa Libertadores",
-        estado: "0",
-        //descripcion: "Hola! Por favor únete a nuestro equipo!"
-      },
-      {
-        id: "3",
-        nombreTorneo: "Copa Piston2",
-        estado: "1",
-        //descripcion: "Hola! Por favor únete a nuestro equipo!"
-      },
-      {
-        id: "4",
-        nombreTorneo: "Copa Libertadores2",
-        estado: "0",
-        //descripcion: "Hola! Por favor únete a nuestro equipo!"
-      },
-    ];
+  getAllTorneos(): Observable<any>{
+    const query = `alltorneos`;
 
-    return torneos;
+    const url = this.API_URL + query;
+
+    return this.httpClient.post<any>(url, {'headers':this.headers});
   }
 
   getListaTorneosOrganizador(idusuario:any): Observable<any>{
@@ -72,4 +49,27 @@ export class TorneosService {
   public setObjetoTorneo(objeto:any){
     return this.objetoTorneo.next(objeto);
   }
+
+  getVersusParaResultado():any{
+    const res:any = [
+      {
+        'infotorneo' : {
+          'nombre' : 'Liga Torneus',
+          'nombreorganizador' : 'Torneus Oficial',
+          'fechainicio' : '29-11-2021',
+          'fechafin' : '29-11-2021'
+        },
+
+        'infoversus' : {
+          'equipoa' : 'Equipo 1',
+          'equipob' : 'Equipo 2',
+          'fecha' : '29-11-2021'
+        }
+      }
+    ];
+
+    return res[0];
+  }
+
+
 }

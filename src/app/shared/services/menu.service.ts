@@ -60,6 +60,11 @@ export class MenuService {
               'url' : '/solicitud-torneo',
               'nombre' : 'Entrar a un Torneo',
               'click' : ''
+            },
+            {
+              'url' : '/torneos/versus-resultados',
+              'nombre' : 'Informar mi Resultado',
+              'click' : ''
             }
           ]
         },
@@ -93,7 +98,8 @@ export class MenuService {
               'url' : '/torneos/mis-torneos',
               'nombre' : 'Mis Torneos',
               'click' : ''
-            }
+            },
+            
           ]
         },
         {

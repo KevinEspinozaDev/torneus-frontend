@@ -14,7 +14,6 @@ export class TorneosOrganizadorComponent implements OnInit {
   hoy:any = new Date();
   fechaFinTorneo:any;
 
-  objeto:any;
   currentUser:any;
   dataReady:boolean = false;
 

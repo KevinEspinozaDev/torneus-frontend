@@ -1,0 +1,75 @@
+<div class="background">
+    <div class="container">
+        <mat-card class="my-2 d-flex justify-content-center px-4 w-100">
+            <div class="row w-100">
+                <h3 class="text-center">Resultados del Versus</h3>
+                <hr>
+
+                <div class="contenido py-4">
+                    <div class="infotorneo">
+                        <p>Torneo: {{infoversus.infotorneo.nombre}}</p>
+                        <p>Organizador: {{infoversus.infotorneo.nombreorganizador}}</p>
+                        <p>Fecha de inicio: {{infoversus.infotorneo.fechainicio}}</p>
+                        <p>Fecha de fin: {{infoversus.infotorneo.fechafin}}</p>
+                    </div>
+                    
+                    <hr>
+
+                    <div class="infoversus d-flex justify-content-center flex-column mt-4">
+                        <h4 class="text-center">
+                            {{infoversus.infoversus.equipoa}} <span class="text-success">(vs)</span> 
+                            {{infoversus.infoversus.equipob}}
+                        </h4>
+
+                        <div class="d-flex justify-content-center flex-column resultados w-50 mx-auto">
+                            <p>Ingresar resultados del versus</p>
+
+                            
+                            
+                            <form [formGroup]="resultados">
+                                <div class="unaPartida">
+                                    <!-- Una partida -->
+                                    <i>Partida #1</i>
+                                    <mat-button-toggle-group formControlName="partida1" aria-label="Resultado">
+                                        <mat-button-toggle class="botonGane w-100 " value="1">Gané</mat-button-toggle>
+                                        <mat-button-toggle class="botonPerdi w-100 " value="0">Perdí</mat-button-toggle>
+                                    </mat-button-toggle-group>
+                                    <p class="text-danger" *ngIf="resultados.controls.partida1.value == 0">Seleccionaste: Perdí</p>
+                                    <p class="text-success" *ngIf="resultados.controls.partida1.value == 1">Seleccionaste: Gané</p>
+                                </div>
+                                <div class="unaPartida">
+                                    <!-- Una partida -->
+                                    <i>Partida #2</i>
+                                    <mat-button-toggle-group formControlName="partida2" aria-label="Resultado">
+                                        <mat-button-toggle class="botonGane w-100 " value="1">Gané</mat-button-toggle>
+                                        <mat-button-toggle class="botonPerdi w-100 " value="0">Perdí</mat-button-toggle>
+                                    </mat-button-toggle-group>
+                                    <p class="text-danger" *ngIf="resultados.controls.partida2.value == 0">Seleccionaste: Perdí</p>
+                                    <p class="text-success" *ngIf="resultados.controls.partida2.value == 1">Seleccionaste: Gané</p>
+                                </div>
+                                <div class="unaPartida">
+                                    <!-- Una partida -->
+                                    <i>Partida #3</i>
+                                    <mat-button-toggle-group formControlName="partida3" aria-label="Resultado">
+                                        <mat-button-toggle class="botonGane w-100 " value="1">Gané</mat-button-toggle>
+                                        <mat-button-toggle class="botonPerdi w-100 " value="0">Perdí</mat-button-toggle>
+                                    </mat-button-toggle-group>
+                                    <p class="text-danger" *ngIf="resultados.controls.partida3.value == 0">Seleccionaste: Perdí</p>
+                                    <p class="text-success" *ngIf="resultados.controls.partida3.value == 1">Seleccionaste: Gané</p>
+                                </div>
+                          
+                            </form>
+                                
+
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+                <button mat-raised-button color="primary" (click)="confirmar()">Confirmar Resultado</button>
+            </div>
+        </mat-card>
+
+    </div>
+</div>

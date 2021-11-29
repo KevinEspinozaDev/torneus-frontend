@@ -16,11 +16,19 @@
     flex-direction: column;
     overflow: scroll;
     overflow-x: unset;
+    width: 100%;
 }
 hr{
     margin:0;
 }
 
-.cadaTorneo:hover{
-    cursor: pointer;
+mat-button-toggle-group {
+    margin-left: 12px;
+}
+
+.botonGane{
+    background-color: var(--success-color);
+}
+.botonPerdi{
+    background-color: var(--error-color);
 }
