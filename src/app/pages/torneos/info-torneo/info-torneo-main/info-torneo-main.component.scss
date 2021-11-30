@@ -15,12 +15,8 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
-    overflow-x: unset;
-}
-hr{
-    margin:0;
 }
 
-.cadaTorneo:hover{
-    cursor: pointer;
+.edit-link{
+    font-size:12px;
 }

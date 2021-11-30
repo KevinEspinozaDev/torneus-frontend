@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TorneosVerComponent } from './torneos-ver/torneos-ver.component';
 import { TorneosOrganizadorComponent } from './torneos-organizador/torneos-organizador.component';
 import { VersusResultadosComponent } from './versus-resultados/versus-resultados.component';
-import { MiTorneoModule } from './mi-torneo/mi-torneo.module';
+import { InfoTorneoModule } from './info-torneo/info-torneo.module';
 
 const routes: Routes = [
   {
@@ -13,8 +13,8 @@ const routes: Routes = [
     path: 'mis-torneos', component: TorneosOrganizadorComponent
   },
   {
-    path: 'mi-torneo/:idtorneo', 
-    loadChildren: () => import('./mi-torneo/mi-torneo.module').then(m => m.MiTorneoModule)
+    path: 'info-torneo/:idtorneo', 
+    loadChildren: () => import('./info-torneo/info-torneo.module').then(m => m.InfoTorneoModule)
   },
   {
     path: 'crear-torneo', 
