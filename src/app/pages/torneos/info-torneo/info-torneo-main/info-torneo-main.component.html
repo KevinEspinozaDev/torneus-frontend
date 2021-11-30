@@ -42,7 +42,7 @@
                 <app-lista-participantes-main></app-lista-participantes-main>
             </div>
 
-            <div class="col-6 my-2">
+            <div class="col-6 my-2" *ngIf="soyElOrganizador == true">
                 <app-lista-aplicantes-main></app-lista-aplicantes-main>
             </div>
 

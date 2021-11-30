@@ -6,7 +6,7 @@
         <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef> Torneo </th>
             <td mat-cell *matCellDef="let torneo"> 
-                <a [routerLink]="'/mi-torneo'">{{torneo.nombre}}</a>
+                <a [routerLink]="'/torneos/info-torneo/'+torneo.idtorneo">{{torneo.nombre}}</a>
             </td>
         </ng-container>
 

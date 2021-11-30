@@ -43,6 +43,7 @@ export class InfoTorneoMainComponent implements OnInit {
           this.dataTorneo = res[0];
         }
         else{
+          console.log('No se encontraron datos para ese torneo')
            this.router.navigateByUrl('/torneos');
         }
       }
@@ -62,8 +63,9 @@ export class InfoTorneoMainComponent implements OnInit {
 
   evaluarSoyOrganizador(){
     // Si el idorganizador del torneo es igual al idusuario mio, soyelorganizador es true
-    this.soyElOrganizador = true;
-
+    if (localStorage.getItem('torneus-idrol') == '4') {
+      this.soyElOrganizador = true;
+    }
     //Sino
     //this.soyElOrganizador = false;
   }

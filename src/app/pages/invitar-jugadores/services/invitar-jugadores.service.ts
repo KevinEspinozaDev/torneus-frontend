@@ -22,7 +22,7 @@ export class InvitarJugadoresService {
 
 
   getJugadores():Observable<any>{
-    const query = 'alljugadores'; 
+    const query = 'alljugadoresnopertenece'; 
     return this.httpClient
     .post(`${this.API_URL}${query}`,
       {headers: this.headers});
