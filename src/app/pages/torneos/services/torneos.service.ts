@@ -30,9 +30,49 @@ export class TorneosService {
     return this.httpClient.post<any>(url, {'headers':this.headers});
   }
 
-  // Observable<any>
-  getDataTorneo(id:any): any{
-    
+  getDataTorneo(idtorneo: any):Observable<any>{
+    const query = 'getdatostorneo'; 
+    //let params = new HttpParams().set('idusuario', idusuario);
+    let torneo = this.httpClient
+    .post(
+      `${this.API_URL}${query}`, {idtorneo: idtorneo},
+      {headers: this.headers}
+    );
+    //console.log(torneo);
+    return torneo;
+  }
+
+  getListaEquipos(idtorneo: any, participa:any):Observable<any>{ //participa: true = aceptado, false = pendiente
+    const query = 'getparticipantesxtorneo'; 
+    //let params = new HttpParams().set('idusuario', idusuario);
+    let participantes = this.httpClient
+    .post(
+      `${this.API_URL}${query}`, {idtorneo: idtorneo, participa: participa},
+      {headers: this.headers}
+    );
+    //console.log(participantes);
+    return participantes;
+  }
+
+  addVersus(objetoVersus: any):Observable<any>{
+    const query = 'crearversus'; 
+    return this.httpClient
+    .post(
+      `${this.API_URL}${query}`, objetoVersus,
+      {headers: this.headers}
+    );
+  }
+
+  getVersus(idtorneo:any):Observable<any>{
+    const query = 'getversusxtorneo'; 
+    //let params = new HttpParams().set('idusuario', idusuario);
+    let versus = this.httpClient
+    .post(
+      `${this.API_URL}${query}`, {idtorneo: idtorneo},
+      {headers: this.headers}
+    );
+    //console.log(versus);
+    return versus;
   }
 
   getListaTorneosOrganizador(idusuario:any): Observable<any>{

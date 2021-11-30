@@ -5,19 +5,19 @@
                 <mat-card class="h-100 mh-100">
                     <h2 class="text-center py-2">Datos del Torneo</h2>
                     <div class="d-flex align-items-center">
-                        <mat-icon class="mx-1">emoji_events</mat-icon> NombreTorneo - Liga
+                        <mat-icon class="mx-1">emoji_events</mat-icon> {{dataTorneo.nombre}} - {{dataTorneo.descripcion}}
                     </div>
                     <hr/>
                     <div class="d-flex align-items-center">
-                        <mat-icon class="mx-1">event</mat-icon> FechaInicio - FechaFin
+                        <mat-icon class="mx-1">event</mat-icon> {{dataTorneo.fechainicio | date : "dd/MM/yyyy"}} - {{dataTorneo.fechafin | date : "dd/MM/yyyy"}}
                     </div>
                     <hr/>
                     <div class="d-flex align-items-center">
-                        <mat-icon class="mx-1">grade</mat-icon> X puntos
+                        <mat-icon class="mx-1">grade</mat-icon> {{dataTorneo.recompensa}} puntos
                     </div>
                     <hr/>
                     <div class="d-flex align-items-center">
-                        <mat-icon class="mx-1">badge</mat-icon> Organizador
+                        <mat-icon class="mx-1">badge</mat-icon> {{dataTorneo.nametorneus}}
                     </div>
                     <hr/>
 

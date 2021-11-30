@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { generateSchedule } from "sports-schedule-generator";
+import { Route, Router, ActivatedRoute } from '@angular/router';
 
-import { TorneoService } from '../../services/torneo.service'; 
+import { TorneosService } from '../../../services/torneos.service';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
@@ -11,96 +12,157 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 })
 export class FixtureMainComponent implements OnInit {
 
+  idtorneo: any;
   arregloFechasVersus: any;
   participantes: any;
+  dataTorneo: any;
   displayedColumns: string[] = ['idequipo1', 'idequipo2', 'fecha', 'informar_resultado'];
 
   test:any = [];
+  arregloEquipos:any;
+  arregloVersus:any;
+  objetoVersus:any;
+  
 
   sessionData:any;
 
   constructor(
-    private torneoService: TorneoService,
+    private torneosService: TorneosService,
     private authenticationService: AuthenticationService,
+    private route : ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
     this.sessionData = this.authenticationService.getSessionData();
+    
+    /* Obtener el id torneo que viene por la url */
+    this.route.params 
+    .subscribe(  
+      (params) => { 
+        if (params.idtorneo) {
+          this.idtorneo = params.idtorneo;
+        }
+      } 
+    );
+
+    /* Obtener los datos del torneo dado el idtorneo */
+    this.torneosService.getDataTorneo(this.idtorneo)
+    .subscribe(
+      (res) => {
+        if(res.length != 0){
+          console.log(res);
+          this.dataTorneo = res[0];
+        }
+        else{
+           this.router.navigateByUrl('/torneos');
+        }
+      }
+    );
+
+    this.torneosService.getVersus(this.idtorneo)
+    .subscribe(
+      (res) => {
+        if(res.length != 0){
+          //console.log(res);
+          //this.acomodarArregloParaVista(res);
+          this.arregloVersus = this.acomodarArregloParaVista(res);
+        }
+      }
+    );
+  }
+
+  longitudObjeto(objeto:any){
+    let longitud = Object.keys(objeto).length
+    return longitud;
   }
 
   generarFixture(){
-    /*
-    this.torneoService.getListaParticipantes(idtorneo)
+    this.torneosService.getListaEquipos(this.idtorneo, true)
     .subscribe(
-      (participantes) => {      //next() callback
-        console.log(participantes);
-        this.participantes = participantes;
-      },
-      (error) => {      //error() callback
-        console.error(error)
+      (res) => {
+        this.participantes = res;
+        this.participantes = this.shuffleArray(this.participantes)
+        this.arregloEquipos = generateSchedule(this.participantes);
+        //console.log(this.arregloEquipos);
+        this.saveVersus(this.arregloEquipos);
       },
     );
-    */
-    let arrayIdEquipos: any = [];
-    /*
-    for (let participante of this.participantes) {
-      arrayIdEquipos.push(participante.idequipo);
-    }
-    */
-    for (let i=1; i<=6; i++) {
-      arrayIdEquipos.push(i);
-    }
-    //console.log(arrayIdEquipos);
-    arrayIdEquipos = this.shuffleArray(arrayIdEquipos);
-    this.arregloFechasVersus = generateSchedule(arrayIdEquipos);
+  }
 
-    console.log(this.arregloFechasVersus);
-
+  saveVersus(arrayEquipos: any){
+    let nroFecha = 1;
     let objetoVersus;
-    let index = 1;
-    let arregloVersus = [];
-    for (let fecha of this.arregloFechasVersus) {
+    for (let fecha of arrayEquipos) {
       for (let versus of fecha) {
+        let fechaFinVersus;
+        fechaFinVersus = new Date(this.dataTorneo.fechainicio);
+        fechaFinVersus.setDate(fechaFinVersus.getDate() + 1);
+        fechaFinVersus = this.javascriptDateToSqlDate(fechaFinVersus)
+
         objetoVersus = {
-          nroFecha: index,
-          idequipo1: versus.home,
-          idequipo2: versus.away,
-          fecha: "2021-12-12", //Por defecto: fecha inicio del torneo
-        };
-        arregloVersus.push(objetoVersus);
-        //console.log(objetoVersus);
+          idtorneo: this.idtorneo,
+          fechaNro: nroFecha,
+          fechainicio: this.dataTorneo.fechainicio,
+          fechafin: fechaFinVersus,
+          idequipo1: versus.home.idequipo,
+          idequipo2: versus.away.idequipo,
+          idequipoganadorfinal: 0,
+        }
+        console.log(objetoVersus);
+        
+        this.torneosService.addVersus(objetoVersus)
+        .subscribe(
+          (res) => {
+            console.log("Versus agregado")
+          },
+          (error) => {
+            console.log("Versus no agregado")
+          }
+        );
+        
       }
-      /*
-      this.torneoService.setFixture(idtorneo, objetoVersus)
-      .subscribe(
-        (res) => {                           //next() callback
-          console.log(res);
-        },
-        (error) => {                              //error() callback
-          console.error(error)
-        },
-      );
-      */
-      index++;
+      nroFecha++;
     }
-    console.log(arregloVersus);
+  }
 
-    let arregloVersusFinal: any = [];
-
-    for(let versusSingle of arregloVersus){
-      if(typeof arregloVersusFinal[versusSingle.nroFecha] === 'undefined'){
-        arregloVersusFinal[versusSingle.nroFecha] = [];
+  acomodarArregloParaVista(arregloVersus:any){
+    
+    let arregloVersusFinal:any = [];
+    for (let key in arregloVersus) {
+      console.log(key, arregloVersus[key]);
+      if(typeof arregloVersusFinal[key] === 'undefined'){
+        arregloVersusFinal[key] = [];
       }
-      arregloVersusFinal[versusSingle.nroFecha].push(versusSingle);
+      arregloVersusFinal.push(arregloVersus[key]);
     }
-
     arregloVersusFinal = arregloVersusFinal.filter(function (el:any) {
-      return el != null;
+      return el != null && el.length;
     });
-
+    /*
+    for(let i = 1; i <= Object.keys(arregloVersus).length; i++){
+      console.log(arregloVersus.i)
+      if(typeof arregloVersusFinal[i] === 'undefined'){
+        arregloVersusFinal[i] = [];
+        
+      }
+      arregloVersusFinal.push(arregloVersus.i);
+    }
+    */
     console.log(arregloVersusFinal);
-    this.test = arregloVersusFinal;
+    return arregloVersusFinal;
+    
+    //console.log(arregloVersus);
+  }
 
+  javascriptDateToSqlDate(fecha:any){
+    fecha = fecha.getUTCFullYear() + '-' +
+      ('00' + (fecha.getUTCMonth()+1)).slice(-2) + '-' +
+      ('00' + fecha.getUTCDate()).slice(-2) + ' ' + 
+      ('00' + fecha.getUTCHours()).slice(-2) + ':' + 
+      ('00' + fecha.getUTCMinutes()).slice(-2) + ':' + 
+      ('00' + fecha.getUTCSeconds()).slice(-2);
+    return fecha;
   }
 
   shuffleArray(a:any) {
