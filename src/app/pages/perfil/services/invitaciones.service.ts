@@ -26,7 +26,7 @@ export class InvitacionesService {
       `${this.API_URL}${query}`, {idjugador: idusuario, esInvitacion: true},
       {headers: this.headers}
     );
-    console.log(invitaciones);
+    //console.log(invitaciones);
     return invitaciones;
   }
 
@@ -38,7 +38,7 @@ export class InvitacionesService {
       `${this.API_URL}${query}`, {idjugador: idusuario, esInvitacion: false},
       {headers: this.headers}
     );
-    console.log(equipos);
+    //console.log(equipos);
     return equipos;
   }
 

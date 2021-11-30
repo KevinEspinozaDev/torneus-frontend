@@ -49,6 +49,7 @@ export class ListaInvitacionesEquiposComponent implements OnInit {
     .subscribe(
       (res) => {                           //next() callback
         console.log(res);
+        window.location.reload();
       },
       (error) => {                              //error() callback
         console.error(error)
