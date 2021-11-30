@@ -44,7 +44,7 @@ export class TorneosVerComponent implements OnInit {
 
   objetoTorneo(torneo:any):void{
     console.log(torneo);
-    this.router.navigateByUrl('/torneos/mi-torneo/'+torneo.idtorneo);
+    this.router.navigateByUrl('/torneos/info-torneo/'+torneo.idtorneo);
   }
 
   torneoExpirado(torneo:any):boolean{
