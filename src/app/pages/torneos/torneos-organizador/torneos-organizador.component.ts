@@ -45,7 +45,7 @@ export class TorneosOrganizadorComponent implements OnInit {
     console.log(torneo);
     //this.torneosService.setObjetoTorneo(torneo.idtorneo);
 
-    this.router.navigateByUrl('/torneos/mi-torneo/'+torneo.idtorneo);
+    this.router.navigateByUrl('/torneos/info-torneo/'+torneo.idtorneo);
   }
 
   torneoExpirado(torneo:any):boolean{

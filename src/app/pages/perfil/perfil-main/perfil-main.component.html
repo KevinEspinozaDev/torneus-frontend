@@ -3,9 +3,8 @@
         <!--<h1>Mi Perfil</h1>-->
         <div class="row my-4">
             <div class="col-12 col-md-4">
-                <!--<div class="containerFotoPerfil rounded-circle" [ngStyle]="{'background' : 'url('+usuarioActual.imageUrl+')'}"></div>
-                -->
-                </div>
+                <div class="containerFotoPerfil rounded-circle" [ngStyle]="{'background-image' : 'url(./assets/images/logo-torneus-main.svg)'}"></div>
+            </div>
 
             <div class="col-12 col-md-8">
                 <mat-card class="h-100 mh-100">
@@ -22,9 +21,18 @@
                         <mat-icon class="mx-1">badge</mat-icon> {{rolUsuarioActual}}
                     </div>
                     <hr/>
+                    <ng-container *ngIf="usuarioActual.idrol == 4">
+                        <div class="d-flex align-items-center">
+                            <mat-icon class="mx-1">emoji_events</mat-icon>
+                            <a [routerLink]="'/torneos/mis-torneos'">Ver mis torneos</a>
+                        </div>
+                        <hr/>
+                    </ng-container>
+                    <!--
                     <div class="text-end edit-link">
                         <a (click)="editarPerfil()" href="javascript:void(0)">Editar</a>
                     </div>
+                    -->
                 </mat-card>
             </div>
 

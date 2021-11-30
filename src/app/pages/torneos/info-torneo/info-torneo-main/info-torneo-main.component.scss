@@ -1,0 +1,22 @@
+.background{
+    background-image: url('/assets/images/login-background.png');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-attachment: fixed;
+}
+
+.container{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.edit-link{
+    font-size:12px;
+}
