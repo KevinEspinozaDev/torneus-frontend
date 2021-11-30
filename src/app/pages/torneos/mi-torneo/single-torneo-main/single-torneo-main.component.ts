@@ -29,6 +29,7 @@ export class SingleTorneoMainComponent implements OnInit {
       (params) => { 
         if (params.idtorneo) {
           this.idtorneo = params.idtorneo;
+          console.log('ID del torneo: '+ this.idtorneo);
         }
       } 
     );

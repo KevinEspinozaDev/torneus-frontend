@@ -57,7 +57,8 @@ export class CrearTorneoFormularioComponent implements OnInit {
       ),      
       recompensa: new FormControl('',[
         Validators.required,
-        Validators.min(1)
+        Validators.min(1),
+        Validators.max(10000)
       ]),
       nroequipos: new FormControl('',[
         Validators.required,

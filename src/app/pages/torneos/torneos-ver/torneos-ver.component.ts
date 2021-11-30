@@ -2,6 +2,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TorneosService } from '../services/torneos.service';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-torneos-ver',
@@ -14,14 +15,15 @@ export class TorneosVerComponent implements OnInit {
 
   hoy:any = new Date();
   fechaFinTorneo:any;
+  rol:any;
 
-  currentUser:any;
   dataReady:boolean = false;
 
   listaTorneos:any;
   constructor(
     private torneosService: TorneosService,
     private router : Router,
+    private userService : UserService
     ) { 
       
     }
@@ -30,28 +32,19 @@ export class TorneosVerComponent implements OnInit {
     this.listaTorneos = this.torneosService.getAllTorneos()
     .subscribe(res => {
       if (res) {
-        console.log(res);
+        //console.log(res);
         this.dataReady = true;
         this.listaTorneos = res;
-      }
-    })
-  }
 
-  setearObjeto() {
+        this.rol = this.userService.getRolPalabras();
 
-    let objeto = [
-      {
-        'id' : '10'
       }
-    ]
-    this.torneosService.setObjetoTorneo(objeto[0]);
-    this.router.navigateByUrl('/perfil')
+    });
   }
 
   objetoTorneo(torneo:any):void{
     console.log(torneo);
-    console.log(this.hoy)
-    console.log(this.fechaFinTorneo)
+    this.router.navigateByUrl('/torneos/mi-torneo/'+torneo.idtorneo);
   }
 
   torneoExpirado(torneo:any):boolean{
