@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router, ActivatedRoute } from '@angular/router';
+
+import { TorneosService } from '../../../services/torneos.service';
+
 
 @Component({
   selector: 'app-lista-participantes-main',
@@ -7,9 +11,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaParticipantesMainComponent implements OnInit {
 
-  constructor() { }
+  idtorneo:any;
+  listaParticipantes: any;
+  displayedColumns: string[] = ['equipo', 'puntos'];
+
+  constructor(
+    private torneosService : TorneosService,
+    private route : ActivatedRoute,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+    /* Obtener el id torneo que viene por la url */
+    this.route.params 
+    .subscribe(  
+      (params) => { 
+        if (params.idtorneo) {
+          this.idtorneo = params.idtorneo;
+        }
+      } 
+    );
+    this.torneosService.getListaEquipos(this.idtorneo, true)
+    .subscribe(
+      (res) => {
+        //console.log(res);
+        this.listaParticipantes = res;
+      }
+    );
   }
 
 }

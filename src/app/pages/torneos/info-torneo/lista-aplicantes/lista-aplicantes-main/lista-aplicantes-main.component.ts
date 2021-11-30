@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import applicants from '../json/applicants.json';
-
-import { DgAceptarRechazarEquipoComponent } from '../dg-aceptar-rechazar-equipo/dg-aceptar-rechazar-equipo.component';
+import { Route, Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
+import { TorneosService } from '../../../services/torneos.service';
+import { DgAceptarRechazarEquipoComponent } from '../dg-aceptar-rechazar-equipo/dg-aceptar-rechazar-equipo.component';
 
 interface Applicants {  
   id: Number;  
@@ -18,13 +20,39 @@ interface Applicants {
 })
 export class ListaAplicantesMainComponent implements OnInit {
 
+  idtorneo:any;
+  listaAplicantes: any;
+  displayedColumns: string[] = ['equipo', 'accion'];
+
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private torneosService : TorneosService,
+    private route : ActivatedRoute,
+    private router: Router,
   ) { }
 
   equipos: Applicants[] = applicants;
   term: string = '';
   items: Applicants[] = [];
+
+  ngOnInit(): void {
+    /* Obtener el id torneo que viene por la url */
+    this.route.params 
+    .subscribe(  
+      (params) => { 
+        if (params.idtorneo) {
+          this.idtorneo = params.idtorneo;
+        }
+      } 
+    );
+    this.torneosService.getListaEquipos(this.idtorneo, false)
+    .subscribe(
+      (res) => {
+        //console.log(res);
+        this.listaAplicantes = res;
+      }
+    );
+  }
 
   acceptRejectTeam(aceptarEquipo: any, objetoEquipo:Applicants){
     
@@ -64,8 +92,7 @@ export class ListaAplicantesMainComponent implements OnInit {
     this.dialog.open(DgAceptarRechazarEquipoComponent, dialogConfig);
   }
 
-  ngOnInit(): void {
-  }
+  
 
   ordenarArreglo(arreglo: Applicants[]){
     arreglo.sort(function (a, b){

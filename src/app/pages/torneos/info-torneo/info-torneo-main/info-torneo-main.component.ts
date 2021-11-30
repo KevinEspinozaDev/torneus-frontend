@@ -31,14 +31,22 @@ export class InfoTorneoMainComponent implements OnInit {
         if (params.idtorneo) {
           this.idtorneo = params.idtorneo;
         }
-        else{
-          //this.router.navigate(['/torneos']);
-        }
       } 
     );
 
     /* Obtener los datos del torneo dado el idtorneo */
-    this.torneosService.getDataTorneo(this.idtorneo);
+    this.torneosService.getDataTorneo(this.idtorneo)
+    .subscribe(
+      (res) => {
+        if(res.length != 0){
+          console.log(res);
+          this.dataTorneo = res[0];
+        }
+        else{
+           this.router.navigateByUrl('/torneos');
+        }
+      }
+    );
     
       /* Dentro del subscribe. si da error la request, hacer un
       this.router.navigateByUrl('/torneos);

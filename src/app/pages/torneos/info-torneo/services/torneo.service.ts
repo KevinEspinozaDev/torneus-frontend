@@ -18,16 +18,18 @@ export class TorneoService {
 
   constructor(public httpClient:HttpClient) { }
 
-  getListaParticipantes(idtorneo: any):Observable<any>{
-    const query = 'getparticipantesxtorneo/'+idtorneo; 
+  
+
+  getDataTorneo(idtorneo: any):Observable<any>{
+    const query = 'gettorneobyid'; 
     //let params = new HttpParams().set('idusuario', idusuario);
-    let participantes = this.httpClient
+    let torneo = this.httpClient
     .post(
       `${this.API_URL}${query}`, {idtorneo: idtorneo},
       {headers: this.headers}
     );
-    console.log(participantes);
-    return participantes;
+    console.log(torneo);
+    return torneo;
   }
 
   setFixture(idtorneo:any, objetoVersus: any):Observable<any>{
