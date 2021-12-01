@@ -20,7 +20,7 @@ export class FixtureMainComponent implements OnInit {
 
   test:any = [];
   arregloEquipos:any;
-  arregloVersus:any;
+  arregloVersus:any = [];
   objetoVersus:any;
   
 
