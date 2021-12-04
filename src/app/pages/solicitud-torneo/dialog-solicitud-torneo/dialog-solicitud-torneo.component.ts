@@ -15,4 +15,8 @@ export class DialogSolicitudTorneoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  refresh(){
+    window.location.reload();
+  }
+
 }

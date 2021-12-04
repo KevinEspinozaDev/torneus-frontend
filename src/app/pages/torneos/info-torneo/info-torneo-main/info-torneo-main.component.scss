@@ -20,3 +20,9 @@
 .edit-link{
     font-size:12px;
 }
+
+.mat-spinner {
+    ::ng-deep circle {
+        stroke: white;
+    }
+}

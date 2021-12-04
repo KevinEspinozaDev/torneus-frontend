@@ -3,9 +3,9 @@
         <div class="col-md-6 col-12 land-intro-left">
             <img class="logo-torneus" src="../../../../assets/images/logo-torneus-main.svg" width="95" height="105">
             <div class="land-text">
-                <p class="torneus-subtitle">LA MEJOR WEB DE TORNEOS E-SPORT EN TODA LA ARGENTINA</p>
+                <p class="torneus-subtitle">LA MEJOR WEB DE TORNEOS E-SPORTS</p>
                 <p class="torneus-desc">Organiza o compite en torneos de tus juegos favoritos.</p>
-                <p class="torneus-desc">Gana premios y dinero.</p>
+                <p class="torneus-desc">Gana torneos y acumula puntos para estar en lo más alto.</p>
             </div>
         </div>
         <div class="col-md-6 col-12 d-md-flex land-intro-right">
@@ -14,7 +14,7 @@
                 <button [routerLink]="'/register'" class="p-2 px-4" mat-flat-button color="primary">REGISTRATE AHORA</button>
             </div>
             <div *ngIf="isUserLoged()" class="botones-login-register">
-                <button [routerLink]="'/home'" class="p-2 px-4" mat-flat-button color="primary">VOLVER A LA PLATAFORMA</button>
+                <button [routerLink]="'/'" class="p-2 px-4" mat-flat-button color="primary">VOLVER A LA PLATAFORMA</button>
             </div>
             <img src="/assets/images/fixture.png">
         </div>

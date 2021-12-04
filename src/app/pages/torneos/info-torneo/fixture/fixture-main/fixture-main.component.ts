@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { generateSchedule } from "sports-schedule-generator";
 import { Route, Router, ActivatedRoute } from '@angular/router';
 
-import { TorneosService } from '../../../services/torneos.service';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { TorneosService } from '../../../services/torneos.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEditarFechaComponent } from '../dialog-editar-fecha/dialog-editar-fecha.component';
 
 @Component({
   selector: 'app-fixture-main',
@@ -22,6 +24,10 @@ export class FixtureMainComponent implements OnInit {
   arregloEquipos:any;
   arregloVersus:any = [];
   objetoVersus:any;
+
+  suficientesEquipos:boolean = false;
+
+  dataReady:boolean = false;
   
 
   sessionData:any;
@@ -31,6 +37,7 @@ export class FixtureMainComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private route : ActivatedRoute,
     private router: Router,
+    private dialog : MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -51,7 +58,7 @@ export class FixtureMainComponent implements OnInit {
     .subscribe(
       (res) => {
         if(res.length != 0){
-          console.log(res);
+          //console.log(res);
           this.dataTorneo = res[0];
         }
         else{
@@ -59,17 +66,18 @@ export class FixtureMainComponent implements OnInit {
         }
       }
     );
+    
+    this.getListaEquipos(this.idtorneo, true);
 
+    /* Obtener los versus para el torneo */
     this.torneosService.getVersus(this.idtorneo)
     .subscribe(
       (res) => {
-        if(res.length != 0){
-          //console.log(res);
-          //this.acomodarArregloParaVista(res);
           this.arregloVersus = this.acomodarArregloParaVista(res);
-        }
-      }
+          this.dataReady = true;
+      },
     );
+
   }
 
   longitudObjeto(objeto:any){
@@ -77,17 +85,32 @@ export class FixtureMainComponent implements OnInit {
     return longitud;
   }
 
-  generarFixture(){
-    this.torneosService.getListaEquipos(this.idtorneo, true)
+  getListaEquipos(idtorneo:any, participa:boolean){
+    this.torneosService.getListaEquipos(idtorneo, participa)
     .subscribe(
       (res) => {
         this.participantes = res;
-        this.participantes = this.shuffleArray(this.participantes)
-        this.arregloEquipos = generateSchedule(this.participantes);
-        //console.log(this.arregloEquipos);
-        this.saveVersus(this.arregloEquipos);
+        if (this.participantes.length != 0) {
+          this.suficientesEquipos = this.participantesPares(this.participantes.length, this.dataTorneo.nroequipos);
+        }else{
+          console.log('No hay equipos pares');
+        }
+        console.log(this.suficientesEquipos)
       },
-    );
+      error => {
+        console.log(error);
+      });
+      
+  }
+
+  generarFixture(){
+        
+      this.participantes = this.shuffleArray(this.participantes)
+      this.arregloEquipos = generateSchedule(this.participantes);
+      //console.log(this.arregloEquipos);
+      this.saveVersus(this.arregloEquipos);
+
+      window.location.reload();
   }
 
   saveVersus(arrayEquipos: any){
@@ -149,7 +172,6 @@ export class FixtureMainComponent implements OnInit {
       arregloVersusFinal.push(arregloVersus.i);
     }
     */
-    console.log(arregloVersusFinal);
     return arregloVersusFinal;
     
     //console.log(arregloVersus);
@@ -174,6 +196,25 @@ export class FixtureMainComponent implements OnInit {
         a[j] = x;
     }
     return a;
- }
+  }
+
+  participantesPares(valor1:any, valor2:any):boolean{
+    let  flag:boolean;
+    
+    if (valor1 || valor2 != 0) {
+      if (valor1 % valor2 == 0) {
+        flag = true;
+        console.log('Pares')
+      }else{
+        flag = false;
+        console.log('Impares')
+      }
+    }else{
+      flag = false;
+    }
+    
+
+    return flag;
+  }
 
 }

@@ -116,5 +116,18 @@ export class TorneosService {
     return res[0];
   }
 
+  aceptarEquipoEnTorneo(idparticipa:any) : Observable<any>{
+    const query = `confirmarparticipacion/`+idparticipa;
+
+    const body = {
+      'estado' : 1,
+      '_method' : 'PUT'
+    }
+
+    const url = this.API_URL + query;
+
+    return this.httpClient.post<any>(url, body, {'headers':this.headers});
+  }
+
 
 }

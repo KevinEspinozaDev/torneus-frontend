@@ -31,6 +31,9 @@ export class SearchTournamentComponent implements OnInit {
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['nombre', 'fechainicio', 'fechafin'];
 
+  hoy:any = new Date();
+  fechaFinTorneo:any;
+
   constructor(
     public dialog: MatDialog,
     private torneosService: TorneosService,
@@ -45,7 +48,6 @@ export class SearchTournamentComponent implements OnInit {
   }
 
   checkRolEquipo(user: any){
-    console.log(user);
     let esEquipo = false;
     if(user.idrol == 3){
       esEquipo = true;
@@ -93,22 +95,21 @@ export class SearchTournamentComponent implements OnInit {
     this.torneosService.storeParticipacion(objetoTorneo, this.sessionData)
     .subscribe(
       (torneos) => {                           //next() callback
-        console.log(torneos);
+        this.openDialog();
         //return this.torneos = torneos;
       },
       (error) => {                              //error() callback
         console.error(error)
       },
     );
-
-    this.openDialog();
+    
   }
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.maxWidth = "100%";
-    dialogConfig.width = "80%";
+    dialogConfig.minWidth = "50%";
     //dialogConfig.height = "90%";
 
     this.dialog.open(DialogSolicitudTorneoComponent, dialogConfig);
@@ -169,7 +170,6 @@ export class SearchTournamentComponent implements OnInit {
     this.torneosService.getListadoTorneos()
     .subscribe(
       (torneos) => {                           //next() callback
-        console.log(torneos);
         this.torneos = torneos;
         this.dataSource.data = this.torneos;
         //return this.torneos = torneos;
@@ -181,6 +181,22 @@ export class SearchTournamentComponent implements OnInit {
     this.dataSource.data = this.torneos;
   }
 
+  torneoExpirado(torneo:any):boolean{
+    let resultado = false;
+    this.fechaFinTorneo = new Date(torneo.fechafin);
+    this.fechaFinTorneo.setDate(this.fechaFinTorneo.getDate() + 1);
+    this.fechaFinTorneo.setHours(23);
+    this.fechaFinTorneo.setMinutes(59);
+    this.fechaFinTorneo.setSeconds(59);
+
+    if (this.hoy > this.fechaFinTorneo) {
+      resultado = true;
+    }else{
+      resultado = false;
+    }
+
+    return resultado;
+  }
 
 
 }

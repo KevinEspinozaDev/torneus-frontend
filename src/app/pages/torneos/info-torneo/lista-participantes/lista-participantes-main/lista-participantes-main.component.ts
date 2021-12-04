@@ -14,6 +14,7 @@ export class ListaParticipantesMainComponent implements OnInit {
   idtorneo:any;
   listaParticipantes: any;
   displayedColumns: string[] = ['equipo', 'puntos'];
+  dataReady : boolean = false;
 
   constructor(
     private torneosService : TorneosService,
@@ -34,8 +35,9 @@ export class ListaParticipantesMainComponent implements OnInit {
     this.torneosService.getListaEquipos(this.idtorneo, true)
     .subscribe(
       (res) => {
-        //console.log(res);
+        
         this.listaParticipantes = res;
+        this.dataReady = true;
       }
     );
   }

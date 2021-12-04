@@ -156,7 +156,7 @@ export class SearchUserComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.maxWidth = "100%";
-    dialogConfig.width = "80%";
+    dialogConfig.minWidth = "50%";
     //dialogConfig.height = "90%";
 
     this.dialog.open(DgEnviarSolicitudComponent, dialogConfig);

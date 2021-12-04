@@ -9,6 +9,7 @@ import { InfoTorneoMainComponent } from './info-torneo-main/info-torneo-main.com
 import { DgListaAplicantesComponent } from './dg-lista-aplicantes/dg-lista-aplicantes.component';
 import { ListaParticipantesMainComponent } from './lista-participantes/lista-participantes-main/lista-participantes-main.component';
 import { FixtureMainComponent } from './fixture/fixture-main/fixture-main.component';
+import { DialogEditarFechaComponent } from './fixture/dialog-editar-fecha/dialog-editar-fecha.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FixtureMainComponent } from './fixture/fixture-main/fixture-main.compon
     InfoTorneoMainComponent,
     DgListaAplicantesComponent,
     ListaParticipantesMainComponent,
-    FixtureMainComponent
+    FixtureMainComponent,
+    DialogEditarFechaComponent
   ],
   imports: [
     CommonModule,

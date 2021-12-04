@@ -74,7 +74,7 @@ export class ListaAplicantesMainComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     let aceptarEquipo: String = '';
     dialogConfig.maxWidth = "100%";
-    dialogConfig.width = "80%";
+    dialogConfig.minWidth = "50%";
     if(accion){
       aceptarEquipo = "Aceptar";
     }
@@ -83,6 +83,7 @@ export class ListaAplicantesMainComponent implements OnInit {
     }
     dialogConfig.data = {
       idEquipo: objetoEquipo.id,
+      idTorneo : this.idtorneo,
       name: objetoEquipo.name,
       acceptTeam: aceptarEquipo, //string de accion
       accion: accion, //boolean de accion

@@ -51,8 +51,9 @@ export class InvitacionesService {
     else{ //Solicitud rechazada
       objetoSolicitud.estado = 2;
     }
+    objetoSolicitud._method = 'PUT';
     return this.httpClient
-    .put(
+    .post(
       `${this.API_URL}${query}`, objetoSolicitud,
       {headers: this.headers}
     );

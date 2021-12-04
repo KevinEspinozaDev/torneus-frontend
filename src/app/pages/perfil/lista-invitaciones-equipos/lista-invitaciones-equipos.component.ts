@@ -33,7 +33,6 @@ export class ListaInvitacionesEquiposComponent implements OnInit {
     this.invitacionesService.getInvitacionesPorId(this.sessionData.idusuario)
     .subscribe(
       (invitaciones) => {                           //next() callback
-        console.log(invitaciones);
         return this.invitaciones = invitaciones;
       },
       (error) => {                              //error() callback
@@ -48,7 +47,6 @@ export class ListaInvitacionesEquiposComponent implements OnInit {
     this.invitacionesService.updateEquipoEstado(objetoSolicitud, true)
     .subscribe(
       (res) => {                           //next() callback
-        console.log(res);
         window.location.reload();
       },
       (error) => {                              //error() callback
@@ -63,7 +61,6 @@ export class ListaInvitacionesEquiposComponent implements OnInit {
     this.invitacionesService.updateEquipoEstado(objetoSolicitud, false)
     .subscribe(
       (res) => {                           //next() callback
-        console.log(res);
       },
       (error) => {                              //error() callback
         console.error(error)

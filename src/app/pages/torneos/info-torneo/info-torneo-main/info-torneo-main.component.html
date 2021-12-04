@@ -1,8 +1,13 @@
 <div class="background">
     <div class="container">
         <div class="row w-100">
-            <div class="col-6 my-2">
-                <mat-card class="h-100 mh-100">
+
+            <div *ngIf="dataReady == false" class="col-12 h-100 w-100 mt-5 d-flex justify-content-center">
+                <mat-spinner mode="indeterminate"></mat-spinner>
+            </div>
+
+            <div class="col-6 my-2" *ngIf="dataReady == true">
+                <mat-card class="h-100 mh-100" *ngIf="dataReady == true">
                     <h2 class="text-center py-2">Datos del Torneo</h2>
                     <div class="d-flex align-items-center">
                         <mat-icon class="mx-1">emoji_events</mat-icon> {{dataTorneo.nombre}} - {{dataTorneo.descripcion}}
@@ -24,29 +29,18 @@
                     <!--
                     <button *ngIf="soyElOrganizador == true">Generar Versus</button>
                         -->
-
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <!--
-                            <div class="text-end edit-link">
-                                <a href="javascript:void(0)">Editar</a>
-                            </div>
-                            -->
-                        </div>
-                    </div>
-                    
                 </mat-card> 
             </div>
             
-            <div class="col-6 my-2">
+            <div class="col-6 my-2" *ngIf="dataReady == true">
                 <app-lista-participantes-main></app-lista-participantes-main>
             </div>
 
-            <div class="col-6 my-2" *ngIf="soyElOrganizador == true">
+            <div class="col-6 my-2" *ngIf="soyElOrganizador == true && dataReady == true">
                 <app-lista-aplicantes-main></app-lista-aplicantes-main>
             </div>
 
-            <div class="col-12 my-2">
+            <div class="col-12 my-2" *ngIf="dataReady == true">
                 <app-fixture-main></app-fixture-main>
             </div>
         </div>

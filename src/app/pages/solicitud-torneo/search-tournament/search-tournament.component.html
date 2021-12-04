@@ -15,7 +15,7 @@
 -->
     <mat-form-field appearance="standard">
         <mat-label>Filtrar</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ej: Copa Piston" #input>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ej: Copa Pistón" #input>
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" >
@@ -23,7 +23,7 @@
         <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef> Torneo </th>
             <td mat-cell *matCellDef="let tor"> 
-                <a [routerLink]="'/mi-torneo'">{{tor.nombre}}</a>
+                <b class="link">{{tor.nombre}}</b>
             </td>
         </ng-container>
 
@@ -47,9 +47,11 @@
         <ng-container matColumnDef="accion">
             <th mat-header-cell *matHeaderCellDef> Acción </th>
             <td mat-cell *matCellDef="let tor"> 
-                <a class="px-1 text-centerbtn btn btn-sm btn-primary" (click)="enviarSolicitud(tor)" href="javascript:void(0)">
-                    Aplicar
-                </a>
+                <button *ngIf="torneoExpirado(tor) == false"
+                (click)="enviarSolicitud(tor)"
+                 mat-raised-button color="primary">Solicitar Participación</button>
+
+                <span *ngIf="torneoExpirado(tor) == true" clas="text-danger">Torneo Finalizado</span>
             </td>
         </ng-container>
 

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { OnlyEquipoGuard } from 'src/app/shared/guards/only-equipo.guard';
+import { OnlyOrganizadorGuard } from 'src/app/shared/guards/only-organizador.guard';
+import { VersusResultadosComponent } from '../versus-resultados/versus-resultados.component';
 import { InfoTorneoMainComponent } from './info-torneo-main/info-torneo-main.component';
 
 const routes: Routes = [
@@ -9,7 +12,11 @@ const routes: Routes = [
   {
     path: ':idtorneo',
     component: InfoTorneoMainComponent
-  }
+  },
+  {
+    path: 'resultados', component: VersusResultadosComponent,
+    canActivate : [OnlyEquipoGuard, OnlyOrganizadorGuard]
+  },
   
 ];
 

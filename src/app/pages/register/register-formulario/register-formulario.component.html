@@ -10,7 +10,7 @@
             <form [formGroup]="registerJugadorOrganizadorForm">
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Tu Nombre y apellido</mat-label>
-                    <input matInput type="text" formControlName="nombre" placeholder="Escribe tu nombre y apellido">
+                    <input required matInput type="text" formControlName="nombre" placeholder="Escribe tu nombre y apellido">
                     <mat-error *ngIf="registerJugadorOrganizadorForm.controls.nombre.errors?.required">
                         Ingresa tu nombre y apellido.
                     </mat-error>
@@ -18,7 +18,7 @@
 
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput type="email" formControlName="email" placeholder="Escribe un email VÁLIDO (ejemplo: tuemail@ejemplo.com)">
+                    <input required matInput type="email" formControlName="email" placeholder="Escribe un email VÁLIDO (ejemplo: tuemail@ejemplo.com)">
                     <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
                     <mat-error *ngIf="registerJugadorOrganizadorForm.controls.email.errors?.required">
                         Ingresa un email.
@@ -74,7 +74,7 @@
 
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Nombre Torneus</mat-label>
-                    <input  matTooltip="Nombre que te identificará dentro de la plataforma."
+                    <input required  matTooltip="Nombre que te identificará dentro de la plataforma."
                     formControlName="nametorneus" matInput type="text" placeholder="Escribe un nombre de Torneus">
                     <mat-error *ngIf="registerJugadorOrganizadorForm.controls.nametorneus.errors?.required">
                         Ingresa el nombre Torneus que quieres tener en la plataforma.
@@ -83,7 +83,7 @@
 
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Contraseña</mat-label>
-                    <input matInput formControlName="password" type="password" placeholder="Escribe una contraseña (al menos 1 número)">
+                    <input required matInput formControlName="password" type="password" placeholder="Escribe una contraseña (al menos 1 número)">
                     <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
                     <mat-error *ngIf="registerJugadorOrganizadorForm.controls.password.errors?.required">
                         Ingresa una contraseña.
@@ -112,7 +112,7 @@
 
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Nombre Torneus / Nombre del Equipo</mat-label>
-                    <input matTooltip="Nombre de tu Equipo."
+                    <input required matTooltip="Nombre de tu Equipo."
                     formControlName="nametorneus" matInput type="text" placeholder="Escribe el nombre del Equipo">
                     <mat-error *ngIf="registerEquipoForm.controls.nametorneus.errors?.required">
                         Ingresa un nombre para tu equipo.
@@ -121,7 +121,7 @@
 
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput type="email" formControlName="email" placeholder="Escribe un email VÁLIDO (ejemplo: tuemail@ejemplo.com)">
+                    <input required matInput type="email" formControlName="email" placeholder="Escribe un email VÁLIDO (ejemplo: tuemail@ejemplo.com)">
                     <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
                     <mat-error *ngIf="registerEquipoForm.controls.email.errors?.required">
                         Ingresa un email.
@@ -163,7 +163,7 @@
 
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Contraseña</mat-label>
-                    <input matInput formControlName="password" type="password" placeholder="Escribe una contraseña (al menos 1 número)">
+                    <input required matInput formControlName="password" type="password" placeholder="Escribe una contraseña (al menos 1 número)">
                     <!--<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
                     <mat-error *ngIf="registerEquipoForm.controls.password.errors?.required">
                         Ingresa una contraseña.
