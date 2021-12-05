@@ -198,5 +198,11 @@ export class SearchTournamentComponent implements OnInit {
     return resultado;
   }
 
+  /*
+  cupoLleno(torneo:any):boolean{
+    let resultado = false;
+    
+  }
+  */
 
 }

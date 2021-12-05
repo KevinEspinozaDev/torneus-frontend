@@ -99,6 +99,14 @@ export class PerfilMainComponent implements OnInit {
       console.log(res);
       this.allDataUser = res;
     })*/
+
+
+    if (this.usuarioActual.idrol == '3') {
+      this.perfilService.getListaJugadoresEquipo(this.usuarioActual.idusuario)
+      .subscribe(res => {
+        console.log(res)
+      })
+    }
   }
 
 

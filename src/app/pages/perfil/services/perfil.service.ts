@@ -29,4 +29,15 @@ export class PerfilService {
     console.log(dataUsuario);
     return dataUsuario;
   }
+
+  getListaJugadoresEquipo(idequipo:any):Observable<any>{
+    const query = 'jugadoresxequipo'; 
+    //let params = new HttpParams().set('idusuario', idusuario);
+    let dataUsuario = this.httpClient
+    .post(
+      `${this.API_URL}${query}`, {idequipo: idequipo},
+      {headers: this.headers}
+    );
+    return dataUsuario;
+  }
 }
