@@ -41,7 +41,8 @@
             <app-lista-mis-equipos class="col-12 col-md-6 my-2"></app-lista-mis-equipos>
             <app-lista-invitaciones-equipos class="col-12 col-md-6 my-2"></app-lista-invitaciones-equipos>
         </div>
-        <app-lista-torneos-inscriptos class="my-2"></app-lista-torneos-inscriptos>
+        <app-lista-torneos-inscriptos *ngIf="usuarioActual.idrol == 3" class="my-2"></app-lista-torneos-inscriptos>
+        <app-lista-mis-jugadores *ngIf="usuarioActual.idrol == 3" class="my-2"></app-lista-mis-jugadores>
 
        <!--
         <mat-card class="my-2">

@@ -26,7 +26,6 @@ export class ListaTorneosService {
       `${this.API_URL}${query}`, {idequipo: idequipo},
       {headers: this.headers}
     );
-    console.log(listaTorneos);
     
     /*
     let dataUsuario = [
