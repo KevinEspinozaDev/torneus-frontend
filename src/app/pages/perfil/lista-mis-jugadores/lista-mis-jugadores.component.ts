@@ -11,7 +11,8 @@ import { PerfilService } from '../services/perfil.service';
 export class ListaMisJugadoresComponent implements OnInit {
 
   jugadoresUsuario:any;
-  displayedColumns: string[] = ['nametorneus'];
+  displayedColumns: string[] = ['nametorneus', 'name', 'email', 'prestigio'];
+  dataReady : boolean = false;
 
   sessionData:any;
 
@@ -27,6 +28,7 @@ export class ListaMisJugadoresComponent implements OnInit {
     this.perfilService.getListaJugadoresEquipo(this.sessionData.idusuario)
     .subscribe(
       (jugadores) => {//next() callback
+        this.dataReady = true;
         return this.jugadoresUsuario = jugadores;
       },
       (error) => {//error() callback

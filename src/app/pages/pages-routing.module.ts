@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { HomeMainComponent } from './home/home-main/home-main.component';
+import { OnlyEquipoGuard } from '../shared/guards/only-equipo.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'torneos', pathMatch: 'full' },
@@ -11,7 +12,8 @@ const routes: Routes = [
   },
   {
     path: 'invitar-jugadores', 
-    loadChildren: () => import('./invitar-jugadores/invitar-jugadores.module').then(m => m.InvitarJugadoresModule)
+    loadChildren: () => import('./invitar-jugadores/invitar-jugadores.module').then(m => m.InvitarJugadoresModule),
+    canActivate : [OnlyEquipoGuard]
   },
   {
     path: 'perfil',
@@ -19,7 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'solicitud-torneo', 
-    loadChildren: () => import('./solicitud-torneo/solicitud-torneo.module').then(m => m.SolicitudTorneoModule)
+    loadChildren: () => import('./solicitud-torneo/solicitud-torneo.module').then(m => m.SolicitudTorneoModule),
+    canActivate : [OnlyEquipoGuard]
   },
   {
     path: 'aceptar-invitacion', 

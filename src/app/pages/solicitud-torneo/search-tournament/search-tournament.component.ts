@@ -6,6 +6,7 @@ import { TorneosService } from '../services/torneos.service';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import tournaments from '../json/tournaments.json';
 import { DialogSolicitudTorneoComponent } from '../dialog-solicitud-torneo/dialog-solicitud-torneo.component'
+import { UserService } from '../../../shared/services/user.service';
 
 interface Tournament {  
   nombre: string;  
@@ -38,6 +39,7 @@ export class SearchTournamentComponent implements OnInit {
     public dialog: MatDialog,
     private torneosService: TorneosService,
     private authenticationService: AuthenticationService,
+    private userService : UserService
   ) 
   {
     
@@ -45,6 +47,25 @@ export class SearchTournamentComponent implements OnInit {
     //this.ordenarArreglo(this.torneos);
     //console.log(this.torneos);
 
+  }
+
+  ngOnInit(): void {
+    this.sessionData = this.userService.getCurrentUser();
+    this.rolEquipo = this.checkRolEquipo(this.sessionData);
+    //this.invitaciones = this.userService.getInvitacionesEquipos();
+
+    this.torneosService.getTorneosDondeNoParticipo(this.sessionData.idusuario)
+    .subscribe(
+      (torneos) => {                           //next() callback
+        this.torneos = torneos;
+        this.dataSource.data = this.torneos;
+        //return this.torneos = torneos;
+      },
+      (error) => {                              //error() callback
+        console.error(error)
+      },
+    );
+    this.dataSource.data = this.torneos;
   }
 
   checkRolEquipo(user: any){
@@ -158,27 +179,6 @@ export class SearchTournamentComponent implements OnInit {
       }
     }
     return arregloNuevo;
-  }
-
-  
-
-  ngOnInit(): void {
-    this.sessionData = this.authenticationService.getSessionData();
-    this.rolEquipo = this.checkRolEquipo(this.sessionData);
-    //this.invitaciones = this.userService.getInvitacionesEquipos();
-
-    this.torneosService.getListadoTorneos()
-    .subscribe(
-      (torneos) => {                           //next() callback
-        this.torneos = torneos;
-        this.dataSource.data = this.torneos;
-        //return this.torneos = torneos;
-      },
-      (error) => {                              //error() callback
-        console.error(error)
-      },
-    );
-    this.dataSource.data = this.torneos;
   }
 
   torneoExpirado(torneo:any):boolean{

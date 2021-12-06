@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import applicants from '../json/applicants.json';
 import { Route, Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -23,6 +23,8 @@ export class ListaAplicantesMainComponent implements OnInit {
   idtorneo:any;
   listaAplicantes: any;
   displayedColumns: string[] = ['equipo', 'accion'];
+
+  @Input() soyElOrganizador:boolean = false;
 
   constructor(
     public dialog: MatDialog,

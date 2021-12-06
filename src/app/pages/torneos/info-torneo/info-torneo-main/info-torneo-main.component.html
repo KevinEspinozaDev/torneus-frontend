@@ -37,11 +37,11 @@
             </div>
 
             <div class="col-6 my-2" *ngIf="soyElOrganizador == true && dataReady == true">
-                <app-lista-aplicantes-main></app-lista-aplicantes-main>
+                <app-lista-aplicantes-main [soyElOrganizador]="soyElOrganizador"></app-lista-aplicantes-main>
             </div>
 
             <div class="col-12 my-2" *ngIf="dataReady == true">
-                <app-fixture-main></app-fixture-main>
+                <app-fixture-main [soyElOrganizador]="soyElOrganizador"></app-fixture-main>
             </div>
         </div>
     </div>

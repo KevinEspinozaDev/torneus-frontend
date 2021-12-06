@@ -13,7 +13,7 @@
             <div *ngIf="sessionData.idrol == 4" class="edit-link">
                 <!-- Debe controlar por idusuario y si no hay fixture -->
                 <button *ngIf="suficientesEquipos == true" (click)="generarFixture();" mat-raised-button color="primary">Iniciar Torneo</button>
-                <p *ngIf="suficientesEquipos == false">Aún no hay equipos en el torneo o no son número par. <b>No puedes iniciar el torneo.</b></p>
+                <p *ngIf="suficientesEquipos == false && soyElOrganizador == true">Aún no hay equipos en el torneo o no son número par. <b>No puedes iniciar el torneo.</b></p>
             </div>
         </div>
     </div>

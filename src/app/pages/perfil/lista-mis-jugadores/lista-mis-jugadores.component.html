@@ -1,21 +1,44 @@
 <mat-card *ngIf="sessionData.idrol == 3">
-    <h2 class="text-center">Jugadores equipos</h2>
+    <h2 class="text-center">Jugadores del equipo</h2>
 
-    <table mat-table [dataSource]="jugadoresUsuario" >
+    <table mat-table  [dataSource]="jugadoresUsuario" style="width: 100%; overflow-wrap:break-word;">
         <!-- Nombre Equipo Column -->
         <ng-container matColumnDef="nametorneus">
-            <th mat-header-cell *matHeaderCellDef> Jugador </th>
+            <th mat-header-cell *matHeaderCellDef> Nombre Torneus </th>
             <td mat-cell *matCellDef="let jugador"> 
-                <b>{{jugador.nametorneus}}</b> - <span>{{jugador.name}}</span> 
+                <b>{{jugador.nametorneus}}</b>
             </td>
         </ng-container>
 
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let jugador"> 
+                <b>{{jugador.name}}</b>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let jugador"> 
+                <b>{{jugador.email}}</b>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prestigio">
+            <th mat-header-cell *matHeaderCellDef> Prestigio </th>
+            <td mat-cell *matCellDef="let jugador"> 
+                <b>{{jugador.prestigio}}</b>
+            </td>
+        </ng-container>
+        <!--
         <tr mat-header-row *matHeaderRowDef="jugadoresUsuario"></tr>
+        -->
         <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="9999">
                 No hay jugadores en el equipo aún.
             </td>
         </tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 </mat-card>

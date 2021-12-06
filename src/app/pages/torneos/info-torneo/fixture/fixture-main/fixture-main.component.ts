@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { generateSchedule } from "sports-schedule-generator";
 import { Route, Router, ActivatedRoute } from '@angular/router';
 
@@ -24,6 +24,7 @@ export class FixtureMainComponent implements OnInit {
   arregloEquipos:any;
   arregloVersus:any = [];
   objetoVersus:any;
+  @Input() soyElOrganizador: boolean = false;
 
   suficientesEquipos:boolean = false;
 
