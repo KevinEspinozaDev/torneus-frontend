@@ -37,7 +37,6 @@ export class PerfilMainComponent implements OnInit {
   sessionData:any;
 
   encuentros:any;
-  dataReady:boolean = false;
 
   constructor(
     private userService: UserService,
@@ -94,7 +93,7 @@ export class PerfilMainComponent implements OnInit {
     this.rolUsuarioActual = this.userService.getRolPalabras();
     //console.log(this.invitaciones);
 
-    /*this.userService.getAllDataUser(this.usuarioActual.idrol)
+    this.userService.getAllDataUser(this.usuarioActual.idrol)
     .subscribe(res => {
       console.log(res);
       this.allDataUser = res;

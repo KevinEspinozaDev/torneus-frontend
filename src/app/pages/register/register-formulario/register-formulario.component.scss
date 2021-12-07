@@ -5,7 +5,6 @@
     height: 100%;
     display: flex;
     background-attachment: fixed;
-    align-items: center;
 }
 
 .container{
@@ -15,7 +14,8 @@
     margin-bottom: 32px;
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    overflow: scroll;
+    overflow-x: unset;
 }
 
 .title{
@@ -68,8 +68,6 @@
 @media (max-width: 768px) {
     .container{
         width: 95%;
-        height: fit-content;
-        max-height: 90%;
     }
 }
 
@@ -77,8 +75,6 @@
 @media (min-width: 768px) and (max-width: 920px) {
     .container{
         width: 80%;
-        height: fit-content;
-        max-height: 90%;
     }
 }
 
@@ -86,7 +82,5 @@
 @media (min-width: 920px){
     .container{
         width: 75%;
-        height: fit-content;
-        max-height: 90%;
     }
 }

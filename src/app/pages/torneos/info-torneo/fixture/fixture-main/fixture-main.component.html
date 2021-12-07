@@ -36,23 +36,35 @@
                         <b class="link">{{equipo.nameequipo2}}</b>
                     </td>
                 </ng-container>
-                <ng-container matColumnDef="fecha">
-                    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                <ng-container matColumnDef="fechainicio">
+                    <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
                     <td mat-cell *matCellDef="let equipo"> 
-                        {{equipo.fechainicio}} 
+                        {{equipo.fechainicio | date : "dd/MM/yyyy"}} 
                         <a href="javascript:void(0);" color="primary">
                             <mat-icon>edit</mat-icon>
                         </a>
                     </td>
                 </ng-container>
-                <ng-container matColumnDef="informar_resultado"> <!--Esto lo ven los equipos y el organizador -->
-                    <th mat-header-cell *matHeaderCellDef> Informar resultado </th>
+				<ng-container matColumnDef="fechafin">
+                    <th mat-header-cell *matHeaderCellDef> Fecha de cierre</th>
                     <td mat-cell *matCellDef="let equipo"> 
-                        <a href="javascript:void(0);" >
-                            Informar
+                        {{equipo.fechainicio | date : "dd/MM/yyyy"}} 
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="informar_resultado"> <!--Esto lo ve equipos nomas-->
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let equipo"> 
+                        <a *ngIf="participoEnEsteVersus(equipo.idequipo1, equipo.idequipo2)" class="btn btn-primary" href="javascript:void(0);">
+                            Informar resultado
                         </a>
-
-                        <button mat-raised-button color="primary"></button>
+                        <a *ngIf="soyElOrganizadorDelTorneo() && checkVersusCerrado(equipo) && checkConflicto(equipo) && !checkExisteGanadorVersus(equipo)" (click)="asignarGanador(equipo)" class="btn btn-primary mx-1" href="javascript:void(0);">
+                            Asignar ganador
+                        </a>
+                        <!--
+                        <a *ngIf="soyElOrganizadorDelTorneo() && checkVersusCerrado(equipo)" (click)="asignarGanador(equipo)" class="btn btn-primary mx-1" href="javascript:void(0);">
+                            Declarar empate
+                        </a>
+                        -->
                     </td>
                 </ng-container>
         

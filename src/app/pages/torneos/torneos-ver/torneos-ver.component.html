@@ -27,14 +27,8 @@
                 <!-- Si no hay torneos -->
                 <div *ngIf="listaTorneos.length == 0">
                     <ng-container>
-                        <p>
-                            <i>Aún no existen torneos! Un Organizador puede crear torneos para que los equipos
-                            puedan competir por el premio.</i>
-                        </p> 
-                        <p *ngIf="rol == 'Organizador'"><b>
-                            Tú eres un Organizador! Puedes crear torneos.
-                            <span [routerLink]="'/torneos/crear-torneo'" class="link-primary"><b>Crear Torneo</b></span>
-                        </b></p>
+                        <i>Aún no creaste ningún torneo...</i> 
+                        <span [routerLink]="'/torneos/crear-torneo'" class="link-primary"><b>Crear Torneo</b></span>
                     </ng-container>
                 </div>
                 

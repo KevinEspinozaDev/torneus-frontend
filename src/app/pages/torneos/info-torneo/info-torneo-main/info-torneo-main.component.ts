@@ -40,6 +40,7 @@ export class InfoTorneoMainComponent implements OnInit {
     .subscribe(
       (res) => {
         if(res.length != 0){
+          //console.log(res);
           this.dataTorneo = res[0];
           this.dataReady = true;
           if (this.dataReady == true) {
@@ -49,7 +50,6 @@ export class InfoTorneoMainComponent implements OnInit {
           
         }
         else{
-          console.log('No se encontraron datos para ese torneo')
            this.router.navigateByUrl('/torneos');
         }
       }
@@ -77,6 +77,7 @@ export class InfoTorneoMainComponent implements OnInit {
     }else{
       console.log('No eres el organizador de este torneo.');
     }
+
     //Sino
     //this.soyElOrganizador = false;
   }

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-6 border-end px-4" *ngIf="dataReady == true">
+    <div class="col-6 border-end px-4">
       <h4 class="text-center">Jugadores disponibles</h4>
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">
@@ -11,7 +11,7 @@
       <div class="border text-muted p-4 m-5 text-center" *ngIf="jugadores.length == 0">
         No se han encontrado jugadores.
       </div>
-      <div *ngFor = "let item of jugadores |filter:term">
+      <div *ngFor = "let item of jugadores |filter:term" >
         <div class="row">
           <div class="col-10">
             <b>{{item.nametorneus}}</b> - {{item.name}}
@@ -23,10 +23,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="col-6 border-end px-4 d-flex justify-content-center align-items-center" *ngIf="dataReady == false">
-      <mat-spinner></mat-spinner>
     </div>
 
     <div class="col-6 px-4">

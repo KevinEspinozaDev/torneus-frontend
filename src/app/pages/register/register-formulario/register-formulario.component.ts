@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { AuthenticationService } from '../../../shared/services/authentication.service';
 
 interface Paises{
   valor: string,
@@ -39,7 +39,6 @@ export class RegisterFormularioComponent implements OnInit {
   ) {
     this.nombreRol = "";
     this.successCuadro = false;
-    /*
     this.paises = [
       {
         id: 1,
@@ -69,7 +68,6 @@ export class RegisterFormularioComponent implements OnInit {
         nombre: 'Bariloche'
       }
     ];
-    */
 
     this.registerJugadorOrganizadorForm = this.formBuilder.group({
       nombre: new FormControl('',[
@@ -88,10 +86,13 @@ export class RegisterFormularioComponent implements OnInit {
         Validators.required
       ]),
       pais: new FormControl('', [
+        Validators.required,
       ]),
       provincia: new FormControl('', [
+        Validators.required,
       ]),
       localidad: new FormControl('', [
+        Validators.required,
       ]),
     });
 
@@ -109,10 +110,13 @@ export class RegisterFormularioComponent implements OnInit {
         Validators.required
       ]),
       pais: new FormControl('', [
+        Validators.required,
       ]),
       provincia: new FormControl('', [
+        Validators.required,
       ]),
       localidad: new FormControl('', [
+        Validators.required,
       ]),
     });
    }
@@ -162,10 +166,11 @@ export class RegisterFormularioComponent implements OnInit {
         idrol: this.idRol
       }
 
+      console.log(this.body)
     }
     
     this.authenticationService.register(this.body).subscribe(
-      (response:any) => {
+      (response) => {
         if (response) {
           //console.log(response);
           console.log('se registró al usuario correctamente!');
@@ -185,7 +190,7 @@ export class RegisterFormularioComponent implements OnInit {
          console.log('No se ha podido registrar al usuario.')
         }
       },
-      (error:any) => {
+      (error) => {
         console.log(error);
         /*
         this._snackBar.open('No se ha podido crear el titulo.', null, {
@@ -194,6 +199,10 @@ export class RegisterFormularioComponent implements OnInit {
         */
       }
     );
+  }
+
+  test(param:any){
+    console.log(param);
   }
 
 }

@@ -21,17 +21,29 @@ export class InvitarJugadoresService {
   ) { }
 
 
-  getJugadores():Observable<any>{
-    const query = 'alljugadoresnopertenece'; 
-    return this.httpClient
-    .post(`${this.API_URL}${query}`,
-      {headers: this.headers});
+  getJugadores():any{
+    const jugadores = [
+      {
+        'idusuario':2,
+        'nametorneus':'Jugador Testing',
+        'name':'Jugador Testing',
+      },
+      /*
+      {
+        'idusuario': 6,
+        'nametorneus':'RoweeClaw99',
+        'name':'Roweena Ravenclaw',
+      }*/
+    ]
+
+    return jugadores;
   }
 
   enviarInvitaciones(jugadores:any):Observable<any>{
     const query = 'invitaralequipo'; 
     return this.httpClient
     .post(`${this.API_URL}${query}`, jugadores,
-      {headers: this.headers});
+      {headers: this.headers}
+    );
   }
 }
