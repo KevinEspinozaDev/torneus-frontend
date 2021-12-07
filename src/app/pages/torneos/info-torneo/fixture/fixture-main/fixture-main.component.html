@@ -1,6 +1,6 @@
 <mat-card class="lista-aplicantes px-4">
     <h2 class="text-center py-2">Enfrentamientos</h2>
-    <div class="w-100 h-100" >
+    <div class="w-100 h-100" *ngIf="arregloVersus.length == 0">
         <div class="w-50 h-50 m-auto p-3 text-center fixture-cartel">
             <div>
                 Lista de enfrentamientos en construcción.
@@ -12,37 +12,56 @@
         </div>
     </div>
     <div *ngIf="arregloVersus.length != 0">
-        <div *ngFor="let item of arregloVersus; let i = index">
+        <div class="my-5" *ngFor="let item of arregloVersus; let i = index">
             <h3>Fecha {{i+1}}</h3>
             <table mat-table [dataSource]="item" >
                 <!-- Nombre Equipo Column -->
                 <ng-container matColumnDef="idequipo1">
                     <th mat-header-cell *matHeaderCellDef> Equipo local </th>
-                    <td mat-cell *matCellDef="let equipo"> 
-                        <a [routerLink]="'/perfil'">{{equipo.nameequipo1}}</a>
+                    <td mat-cell *matCellDef="let versus"> 
+                        <a [routerLink]="'/perfil'">{{versus.nameequipo1}}</a>
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="idequipo2">
                     <th mat-header-cell *matHeaderCellDef> Equipo visitante </th>
-                    <td mat-cell *matCellDef="let equipo"> 
-                        <a [routerLink]="'/perfil'">{{equipo.nameequipo2}}</a>
+                    <td mat-cell *matCellDef="let versus"> 
+                        <a [routerLink]="'/perfil'">{{versus.nameequipo2}}</a>
                     </td>
                 </ng-container>
-                <ng-container matColumnDef="fecha">
-                    <th mat-header-cell *matHeaderCellDef> Fecha </th>
-                    <td mat-cell *matCellDef="let equipo"> 
-                        {{equipo.fechainicio}} 
-                        <a href="javascript:void(0);">
-                            <mat-icon>edit</mat-icon>
-                        </a>
+                <ng-container matColumnDef="fechainicio">
+                    <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
+                    <td mat-cell *matCellDef="let versus"> 
+                        {{versus.fechainicio | date : "dd/MM/yyyy"}} 
+                        <span *ngIf="dataTorneo">
+                            <a *ngIf="soyElOrganizadorDelTorneo()" (click)="modificarFechas(versus.fechainicio)" href="javascript:void(0);">
+                                <mat-icon>edit</mat-icon>
+                            </a>
+                        </span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="fechafin">
+                    <th mat-header-cell *matHeaderCellDef> Fecha de cierre </th>
+                    <td mat-cell *matCellDef="let versus"> 
+                        {{versus.fechafin | date : "dd/MM/yyyy"}} 
+                        <span *ngIf="dataTorneo">
+                            
+                        </span>
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="informar_resultado"> <!--Esto lo ve equipos nomas-->
-                    <th mat-header-cell *matHeaderCellDef> Informar resultado </th>
-                    <td mat-cell *matCellDef="let equipo"> 
-                        <a href="javascript:void(0);">
-                            Informar
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let versus"> 
+                        <a *ngIf="participoEnEsteVersus(versus.idequipo1, versus.idequipo2)" class="btn btn-primary" href="javascript:void(0);">
+                            Informar resultado
                         </a>
+                        <a *ngIf="soyElOrganizadorDelTorneo() && checkVersusCerrado(versus) && checkConflicto(versus) && !checkExisteGanadorVersus(versus)" (click)="asignarGanador(versus)" class="btn btn-primary mx-1" href="javascript:void(0);">
+                            Asignar ganador
+                        </a>
+                        <!--
+                        <a *ngIf="soyElOrganizadorDelTorneo() && checkVersusCerrado(versus)" (click)="asignarGanador(versus)" class="btn btn-primary mx-1" href="javascript:void(0);">
+                            Declarar empate
+                        </a>
+                        -->
                     </td>
                 </ng-container>
         

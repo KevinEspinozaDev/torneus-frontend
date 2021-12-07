@@ -22,12 +22,11 @@ interface User {
 export class SearchUserComponent implements OnInit {
 
   //items: object[] = [{ name: 'archie' }, { name: 'jake' }, { name: 'richard' }];
-  jugadores:any = [];
-  usuariosSeleccionados:any = [];
+  jugadores: User[] = [];
+  usuariosSeleccionados: User[] = [];
   term: string = '';
   items: User[] = [];
   selectedItems: User[] = [];
-  dataReady:boolean = false;
 
   invitacionOk:boolean;
 
@@ -43,14 +42,7 @@ export class SearchUserComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.jugadores = this.invitarJugadoresService.getJugadores().
-    subscribe( res => {
-      if (res) {
-        this.jugadores = res;
-        this.dataReady = true;
-        console.log(this.jugadores);
-      }
-    })
+    this.jugadores = this.invitarJugadoresService.getJugadores();
     //console.log(this.jugadores)
   }
 
@@ -121,7 +113,7 @@ export class SearchUserComponent implements OnInit {
   }
 
   enviarSolicitudes(invitados:any){
-    console.log(invitados);
+
     invitados.forEach((element:any) => {
       console.log(element)
       const idRolUser = localStorage.getItem('torneus-idrol');
@@ -131,7 +123,6 @@ export class SearchUserComponent implements OnInit {
         element.idequipo = localStorage.getItem('torneus-id');
         element.descripcion = "'¡Te invitamos a unirte a nuestro equipo!'";
         element.idjugador = element.idusuario;
-        element.estado = 0;
 
         this.invitarJugadoresService.enviarInvitaciones(JSON.stringify(element))
         .subscribe(
@@ -139,7 +130,6 @@ export class SearchUserComponent implements OnInit {
             if (res) {
               console.log(res);
               this.invitacionOk = true;
-              this.openDialog();
             }
           },
           (error) => {
@@ -150,6 +140,10 @@ export class SearchUserComponent implements OnInit {
       }
       console.log(element)
     });
+    
+    
+    //console.log(invitados);
+    this.openDialog();
   }
 
   openDialog() {

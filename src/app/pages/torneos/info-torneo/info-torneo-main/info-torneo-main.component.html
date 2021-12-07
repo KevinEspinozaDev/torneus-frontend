@@ -1,5 +1,5 @@
 <div class="background">
-    <div class="container">
+    <div *ngIf="dataTorneo" class="container">
         <div class="row w-100">
             <div class="col-6 my-2">
                 <mat-card class="h-100 mh-100">
@@ -21,10 +21,6 @@
                     </div>
                     <hr/>
 
-                    <!--
-                    <button *ngIf="soyElOrganizador == true">Generar Versus</button>
-                        -->
-
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <!--
@@ -42,12 +38,12 @@
                 <app-lista-participantes-main></app-lista-participantes-main>
             </div>
 
-            <div class="col-6 my-2" *ngIf="soyElOrganizador == true">
+            <div class="col-6 my-2">
                 <app-lista-aplicantes-main></app-lista-aplicantes-main>
             </div>
 
             <div class="col-12 my-2">
-                <app-fixture-main></app-fixture-main>
+                <app-fixture-main [dataTorneo]="dataTorneo"></app-fixture-main>
             </div>
         </div>
     </div>

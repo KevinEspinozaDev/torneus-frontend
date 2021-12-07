@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +15,7 @@ export class PerfilService {
   .set("Authorization", "Bearer " + localStorage.getItem("torneus-token"));
 
   private API_URL: string = environment.apiUrl;
+  private objetoPerfil:any = new Subject<String>();
 
   constructor(public httpClient:HttpClient) { }
 
@@ -28,5 +29,13 @@ export class PerfilService {
     );
     console.log(dataUsuario);
     return dataUsuario;
+  }
+
+  public getObjetoPerfil(): Observable<any>{
+    return this.objetoPerfil.asObservable();
+  }
+
+  public setObjetoPerfil(objeto:any){
+    return this.objetoPerfil.next(objeto);
   }
 }

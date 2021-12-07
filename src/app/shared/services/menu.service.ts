@@ -57,6 +57,11 @@ export class MenuService {
               'click' : '',
             },
             {
+              'url' : '/solicitud-torneo',
+              'nombre' : 'Entrar a un Torneo',
+              'click' : ''
+            },
+            {
               'url' : '/torneos/versus-resultados',
               'nombre' : 'Informar mi Resultado',
               'click' : ''
@@ -68,13 +73,7 @@ export class MenuService {
           'nombre' : 'Invitar Jugadores al Equipo',
           'click' : '',
           'submenus' : []
-        },
-        {
-          'url' : '/solicitud-torneo',
-          'nombre' : 'Entrar a un Torneo',
-          'click' : '',
-          'submenus' : []
-        },
+        }
       ];
 
       // Organizador
@@ -103,14 +102,12 @@ export class MenuService {
             
           ]
         },
-        /*
         {
           'url' : '',
           'nombre' : 'Invitar Equipos a un Torneo',
           'click' : '',
           'submenus' : []
         }
-        */
       ];
     }
 
