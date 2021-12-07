@@ -30,10 +30,11 @@ export class SearchTournamentComponent implements OnInit {
   rolEquipo: any;
   
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['nombre', 'fechainicio', 'fechafin'];
+  displayedColumns: string[] = ['nombre', 'fechainicio', 'fechafin', 'nroequipos'];
 
   hoy:any = new Date();
   fechaFinTorneo:any;
+  loading:boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -54,7 +55,7 @@ export class SearchTournamentComponent implements OnInit {
     this.rolEquipo = this.checkRolEquipo(this.sessionData);
     //this.invitaciones = this.userService.getInvitacionesEquipos();
 
-    this.torneosService.getTorneosDondeNoParticipo(this.sessionData.idusuario)
+    this.torneosService.getTorneosDisponibles(this.sessionData.idusuario)
     .subscribe(
       (torneos) => {                           //next() callback
         this.torneos = torneos;
@@ -112,12 +113,14 @@ export class SearchTournamentComponent implements OnInit {
     //let arregloNuevo: any = [];
     //var tournamentNombre = this.searchTournamentById(this.torneos, objetoTorneo.id);   
     //var tournamentId =  objetoTorneo.id;
+    this.loading = true;
 
     this.torneosService.storeParticipacion(objetoTorneo, this.sessionData)
     .subscribe(
       (torneos) => {                           //next() callback
         this.openDialog();
         //return this.torneos = torneos;
+        this.loading = false;
       },
       (error) => {                              //error() callback
         console.error(error)

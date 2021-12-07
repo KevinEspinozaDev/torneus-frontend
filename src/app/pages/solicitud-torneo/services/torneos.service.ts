@@ -29,8 +29,8 @@ export class TorneosService {
     return torneos;
   }
 
-  getTorneosDondeNoParticipo(idequipo:any):Observable<any>{
-    const query = 'torneosdondenoparticipo'; 
+  getTorneosDisponibles(idequipo:any):Observable<any>{
+    const query = 'torneosdisponibles'; 
 
     const body = {
       idequipo : idequipo
