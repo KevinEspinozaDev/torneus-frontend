@@ -9,6 +9,7 @@ import { DgAceptarRechazarEquipoComponent } from '../dg-aceptar-rechazar-equipo/
 interface Applicants {  
   id: Number;  
   name: String;  
+  idusuario: any;
   //username: String;  
   //email: String;  
 }  
@@ -33,7 +34,7 @@ export class ListaAplicantesMainComponent implements OnInit {
     private router: Router,
   ) { }
 
-  equipos: Applicants[] = applicants;
+  //equipos: Applicants[] = applicants;
   term: string = '';
   items: Applicants[] = [];
 
@@ -50,7 +51,7 @@ export class ListaAplicantesMainComponent implements OnInit {
     this.torneosService.getListaEquipos(this.idtorneo, false)
     .subscribe(
       (res) => {
-        //console.log(res);
+        console.log(res);
         this.listaAplicantes = res;
       }
     );
@@ -73,6 +74,7 @@ export class ListaAplicantesMainComponent implements OnInit {
   }
 
   openDialog(objetoEquipo: Applicants, accion: boolean) {
+    console.log(objetoEquipo)
     const dialogConfig = new MatDialogConfig();
     let aceptarEquipo: String = '';
     dialogConfig.maxWidth = "100%";
@@ -84,7 +86,9 @@ export class ListaAplicantesMainComponent implements OnInit {
       aceptarEquipo = "Rechazar";
     }
     dialogConfig.data = {
-      idEquipo: objetoEquipo.id,
+      // objetoEquipo.id es el idparticipa
+      idParticipacion: objetoEquipo.id,
+      idEquipo : objetoEquipo.idusuario,
       idTorneo : this.idtorneo,
       name: objetoEquipo.name,
       acceptTeam: aceptarEquipo, //string de accion

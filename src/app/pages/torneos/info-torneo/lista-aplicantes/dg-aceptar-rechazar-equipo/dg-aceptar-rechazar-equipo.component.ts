@@ -23,23 +23,25 @@ export class DgAceptarRechazarEquipoComponent implements OnInit {
   accionEquipoString: String = '';
   accionEquipoBoolean: Boolean = false;
   idTorneo : any;
+  idParticipacion : any;
 
   ngOnInit(): void {
-    this.idEquipo = this.data.idEquipo;
+    this.idEquipo = this.data.idusuario;
     this.nombreEquipo = this.data.name;
     this.accionEquipoString = this.data.acceptTeam;
     this.accionEquipoBoolean = this.data.accion;
     this.idTorneo = this.data.idTorneo;
-    
+    this.idParticipacion = this.data.idParticipacion;
   }
 
   confirmarAccion():any {
       
       if(this.accionEquipoBoolean){
-        console.log(this.data)
-        this.torneosService.aceptarEquipoEnTorneo(this.data.id)
+        this.torneosService.aceptarEquipoEnTorneo(this.idParticipacion)
         .subscribe(res => {
-          console.log(res)
+          if (res) {
+            window.location.reload();
+          }
         })
       }
       else{
