@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FixtureMainComponent } from './fixture-main.component';
+import { DgAsignarGanadorComponent } from './dg-asignar-ganador.component';
 
-describe('FixtureMainComponent', () => {
-  let component: FixtureMainComponent;
-  let fixture: ComponentFixture<FixtureMainComponent>;
+describe('DgAsignarGanadorComponent', () => {
+  let component: DgAsignarGanadorComponent;
+  let fixture: ComponentFixture<DgAsignarGanadorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FixtureMainComponent ]
+      declarations: [ DgAsignarGanadorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FixtureMainComponent);
+    fixture = TestBed.createComponent(DgAsignarGanadorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

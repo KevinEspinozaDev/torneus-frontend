@@ -1,0 +1,29 @@
+<div class="container">
+    <h1 mat-dialog-title>Asignar ganador</h1>
+    <div mat-dialog-content>
+        <p>¿Quién es el ganador del equipo?</p>
+        <div *ngIf="conflicto; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>Hay conflicto.</ng-template>
+        <ng-template #elseBlock>
+            <div>No hay conflicto.</div>
+            <div>{{ganador.nombreequipo1}}: {{ganador.puntosequipo1}} puntos.</div>
+            <div>{{ganador.nombreequipo2}}: {{ganador.puntosequipo2}} puntos.</div>
+            <div>El equipo ganador es <b>{{ganador.nombreequipoganador}}</b></div>
+        </ng-template>
+
+        <div class="my-2">
+            <mat-radio-group [(ngModel)]="ganador.idequipoganador" [disabled]="!conflicto" color="primary" [required]="true" aria-label="Seleccione un ganador">
+                <mat-radio-button [value]="idequipo1">{{nameequipo1}}</mat-radio-button>
+                <mat-radio-button [value]="idequipo2">{{nameequipo2}}</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div *ngIf="checkExisteGanadorVersus()">
+            Este enfrentamiento ya posee un ganador
+        </div>
+    </div>
+    <div mat-dialog-actions class="containerAcciones">
+        <button *ngIf="!checkExisteGanadorVersus()" (click)="updatePuntosEquipos(conflicto)" [disabled]="ganador.idequipoganador == 0" mat-raised-button color="primary">Confirmar</button>
+        <button mat-button mat-dialog-close>Cerrar</button>
+    </div>
+</div>

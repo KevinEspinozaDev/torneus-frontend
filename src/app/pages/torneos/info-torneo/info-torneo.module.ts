@@ -9,7 +9,10 @@ import { InfoTorneoMainComponent } from './info-torneo-main/info-torneo-main.com
 import { DgListaAplicantesComponent } from './dg-lista-aplicantes/dg-lista-aplicantes.component';
 import { ListaParticipantesMainComponent } from './lista-participantes/lista-participantes-main/lista-participantes-main.component';
 import { FixtureMainComponent } from './fixture/fixture-main/fixture-main.component';
+import { DgAsignarGanadorComponent } from './dg-asignar-ganador/dg-asignar-ganador.component';
+import { FormsModule } from '@angular/forms';
 import { DialogEditarFechaComponent } from './fixture/dialog-editar-fecha/dialog-editar-fecha.component';
+import { DgModificarFechaInicioComponent } from './fixture/dg-modificar-fecha-inicio/dg-modificar-fecha-inicio.component';
 
 
 @NgModule({
@@ -20,12 +23,15 @@ import { DialogEditarFechaComponent } from './fixture/dialog-editar-fecha/dialog
     DgListaAplicantesComponent,
     ListaParticipantesMainComponent,
     FixtureMainComponent,
-    DialogEditarFechaComponent
+    DialogEditarFechaComponent,
+    DgAsignarGanadorComponent,
+    DgModificarFechaInicioComponent
   ],
   imports: [
     CommonModule,
     InfoTorneoRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class InfoTorneoModule { }

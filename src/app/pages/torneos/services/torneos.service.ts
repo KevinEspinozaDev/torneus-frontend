@@ -129,5 +129,64 @@ export class TorneosService {
     return this.httpClient.post<any>(url, body, {'headers':this.headers});
   }
 
+  /****************** Update maxi 100  ************************/
+
+  addEncuentro(objetoEncuentro: any):Observable<any>{
+    const query = 'crearencuentro'; 
+    return this.httpClient
+    .post(
+      `${this.API_URL}${query}`, objetoEncuentro,
+      {headers: this.headers}
+    );
+  }
+
+  addJuega(objetoJuega: any):Observable<any>{
+    const query = 'crearjuega'; 
+    return this.httpClient
+    .post(
+      `${this.API_URL}${query}`, objetoJuega,
+      {headers: this.headers}
+    );
+  }
+  
+
+  getListaEncuentros(idversus:any):Observable<any>{
+    const query = 'getencuentrosxversus'; 
+    let encuentros = this.httpClient
+    .post(
+      `${this.API_URL}${query}`, {idversus: idversus},
+      {headers: this.headers}
+    );
+    return encuentros;
+  }
+
+  getItemParticipa(idtorneo:any, idequipo:any){
+    const query = 'getparticipaxtorneoyequipo'; 
+    let itemParticipa = this.httpClient
+    .post(
+      `${this.API_URL}${query}`, {idtorneo: idtorneo, idequipo: idequipo},
+      {headers: this.headers}
+    );
+    return itemParticipa;
+  }
+
+  updatePuntosTorneo(objetoParticipa:any){
+    const query = 'asignarpuntaje/'+objetoParticipa.id; 
+    return this.httpClient
+    .put(
+      `${this.API_URL}${query}`, objetoParticipa,
+      {headers: this.headers}
+    );
+  }
+
+  updateIdGanadorVersus(objetoVersus:any){
+    const query = 'actualizaridganador/'+objetoVersus.idversus; 
+    return this.httpClient
+    .put(
+      `${this.API_URL}${query}`, objetoVersus,
+      {headers: this.headers}
+    );
+  }
+
 
 }

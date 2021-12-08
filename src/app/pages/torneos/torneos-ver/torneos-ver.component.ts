@@ -37,10 +37,24 @@ export class TorneosVerComponent implements OnInit {
         this.listaTorneos = res;
 
         this.rol = this.userService.getRolPalabras();
-
       }
     });
   }
+
+  /*
+  setearObjeto() {
+
+    let objeto = [
+      {
+        'id' : '10'
+      }
+    ];
+  }
+    
+    this.torneosService.setObjetoTorneo(objeto[0]);
+    this.router.navigateByUrl('/perfil')
+  }
+  */
 
   objetoTorneo(torneo:any):void{
     console.log(torneo);

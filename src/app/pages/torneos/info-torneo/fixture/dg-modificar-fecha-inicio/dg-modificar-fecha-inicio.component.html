@@ -1,0 +1,19 @@
+<div class="container">
+    <h1 mat-dialog-title>Modificar fechas</h1>
+    <div mat-dialog-content>
+        <p>Ingrese la nueva fecha de inicio del enfrentamiento</p>
+        <small>Nota: La fecha de fin del enfrentamiento será 1 día después a la fecha de inicio del mismo</small>
+        <div class="my-2">
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese la fecha</mat-label>
+                <input matInput [matDatepicker]="picker1" [(ngModel)]="fechainicio">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions class="containerAcciones">
+        <button (click)="updateFechasVersus(fechainicio)" mat-raised-button color="primary">Confirmar</button>
+        <button mat-button mat-dialog-close>Cerrar</button>
+    </div>
+</div> 

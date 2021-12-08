@@ -1,5 +1,5 @@
 <div class="background">
-    <div class="container">
+    <div *ngIf="dataTorneo" class="container">
         <div class="row w-100">
 
             <div *ngIf="dataReady == false" class="col-12 h-100 w-100 mt-5 d-flex justify-content-center">
@@ -41,7 +41,7 @@
             </div>
 
             <div class="col-12 my-2" *ngIf="dataReady == true">
-                <app-fixture-main [soyElOrganizador]="soyElOrganizador"></app-fixture-main>
+                <app-fixture-main [dataTorneo]="dataTorneo" [soyElOrganizador]="soyElOrganizador"></app-fixture-main>
             </div>
         </div>
     </div>
