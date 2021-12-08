@@ -55,14 +55,17 @@
                     <mat-label>Recompensa (puntos)</mat-label>
                     <input required matInput type="number" [min]="1" [max]="10000" (keypress)="($event.charCode >= 48 && $event.charCode < 58)" formControlName="recompensa" placeholder="Ingrese la recompensa (en puntos)">
                     <mat-error *ngIf="registerTipoTorneoForm.controls.recompensa.errors?.required">
-                        Ingresa la recompensa del torneo.
+                        Ingresa la recompensa del torneo
                     </mat-error>
                     <mat-error *ngIf="registerTipoTorneoForm.controls.recompensa.errors?.min">
-                        La cantidad mínima de puntos es 1.
+                        La cantidad mínima de puntos es 1
+                    </mat-error>
+                    <mat-error *ngIf="registerTipoTorneoForm.controls.recompensa.errors?.max">
+                        La cantidad máxima de puntos es 10.000
                     </mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" class="w-100">
+                <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Cantidad máxima de equipos</mat-label>
                     <mat-select required formControlName="nroequipos">
                         <mat-option *ngFor="let numero of listaNumeroEquipos" [value]="numero">
@@ -104,16 +107,6 @@
                     <button (click)="registrarTorneo()" [disabled]="this.registerTipoTorneoForm.invalid" mat-raised-button color="primary" type="submit">Crear torneo</button>
                 </div>
             </form>
-
-            <div class="alert alert-success my-3" role="alert">
-                Torneo creado!
-                <p>
-                    Copia el nombre de tu torneo y envíaselo a quienes desees que participen en él:
-                    <br>
-                    <b>{{registerTipoTorneoForm.controls.nombre.value}}</b>
-                    
-                </p>
-            </div>
         </div>
     </mat-card>
 </div>
