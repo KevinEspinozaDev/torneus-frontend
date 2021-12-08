@@ -9,10 +9,10 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between"> 
 
         <!-- Por cada opcion padre -->
-        <li *ngFor="let item of menu" class="nav-item" [class.dropdown]="item.submenus.length > 0"
+        <li *ngFor="let item of menu" class="nav-item active" [class.dropdown]="item.submenus.length > 0"
           [class.ml-auto]="item.submenus.length > 0">
 
           <!-- Opcion simple, sin submenus-->
@@ -29,9 +29,10 @@
           </ul>
           
         </li>
-      
+      </ul>
 
-        <li class="nav-item dropdown ml-auto">
+      <ul  class="navbar-nav ">
+        <li class="nav-item active dropdown d-flex flex-column justify-self-right">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{sessionData.username}} ({{rolUsuario}})
           </a>
@@ -40,7 +41,6 @@
             <li><a class="dropdown-item text-danger" (click)="logout()">Cerrar Sesión</a></li>
           </ul>
         </li>
-
       </ul>
 
     </div>
