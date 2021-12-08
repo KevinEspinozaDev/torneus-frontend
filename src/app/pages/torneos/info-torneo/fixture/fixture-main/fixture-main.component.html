@@ -20,7 +20,7 @@
 
     <!-- Si existe un fixture para el torneo -->
     <div *ngIf="arregloVersus.length != 0 && dataReady == true">
-        <div *ngFor="let item of arregloVersus; let i = index">
+        <div>
             <div class="my-5" *ngFor="let item of arregloVersus; let i = index">
                 <h3>Fecha {{i+1}}</h3>
                 <table mat-table [dataSource]="item" >
