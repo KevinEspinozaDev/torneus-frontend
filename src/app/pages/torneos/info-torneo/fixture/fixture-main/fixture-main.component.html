@@ -64,7 +64,7 @@
                             (click)="dialogInformarResultado(versus)" class="btn btn-primary" href="javascript:void(0);">
                                 Informar resultado
                             </a>
-                            <a *ngIf="soyElOrganizadorDelTorneo() && checkVersusCerrado(versus) && checkConflicto(versus) && !checkExisteGanadorVersus(versus) && versus.estado != 0" (click)="asignarGanador(versus)" class="btn btn-primary mx-1" href="javascript:void(0);">
+                            <a *ngIf="soyElOrganizadorDelTorneo() && checkVersusCerrado(versus) && checkConflicto(versus) && !checkExisteGanadorVersus(versus) && versus.estado != 0 && versus.estado != 1" (click)="asignarGanador(versus)" class="btn btn-primary mx-1" href="javascript:void(0);">
                                 Asignar ganador
                             </a>
                             <!--

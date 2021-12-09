@@ -123,15 +123,19 @@ export class FixtureMainComponent implements OnInit {
 
   async asignarEstadoSinResultados(objetoVersus: any){
     let fechaActual = new Date();
-    let fechaInicio = new Date(objetoVersus.fechaInicio);
+    let fechaInicio = new Date(objetoVersus.fechainicio);
     let fechaFin = new Date(objetoVersus.fechafin);
     let equipoUnoSubioResultados = await this.comprobarResultadosEquipo(objetoVersus, objetoVersus.idequipo1);
     let equipoDosSubioResultados = await this.comprobarResultadosEquipo(objetoVersus, objetoVersus.idequipo2);
     if(objetoVersus.estado == 1 && fechaActual >= fechaFin){
       if(!equipoUnoSubioResultados && !equipoDosSubioResultados){
         objetoVersus.estado = 4
-        await this.callGetUpdateEstadoVersusFromService(objetoVersus);
+        
       }
+      else if(equipoUnoSubioResultados && equipoDosSubioResultados){
+        objetoVersus.estado = 5;
+      }
+      await this.callGetUpdateEstadoVersusFromService(objetoVersus);
     }
   }
 
