@@ -40,6 +40,12 @@ export class MenuService {
           'nombre' : 'Mis Invitaciones a Equipos',
           'click' : '',
           'submenus' : []
+        },
+        {
+          'url' : '/rankings',
+          'nombre' : 'Rankings',
+          'click' : '',
+          'submenus' : []
         }
       ];
 
@@ -75,6 +81,12 @@ export class MenuService {
           'click' : '',
           'submenus' : []
         },
+        {
+          'url' : '/rankings',
+          'nombre' : 'Rankings',
+          'click' : '',
+          'submenus' : []
+        }
       ];
 
       // Organizador
@@ -103,6 +115,12 @@ export class MenuService {
             
           ]
         },
+        {
+          'url' : '/rankings',
+          'nombre' : 'Rankings',
+          'click' : '',
+          'submenus' : []
+        }
         /*
         {
           'url' : '',

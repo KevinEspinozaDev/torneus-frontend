@@ -1,1 +1,24 @@
-<p>rankings-main works!</p>
+<div class="background">
+    <div class="container d-flex justify-content-center">
+        <mat-card class="w-50">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Equipo</th>
+                    <th scope="col">Torneos Ganados</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <!-- por cada equipo en orden de torneos ganados -->
+                    <tr *ngFor="let equipo of topEquipos; let i = index" >
+                        <td scope="row">{{i+1}}</td>
+                        <td scope="row">{{equipo.nametorneus}}</td>
+                        <td scope="row">{{equipo.torneosganados}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-card>
+        
+    </div>
+</div>

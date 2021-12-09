@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { HomeMainComponent } from './home/home-main/home-main.component';
 import { OnlyEquipoGuard } from '../shared/guards/only-equipo.guard';
+import { RankingsModule } from './rankings/rankings.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'torneos', pathMatch: 'full' },
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'aceptar-invitacion', 
     loadChildren: () => import('./aceptar-rechazar-invitacion/aceptar-rechazar-invitacion.module').then(m => m.AceptarRechazarInvitacionModule)
+  },
+  {
+    path: 'rankings', 
+    loadChildren: () => import('./rankings/rankings.module').then(m => m.RankingsModule)
   },
 
 ];
