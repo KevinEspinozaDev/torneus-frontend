@@ -15,7 +15,6 @@ export class CrearTorneoMainComponent implements OnInit {
 
   openDialog(id:number) {
     this.idTipoTorneoSeleccionado = id;
-    console.log('Tipo de Torneo seleccionado: '+this.idTipoTorneoSeleccionado);
     const dialogRef = this.dialog.open(DialogTipoTorneoComponent, {
       data: {
         idTipoTorneo: this.idTipoTorneoSeleccionado

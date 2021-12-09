@@ -82,7 +82,6 @@ export class FixtureMainComponent implements OnInit {
           this.dataTorneo = res[0];
         }
         else{
-          console.log('No se encontró información del torneo desde fixture-main')
            this.router.navigateByUrl('/torneos');
         }
       }
@@ -120,7 +119,6 @@ export class FixtureMainComponent implements OnInit {
         }else{
           console.log('No hay equipos pares');
         }
-        console.log(this.suficientesEquipos)
       },
       error => {
         console.log(error);

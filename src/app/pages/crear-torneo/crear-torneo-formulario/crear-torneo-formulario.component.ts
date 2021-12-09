@@ -96,7 +96,6 @@ export class CrearTorneoFormularioComponent implements OnInit {
 
   registrarTorneo():any{
     this.registerTipoTorneoForm.controls.idorganizador.setValue(this.idOrganizador);
-    console.log(this.registerTipoTorneoForm.value);
 
     let nuevaFechaInicio = new Date(this.registerTipoTorneoForm.controls.fechainicio.value).toJSON().slice(0, 10);
     this.registerTipoTorneoForm.controls.fechainicio.setValue(nuevaFechaInicio);

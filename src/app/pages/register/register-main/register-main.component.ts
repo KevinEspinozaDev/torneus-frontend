@@ -17,7 +17,6 @@ export class RegisterMainComponent implements OnInit {
 
   openDialog(id:number) {
     this.idRolElegido = id;
-    console.log('Rol elegido: '+this.idRolElegido);
     const dialogRef = this.dialog.open(DialogConfirmarRolComponent, {
       data: {
         idRol: this.idRolElegido

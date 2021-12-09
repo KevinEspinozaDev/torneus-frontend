@@ -87,6 +87,19 @@ export class TorneosService {
     return this.httpClient.post<any>(url, objetoIdUsuario, {'headers':this.headers});
   }
 
+  getListaInfoVersus(idtorneo:any, idversus:any):Observable<any>{
+    const query = `listarinfoversus`;
+
+    const body = {
+      idtorneo : idtorneo,
+      idversus : idversus
+    }
+
+    const url = this.API_URL + query;
+
+    return this.httpClient.post<any>(url, body, {'headers':this.headers});
+  }
+
   public getObjetoTorneo(): Observable<any>{
     return this.objetoTorneo.asObservable();
   }

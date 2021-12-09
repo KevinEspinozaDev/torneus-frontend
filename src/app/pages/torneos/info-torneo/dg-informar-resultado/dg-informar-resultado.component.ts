@@ -11,7 +11,9 @@ import { TorneosService } from '../../services/torneos.service';
 export class DgInformarResultadoComponent implements OnInit {
 
   infoversus:any;
+  infotorneo:any;
   resultados:any;
+  dataReady:boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data:any,
@@ -33,7 +35,22 @@ export class DgInformarResultadoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.infoversus = this.data.data;
+    this.torneosService.getListaInfoVersus(this.data.versus.idtorneo, this.data.versus.idversus)
+    .subscribe(res => {
+      console.log(res)
+      // info versus
+      console.log(res[0]);
+      this.infoversus = res[0][0];
+
+      // info torneo
+      console.log(res[1]);
+      this.infotorneo = res[1][0];
+
+      // info equipo 1
+      console.log(res[2]);
+
+      this.dataReady = true;
+    })
   }
 
   confirmar(){

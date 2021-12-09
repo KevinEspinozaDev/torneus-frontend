@@ -51,7 +51,6 @@ export class ListaAplicantesMainComponent implements OnInit {
     this.torneosService.getListaEquipos(this.idtorneo, false)
     .subscribe(
       (res) => {
-        console.log(res);
         this.listaAplicantes = res;
       }
     );
@@ -74,7 +73,6 @@ export class ListaAplicantesMainComponent implements OnInit {
   }
 
   openDialog(objetoEquipo: Applicants, accion: boolean) {
-    console.log(objetoEquipo)
     const dialogConfig = new MatDialogConfig();
     let aceptarEquipo: String = '';
     dialogConfig.maxWidth = "100%";
