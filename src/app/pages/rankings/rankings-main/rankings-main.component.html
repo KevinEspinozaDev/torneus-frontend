@@ -1,7 +1,7 @@
 <div class="background">
-    <div class="container d-flex justify-content-center">
-        <mat-card class="w-50">
-            <div class="titulo my-3">
+    <div class="container">
+        <mat-card class="w-50 mat-card">
+            <div class="titulo my-3 text-center">
                 <h3>Raking de Equipos Torneus</h3>
             </div>
 
@@ -16,9 +16,13 @@
                 <tbody>
                     <!-- por cada equipo en orden de torneos ganados -->
                     <tr *ngFor="let equipo of topEquipos; let i = index" >
-                        <td scope="row">{{i+1}}</td>
-                        <td scope="row">{{equipo.nametorneus}}</td>
-                        <td scope="row">{{equipo.torneosganados}}</td>
+                        <td *ngIf="i+1 == 1" class="bg-warning" scope="row">{{i+1}}</td>
+                        <td *ngIf="i+1 == 1" class="bg-warning" scope="row">{{equipo.nametorneus}}</td>
+                        <td *ngIf="i+1 == 1" class="bg-warning" scope="row">{{equipo.torneosganados}}</td>
+
+                        <td *ngIf="i+1 != 1" scope="row">{{i+1}}</td>
+                        <td *ngIf="i+1 != 1" scope="row">{{equipo.nametorneus}}</td>
+                        <td *ngIf="i+1 != 1" scope="row">{{equipo.torneosganados}}</td>
                     </tr>
                 </tbody>
             </table>

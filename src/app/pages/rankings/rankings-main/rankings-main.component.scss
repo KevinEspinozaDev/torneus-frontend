@@ -13,6 +13,11 @@
     margin-top: 32px;
     margin-bottom: 32px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     overflow: auto;
+
+    .mat-card{
+        height: fit-content;
+        max-height: 90%;
+    }
 }
