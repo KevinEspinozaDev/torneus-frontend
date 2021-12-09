@@ -58,6 +58,7 @@ export class SearchTournamentComponent implements OnInit {
     this.torneosService.getTorneosDisponibles(this.sessionData.idusuario)
     .subscribe(
       (torneos) => {                           //next() callback
+        console.log(torneos)
         this.torneos = torneos;
         this.dataSource.data = this.torneos;
         //return this.torneos = torneos;

@@ -60,10 +60,12 @@
                     <ng-container matColumnDef="informar_resultado"> <!--Esto lo ven los equipos y el organizador -->
                         <th mat-header-cell *matHeaderCellDef> Acciones </th>
                         <td mat-cell *matCellDef="let versus"> 
-                            <a *ngIf="participoEnEsteVersus(versus.idequipo1, versus.idequipo2)" class="btn btn-primary" href="javascript:void(0);">
+                            <a *ngIf="participoEnEsteVersus(versus.idequipo1, versus.idequipo2)" 
+                            (click)="dialogInformarResultado(versus)" class="btn btn-primary" href="javascript:void(0);">
                                 Informar resultado
                             </a>
-                            <a *ngIf="soyElOrganizadorDelTorneo() && checkVersusCerrado(versus) && checkConflicto(versus) && !checkExisteGanadorVersus(versus)" (click)="asignarGanador(versus)" class="btn btn-primary mx-1" href="javascript:void(0);">
+                            <a *ngIf="soyElOrganizadorDelTorneo() && checkVersusCerrado(versus) && checkConflicto(versus) && !checkExisteGanadorVersus(versus)" 
+                            (click)="asignarGanador(versus)" class="btn btn-primary mx-1" href="javascript:void(0);">
                                 Asignar ganador
                             </a>
                             <!--

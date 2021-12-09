@@ -7,6 +7,7 @@ import { TorneosService } from '../../../services/torneos.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DgModificarFechaInicioComponent } from '../dg-modificar-fecha-inicio/dg-modificar-fecha-inicio.component';
 import { DgAsignarGanadorComponent } from '../../dg-asignar-ganador/dg-asignar-ganador.component';
+import { DgInformarResultadoComponent } from '../../dg-informar-resultado/dg-informar-resultado.component';
 
 @Component({
   selector: 'app-fixture-main',
@@ -81,6 +82,7 @@ export class FixtureMainComponent implements OnInit {
           this.dataTorneo = res[0];
         }
         else{
+          console.log('No se encontró información del torneo desde fixture-main')
            this.router.navigateByUrl('/torneos');
         }
       }
@@ -322,7 +324,7 @@ export class FixtureMainComponent implements OnInit {
   async asignarGanador(objetoVersus: any){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = "100%";
-    dialogConfig.width = "80%";
+    dialogConfig.minWidth = "50%";
     let listaEncuentros = await this.callGetListaEncuentrosFromService(objetoVersus.idversus);
     dialogConfig.data = {
       versus: objetoVersus,
@@ -450,6 +452,18 @@ export class FixtureMainComponent implements OnInit {
       }
     }
     return organizo;
+  }
+
+  /*********** update Kevin 100% ****************** */
+  dialogInformarResultado(versus:any){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.minWidth = "95%";
+    dialogConfig.height = "98%";
+
+    dialogConfig.data = {
+      versus: versus,
+    }; //Mandar también la lista de resultados
+    this.dialog.open(DgInformarResultadoComponent, dialogConfig);
   }
 
 }

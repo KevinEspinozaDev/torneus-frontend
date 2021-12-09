@@ -5,7 +5,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { TorneosRoutingModule } from './torneos-routing.module';
 import { TorneosVerComponent } from './torneos-ver/torneos-ver.component';
 import { TorneosOrganizadorComponent } from './torneos-organizador/torneos-organizador.component';
-import { VersusResultadosComponent } from './versus-resultados/versus-resultados.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -13,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     TorneosVerComponent,
     TorneosOrganizadorComponent,
-    VersusResultadosComponent,
   ],
   imports: [
     CommonModule,

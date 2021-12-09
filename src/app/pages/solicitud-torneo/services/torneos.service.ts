@@ -45,6 +45,23 @@ export class TorneosService {
     return torneos;
   }
 
+  /* carga los torneos en los que estoy participando con estado 1 */
+  getMisTorneos(idequipo:any):Observable<any>{
+    const query = 'mistorneos'; 
+
+    const body = {
+      idequipo : idequipo
+    }
+
+    let torneos = this.httpClient
+    .post(
+      `${this.API_URL}${query}`, body,
+      {headers: this.headers}
+    );
+    //console.log(torneos);
+    return torneos;
+  }
+
   storeParticipacion(objetoTorneo: any, objetoEquipo: any):Observable<any>{
     const query = 'participartorneo'; 
     let objetoRequest = {

@@ -10,9 +10,11 @@ import { DgListaAplicantesComponent } from './dg-lista-aplicantes/dg-lista-aplic
 import { ListaParticipantesMainComponent } from './lista-participantes/lista-participantes-main/lista-participantes-main.component';
 import { FixtureMainComponent } from './fixture/fixture-main/fixture-main.component';
 import { DgAsignarGanadorComponent } from './dg-asignar-ganador/dg-asignar-ganador.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogEditarFechaComponent } from './fixture/dialog-editar-fecha/dialog-editar-fecha.component';
 import { DgModificarFechaInicioComponent } from './fixture/dg-modificar-fecha-inicio/dg-modificar-fecha-inicio.component';
+import { InformarResultadoComponent } from './informar-resultado/informar-resultado.component';
+import { DgInformarResultadoComponent } from './dg-informar-resultado/dg-informar-resultado.component';
 
 
 @NgModule({
@@ -25,13 +27,16 @@ import { DgModificarFechaInicioComponent } from './fixture/dg-modificar-fecha-in
     FixtureMainComponent,
     DialogEditarFechaComponent,
     DgAsignarGanadorComponent,
-    DgModificarFechaInicioComponent
+    DgModificarFechaInicioComponent,
+    InformarResultadoComponent,
+    DgInformarResultadoComponent
   ],
   imports: [
     CommonModule,
     InfoTorneoRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class InfoTorneoModule { }

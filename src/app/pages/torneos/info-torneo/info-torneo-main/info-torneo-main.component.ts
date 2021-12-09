@@ -49,7 +49,7 @@ export class InfoTorneoMainComponent implements OnInit {
           
         }
         else{
-          console.log('No se encontraron datos para ese torneo')
+          console.log('No se encontraron datos para ese torneo desde info-torneo-main')
            this.router.navigateByUrl('/torneos');
         }
       }

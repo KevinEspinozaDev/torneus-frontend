@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TorneosService } from '../services/torneos.service';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { TorneosService } from '../../services/torneos.service';
 
 @Component({
-  selector: 'app-versus-resultados',
-  templateUrl: './versus-resultados.component.html',
-  styleUrls: ['./versus-resultados.component.scss']
+  selector: 'app-informar-resultado',
+  templateUrl: './informar-resultado.component.html',
+  styleUrls: ['./informar-resultado.component.scss']
 })
-export class VersusResultadosComponent implements OnInit {
+export class InformarResultadoComponent implements OnInit {
 
   infoversus:any;
   resultados:any;
