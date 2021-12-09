@@ -71,7 +71,7 @@ export class FixtureMainComponent implements OnInit {
   //Asignacion de estados
   async asignarEstadoEnCurso(objetoVersus: any){
     let fechaActual = new Date();
-    let fechaInicio = new Date(objetoVersus.fechaInicio);
+    let fechaInicio = new Date(objetoVersus.fechainicio);
     let fechaFin = new Date(objetoVersus.fechafin);
     if(objetoVersus.estado == 0 && fechaActual >= fechaInicio){
       objetoVersus.estado = 1;
@@ -105,7 +105,7 @@ export class FixtureMainComponent implements OnInit {
   }
 
   async asignarEstadoHayGanador(objetoVersus: any){
-    if((objetoVersus.estado == 1 || objetoVersus.estado == 3 || objetoVersus.estado == 4) && objetoVersus.idganadorfinal != 0){
+    if((objetoVersus.estado == 1 || objetoVersus.estado == 3 || objetoVersus.estado == 4) && objetoVersus.idequipoganadorfinal != 0){
       objetoVersus.estado = 2;
       await this.callGetUpdateEstadoVersusFromService(objetoVersus);
     }
@@ -122,15 +122,19 @@ export class FixtureMainComponent implements OnInit {
 
   async asignarEstadoSinResultados(objetoVersus: any){
     let fechaActual = new Date();
-    let fechaInicio = new Date(objetoVersus.fechaInicio);
+    let fechaInicio = new Date(objetoVersus.fechainicio);
     let fechaFin = new Date(objetoVersus.fechafin);
     let equipoUnoSubioResultados = await this.comprobarResultadosEquipo(objetoVersus, objetoVersus.idequipo1);
     let equipoDosSubioResultados = await this.comprobarResultadosEquipo(objetoVersus, objetoVersus.idequipo2);
     if(objetoVersus.estado == 1 && fechaActual >= fechaFin){
       if(!equipoUnoSubioResultados && !equipoDosSubioResultados){
         objetoVersus.estado = 4
-        await this.callGetUpdateEstadoVersusFromService(objetoVersus);
+        
       }
+      else if(equipoUnoSubioResultados && equipoDosSubioResultados){
+        objetoVersus.estado = 5;
+      }
+      await this.callGetUpdateEstadoVersusFromService(objetoVersus);
     }
   }
 
@@ -252,6 +256,7 @@ export class FixtureMainComponent implements OnInit {
           idequipo1: versus.home.idusuario,
           idequipo2: versus.away.idusuario,
           idequipoganadorfinal: 0,
+          estado: 0,
         }
         arrayVersus.push(objetoVersus);
       }
