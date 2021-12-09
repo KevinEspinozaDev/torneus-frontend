@@ -140,6 +140,10 @@ export class FixtureMainComponent implements OnInit {
         this.saveVersus(this.arregloEquipos);
         console.log(this.callGetVersusFromService()); //Bizarro pero esto tiene que estar, si no, no trae versus en el saveEncuentros
         this.saveEncuentros();
+
+        if (res) {
+          window.location.reload();
+        }
       },
     );
   }
@@ -148,9 +152,10 @@ export class FixtureMainComponent implements OnInit {
     let nroFecha = 1;
     let objetoVersus;
     let arrayVersus = [];
+    console.log(arrayEquipos)
     for (let fecha of arrayEquipos) {
       for (let versus of fecha) {
-        let fechaFinVersus;
+        let fechaFinVersus = new Date();
         fechaFinVersus = this.javascriptDateToSqlDate(fechaFinVersus)
 
         objetoVersus = {
@@ -158,8 +163,8 @@ export class FixtureMainComponent implements OnInit {
           fechaNro: nroFecha,
           fechainicio: this.dataTorneo.fechainicio,
           fechafin: fechaFinVersus,
-          idequipo1: versus.home.idequipo,
-          idequipo2: versus.away.idequipo,
+          idequipo1: versus.home.idusuario,
+          idequipo2: versus.away.idusuario,
           idequipoganadorfinal: 0,
         }
         arrayVersus.push(objetoVersus);
