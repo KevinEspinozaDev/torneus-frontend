@@ -60,7 +60,82 @@ export class FixtureMainComponent implements OnInit {
     return this.sessionData.idrol == '4';
   }
 
-  ngOnInit(): void {
+  //Verificaciones de estados
+  verificarEstadoEnCurso(objetoVersus: any){
+    return objetoVersus.estado == 1;
+  }
+
+  verificarEstadoHayGanador(objetoVersus: any){
+    return objetoVersus.estado == 2;
+  }
+
+  //Asignacion de estados
+  async asignarEstadoEnCurso(objetoVersus: any){
+    let fechaActual = new Date();
+    let fechaInicio = new Date(objetoVersus.fechaInicio);
+    let fechaFin = new Date(objetoVersus.fechafin);
+    if(objetoVersus.estado == 0 && fechaActual >= fechaInicio){
+      objetoVersus.estado = 1;
+      await this.callGetUpdateEstadoVersusFromService(objetoVersus);
+    }
+  }
+
+  contadorDeVictorias(arregloEncuentros: any){
+    let contVictorias = 0;
+    for(let encuentro of arregloEncuentros){
+      if(encuentro.victoria == 1){
+        contVictorias++;
+      }
+    }
+    return contVictorias;
+  }
+
+ 
+
+  async asignarEstadoHayConflicto(objetoVersus: any){
+    let hayConflicto = false;
+    console.log(objetoVersus);
+    let arregloEncuentros = await this.callGetListaEncuentrosFromService(objetoVersus.idversus)
+    let victorias = this.contadorDeVictorias(arregloEncuentros);
+    //Si hay 4 o mas victorias, hay conflicto
+    if(objetoVersus.estado == 1 && victorias >= 4){
+      hayConflicto = true;
+      objetoVersus.estado = 3;
+      await this.callGetUpdateEstadoVersusFromService(objetoVersus);
+    }
+  }
+
+  async asignarEstadoHayGanador(objetoVersus: any){
+    if((objetoVersus.estado == 1 || objetoVersus.estado == 3 || objetoVersus.estado == 4) && objetoVersus.idganadorfinal != 0){
+      objetoVersus.estado = 2;
+      await this.callGetUpdateEstadoVersusFromService(objetoVersus);
+    }
+  }
+
+  async comprobarResultadosEquipo(objetoVersus:any, idequipo:any){
+    let resultados:any = await this.callGetEncuentrosSinResultadosFromService(objetoVersus, idequipo);
+    let equipoSubioResultados = false;
+    if(resultados.length = 0){
+      equipoSubioResultados = true;
+    }
+    return equipoSubioResultados;
+  }
+
+  async asignarEstadoSinResultados(objetoVersus: any){
+    let fechaActual = new Date();
+    let fechaInicio = new Date(objetoVersus.fechaInicio);
+    let fechaFin = new Date(objetoVersus.fechafin);
+    let equipoUnoSubioResultados = await this.comprobarResultadosEquipo(objetoVersus, objetoVersus.idequipo1);
+    let equipoDosSubioResultados = await this.comprobarResultadosEquipo(objetoVersus, objetoVersus.idequipo2);
+    if(objetoVersus.estado == 1 && fechaActual >= fechaFin){
+      if(!equipoUnoSubioResultados && !equipoDosSubioResultados){
+        objetoVersus.estado = 4
+        await this.callGetUpdateEstadoVersusFromService(objetoVersus);
+      }
+    }
+  }
+
+  async ngOnInit() { //:void
     this.sessionData = this.authenticationService.getSessionData();
     
     /* Obtener el id torneo que viene por la url */
@@ -98,6 +173,17 @@ export class FixtureMainComponent implements OnInit {
       },
     );
 
+    let arregloVersus = await this.callGetVersusSinAgruparFromService();
+    //this.arregloVersus = this.acomodarArregloParaVista(this.arregloVersus)
+    //console.log(this.arregloVersus);
+    for(let versus of arregloVersus){
+      this.asignarEstadoEnCurso(versus);
+      this.asignarEstadoHayConflicto(versus);
+      this.asignarEstadoSinResultados(versus);
+      this.asignarEstadoHayGanador(versus);
+    }
+    
+
   }
 
   longitudObjeto(objeto:any){
@@ -119,6 +205,7 @@ export class FixtureMainComponent implements OnInit {
         }else{
           console.log('No hay equipos pares');
         }
+        //console.log(this.suficientesEquipos)
       },
       error => {
         console.log(error);
@@ -127,33 +214,35 @@ export class FixtureMainComponent implements OnInit {
   }
 
   generarFixture(){
-    this.torneosService.getListaEquipos(this.idtorneo, true)
+    //this.torneosService.getListaEquipos(this.idtorneo, true)
     this.torneosService.getListaEquipos(this.dataTorneo.idtorneo, true)
     .subscribe(
-      (res) => {
+      async (res) => {
         this.participantes = res;
         this.participantes = this.shuffleArray(this.participantes)
         this.arregloEquipos = generateSchedule(this.participantes);
         //console.log(this.arregloEquipos);
-        this.saveVersus(this.arregloEquipos);
+        await this.saveVersus(this.arregloEquipos);
         console.log(this.callGetVersusFromService()); //Bizarro pero esto tiene que estar, si no, no trae versus en el saveEncuentros
-        this.saveEncuentros();
+        await this.saveEncuentros();
+        window.location.reload();
 
         if (res) {
-          window.location.reload();
+          //window.location.reload();
         }
       },
     );
   }
 
-  saveVersus(arrayEquipos: any){
+  async saveVersus(arrayEquipos: any){
     let nroFecha = 1;
     let objetoVersus;
     let arrayVersus = [];
-    console.log(arrayEquipos)
+    //console.log(arrayEquipos)
     for (let fecha of arrayEquipos) {
       for (let versus of fecha) {
-        let fechaFinVersus = new Date();
+        let fechaFinVersus = new Date(this.dataTorneo.fechainicio);
+        fechaFinVersus.setDate(fechaFinVersus.getDate() + 1);;
         fechaFinVersus = this.javascriptDateToSqlDate(fechaFinVersus)
 
         objetoVersus = {
@@ -169,14 +258,14 @@ export class FixtureMainComponent implements OnInit {
       }
       nroFecha++;
     }
-    this.callAddVersusFromService(arrayVersus);
+    await this.callAddVersusFromService(arrayVersus);
   }
 
   acomodarArregloParaVista(arregloVersus:any){
     
     let arregloVersusFinal:any = [];
     for (let key in arregloVersus) {
-      console.log(key, arregloVersus[key]);
+      //console.log(key, arregloVersus[key]);
       if(typeof arregloVersusFinal[key] === 'undefined'){
         arregloVersusFinal[key] = [];
       }
@@ -188,60 +277,73 @@ export class FixtureMainComponent implements OnInit {
     return arregloVersusFinal;
   }
 
-  saveEncuentros(){
+  callGetVersusFromService(){
+    return this.torneosService.getVersus(this.dataTorneo.idtorneo).toPromise();
+  }
+
+  callGetVersusSinAgruparFromService(){
+    return this.torneosService.getVersusSinAgrupar(this.dataTorneo.idtorneo).toPromise();
+  }
+
+  async saveEncuentros(){
+    /*
     this.torneosService.getVersus(this.dataTorneo.idtorneo)
     .subscribe(
       (res) => {
-        if(res.length != 0){
-          let arregloVersus = this.acomodarArregloParaVista(res);
-          //console.log(arregloVersus);
-          let arregloJuega = [];
-          let arregloEncuentros = [];
-          for(let fecha of arregloVersus){
-            //console.log(fecha);
-            for(let versus of fecha){
-              let objetoJuegaEquipo1 = {
-                idversus: versus.idversus,
-                idequipo: versus.idequipo1,
-              };
-              let objetoJuegaEquipo2 = {
-                idversus: versus.idversus,
-                idequipo: versus.idequipo2,
-              };
-              arregloJuega.push(objetoJuegaEquipo1);
-              arregloJuega.push(objetoJuegaEquipo2);
-              for(let i=1; i<=3; i++){
-                let objetoEncuentroEquipo1 = {
-                  idversus: versus.idversus,
-                  idequipoganador: versus.idequipo1,
-                  victoria: -1,
-                }
-                //console.log(objetoEncuentroEquipo1);
-
-                let objetoEncuentroEquipo2 = {
-                  idversus: versus.idversus,
-                  idequipoganador: versus.idequipo2,
-                  victoria: -1,
-                }
-                //console.log(objetoEncuentroEquipo2);
-
-                arregloEncuentros.push(objetoEncuentroEquipo1);
-                arregloEncuentros.push(objetoEncuentroEquipo2);
-              }
-
-
-
-              //this.addTresEncuentros(objetoEncuentroEquipo1, objetoEncuentroEquipo2);
-
-            }
-          }
-          //console.log(arregloEncuentros);
-          //console.log(arregloJuega);
-          this.callAddJuegaFromService(arregloJuega);
-          this.callAddEncuentroFromService(arregloEncuentros);
-        }
+        
       }
     );
+    */
+    let res = await this.callGetVersusFromService();
+
+    if(res.length != 0){
+      let arregloVersus = this.acomodarArregloParaVista(res);
+      //console.log(arregloVersus);
+      let arregloJuega = [];
+      let arregloEncuentros = [];
+      for(let fecha of arregloVersus){
+        //console.log(fecha);
+        for(let versus of fecha){
+          let objetoJuegaEquipo1 = {
+            idversus: versus.idversus,
+            idequipo: versus.idequipo1,
+          };
+          let objetoJuegaEquipo2 = {
+            idversus: versus.idversus,
+            idequipo: versus.idequipo2,
+          };
+          arregloJuega.push(objetoJuegaEquipo1);
+          arregloJuega.push(objetoJuegaEquipo2);
+          for(let i=1; i<=3; i++){
+            let objetoEncuentroEquipo1 = {
+              idversus: versus.idversus,
+              idequipoganador: versus.idequipo1,
+              victoria: -1,
+            }
+            //console.log(objetoEncuentroEquipo1);
+
+            let objetoEncuentroEquipo2 = {
+              idversus: versus.idversus,
+              idequipoganador: versus.idequipo2,
+              victoria: -1,
+            }
+            //console.log(objetoEncuentroEquipo2);
+
+            arregloEncuentros.push(objetoEncuentroEquipo1);
+            arregloEncuentros.push(objetoEncuentroEquipo2);
+          }
+
+
+
+          //this.addTresEncuentros(objetoEncuentroEquipo1, objetoEncuentroEquipo2);
+
+        }
+      }
+      //console.log(arregloEncuentros);
+      //console.log(arregloJuega);
+      await this.callAddJuegaFromService(arregloJuega);
+      await this.callAddEncuentroFromService(arregloEncuentros);
+    }
   }
   /*
   addTresEncuentros(objEncuentroEquipo1:any, objEncuentroEquipo2:any){
@@ -253,7 +355,7 @@ export class FixtureMainComponent implements OnInit {
     }
   }
   */
-
+  /*
   callGetVersusFromService(){
     this.torneosService.getVersus(this.dataTorneo.idtorneo)
     .subscribe(
@@ -265,8 +367,10 @@ export class FixtureMainComponent implements OnInit {
       }
     );
   }
+  */
 
   callAddVersusFromService(objetoVersus:any){
+    /*
     this.torneosService.addVersus(objetoVersus)
     .subscribe(
       (res) => {
@@ -277,9 +381,12 @@ export class FixtureMainComponent implements OnInit {
         console.log("Versus no agregado")
       }
     );
+    */
+    return this.torneosService.addVersus(objetoVersus).toPromise();
   }
 
   callAddEncuentroFromService(objetoEncuentro:any){
+    /*
     //setTimeout(()=>{ 
       //let booleano = false;
       this.torneosService.addEncuentro(objetoEncuentro)
@@ -294,9 +401,12 @@ export class FixtureMainComponent implements OnInit {
       );
       //return booleano;
     //}, 500)
+    */
+   return this.torneosService.addEncuentro(objetoEncuentro).toPromise();
   }
 
   callAddJuegaFromService(objetoJuega:any){
+    /*
     this.torneosService.addJuega(objetoJuega)
     .subscribe(
       (res) => {
@@ -306,6 +416,8 @@ export class FixtureMainComponent implements OnInit {
         console.log("Juega no agregado")
       }
     );
+    */
+    return this.torneosService.addJuega(objetoJuega).toPromise();
   }
 
   callGetListaEncuentrosFromService(idversus:any): Promise<any>{
@@ -322,6 +434,14 @@ export class FixtureMainComponent implements OnInit {
     );
     */
    return this.torneosService.getListaEncuentros(idversus).toPromise()
+  }
+
+  callGetUpdateEstadoVersusFromService(objetoVersus:any){
+    return this.torneosService.updateEstadoVersus(objetoVersus).toPromise();
+  }
+
+  callGetEncuentrosSinResultadosFromService(objetoVersus:any, idequipo:any){
+    return this.torneosService.getEncuentrosSinResultados(objetoVersus, idequipo).toPromise();
   }
 
   async asignarGanador(objetoVersus: any){

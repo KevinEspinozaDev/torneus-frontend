@@ -75,6 +75,18 @@ export class TorneosService {
     return versus;
   }
 
+  getVersusSinAgrupar(idtorneo:any):Observable<any>{
+    const query = 'getversusxtorneosinagrupar'; 
+    //let params = new HttpParams().set('idusuario', idusuario);
+    let versus = this.httpClient
+    .post(
+      `${this.API_URL}${query}`, {idtorneo: idtorneo},
+      {headers: this.headers}
+    );
+    //console.log(versus);
+    return versus;
+  }
+
   getListaTorneosOrganizador(idusuario:any): Observable<any>{
     const query = `listartorneos`;
 
@@ -183,6 +195,16 @@ export class TorneosService {
     return itemParticipa;
   }
 
+  getEncuentrosSinResultados(idversus:any, idequipo:any){
+    const query = 'getencuentrossinresultados'; 
+    let encuentros = this.httpClient
+    .post(
+      `${this.API_URL}${query}`, {idversus: idversus, idequipoganador: idequipo},
+      {headers: this.headers}
+    );
+    return encuentros;
+  }
+
   updatePuntosTorneo(objetoParticipa:any){
     const query = 'asignarpuntaje/'+objetoParticipa.id; 
     return this.httpClient
@@ -194,6 +216,15 @@ export class TorneosService {
 
   updateIdGanadorVersus(objetoVersus:any){
     const query = 'actualizaridganador/'+objetoVersus.idversus; 
+    return this.httpClient
+    .put(
+      `${this.API_URL}${query}`, objetoVersus,
+      {headers: this.headers}
+    );
+  }
+
+  updateEstadoVersus(objetoVersus:any){
+    const query = 'actualizarestadoversus/'+objetoVersus.idversus; 
     return this.httpClient
     .put(
       `${this.API_URL}${query}`, objetoVersus,

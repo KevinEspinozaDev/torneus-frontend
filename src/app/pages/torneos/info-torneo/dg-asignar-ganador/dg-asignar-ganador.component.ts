@@ -29,6 +29,8 @@ export class DgAsignarGanadorComponent implements OnInit {
   };
   objetoGanador:any;
   conflicto: any;
+  estadoResultados: any;
+
 
   itemParticipa: any;
 
@@ -53,6 +55,8 @@ export class DgAsignarGanadorComponent implements OnInit {
     if(!this.conflicto){
       this.definirGanador();
     }
+
+    this.hayResultadosCargados()
 
   }
 
@@ -134,6 +138,45 @@ export class DgAsignarGanadorComponent implements OnInit {
 
   callUpdateIdGanadorVersusFromService(objetoVersus:any){
     return this.torneosService.updateIdGanadorVersus(objetoVersus).toPromise()
+  }
+
+  async comprobarResultadosEquipo(objetoVersus:any, idequipo:any){
+    let resultados = await this.callGetEncuentrosSinResultadosFromService(objetoVersus, idequipo);
+    let equipoSubioResultados = false;
+    if(resultados.length == 0){
+      equipoSubioResultados = true;
+    }
+    return equipoSubioResultados;
+  }
+
+  callGetEncuentrosSinResultadosFromService(objetoVersus:any, idequipo:any): Promise<any>{
+    return this.torneosService.getEncuentrosSinResultados(objetoVersus, idequipo).toPromise();
+  }
+
+  async hayResultadosCargados(){
+    let equipoUnoSubioResultados = this.comprobarResultadosEquipo(this.data.versus, this.data.versus.idequipo1);
+    let equipoDosSubioResultados = this.comprobarResultadosEquipo(this.data.versus, this.data.versus.idequipo2);
+    if(await equipoUnoSubioResultados && await equipoDosSubioResultados){
+      this.conflicto = this.checkExisteConflicto();
+      if(!this.conflicto){
+        this.estadoResultados = 0;
+      }
+      else{
+        this.estadoResultados = 1;
+      }
+    }
+    else if(await equipoUnoSubioResultados && !await equipoDosSubioResultados){
+      this.idequipoganadorfinal = this.data.versus.idequipo1;
+      this.estadoResultados = 2;
+    }
+    else if(!await equipoUnoSubioResultados && await equipoDosSubioResultados){
+      this.idequipoganadorfinal = this.data.versus.idequipo2;
+      this.estadoResultados = 3;
+    }
+    else {
+      this.estadoResultados = 4;
+    }
+    console.log(this.estadoResultados);
   }
 
   checkExisteConflicto(){
