@@ -71,10 +71,10 @@ export class FixtureMainComponent implements OnInit {
 
   //Asignacion de estados
   async asignarEstadoEnCurso(objetoVersus: any){
-    let fechaActual = new Date();
-    let fechaInicio = new Date(objetoVersus.fechaInicio);
+    let fechaactual = new Date();
+    let fechainicio = new Date(objetoVersus.fechainicio);
     let fechaFin = new Date(objetoVersus.fechafin);
-    if(objetoVersus.estado == 0 && fechaActual >= fechaInicio){
+    if(objetoVersus.estado == 0 && fechaactual >= fechainicio){
       objetoVersus.estado = 1;
       await this.callGetUpdateEstadoVersusFromService(objetoVersus);
     }
@@ -94,7 +94,6 @@ export class FixtureMainComponent implements OnInit {
 
   async asignarEstadoHayConflicto(objetoVersus: any){
     let hayConflicto = false;
-    console.log(objetoVersus);
     let arregloEncuentros = await this.callGetListaEncuentrosFromService(objetoVersus.idversus)
     let victorias = this.contadorDeVictorias(arregloEncuentros);
     //Si hay 4 o mas victorias, hay conflicto
@@ -106,7 +105,8 @@ export class FixtureMainComponent implements OnInit {
   }
 
   async asignarEstadoHayGanador(objetoVersus: any){
-    if((objetoVersus.estado == 1 || objetoVersus.estado == 3 || objetoVersus.estado == 4) && objetoVersus.idganadorfinal != 0){
+    if((objetoVersus.estado == 1 || objetoVersus.estado == 3 || objetoVersus.estado == 4) 
+    && objetoVersus.idequipoganadorfinal != 0){
       objetoVersus.estado = 2;
       await this.callGetUpdateEstadoVersusFromService(objetoVersus);
     }
@@ -175,8 +175,9 @@ export class FixtureMainComponent implements OnInit {
 
     let arregloVersus = await this.callGetVersusSinAgruparFromService();
     //this.arregloVersus = this.acomodarArregloParaVista(this.arregloVersus)
-    //console.log(this.arregloVersus);
+
     for(let versus of arregloVersus){
+      console.log(versus)
       this.asignarEstadoEnCurso(versus);
       this.asignarEstadoHayConflicto(versus);
       this.asignarEstadoSinResultados(versus);

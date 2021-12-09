@@ -166,11 +166,11 @@ export class DgAsignarGanadorComponent implements OnInit {
       }
     }
     else if(await equipoUnoSubioResultados && !await equipoDosSubioResultados){
-      this.idequipoganadorfinal = this.data.versus.idequipo1;
+      this.ganador.idequipoganador = this.data.versus.idequipo1;
       this.estadoResultados = 2;
     }
     else if(!await equipoUnoSubioResultados && await equipoDosSubioResultados){
-      this.idequipoganadorfinal = this.data.versus.idequipo2;
+      this.ganador.idequipoganador = this.data.versus.idequipo2;
       this.estadoResultados = 3;
     }
     else {

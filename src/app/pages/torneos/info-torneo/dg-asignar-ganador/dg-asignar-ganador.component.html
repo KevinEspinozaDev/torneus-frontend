@@ -14,7 +14,9 @@
         <div *ngIf="estadoResultados == 4">Los equipos no subieron sus resultados. Ningún equipo obtendrá puntos.</div>
 
         <div class="my-2" *ngIf="estadoResultados != 4">
-            <mat-radio-group [(ngModel)]="ganador.idequipoganador" [disabled]="estadoResultados == 2 || estadoResultados == 3 || estadoResultados == 0" color="primary" [required]="true" aria-label="Seleccione un ganador">
+            <mat-radio-group [(ngModel)]="ganador.idequipoganador" 
+            [disabled]="estadoResultados == 2 || estadoResultados == 3 || estadoResultados == 0" 
+            color="primary" [required]="true" aria-label="Seleccione un ganador">
                 <mat-radio-button [value]="idequipo1">{{nameequipo1}}</mat-radio-button>
                 <mat-radio-button [value]="idequipo2">{{nameequipo2}}</mat-radio-button>
             </mat-radio-group>
@@ -25,10 +27,18 @@
         </div>
     </div>
     <div mat-dialog-actions class="containerAcciones d-flex justify-content-between">
-        <button *ngIf="!checkExisteGanadorVersus() && estadoResultados != 4" (click)="updatePuntosEquipos(conflicto)" [disabled]="ganador.idequipoganador == 0" mat-raised-button color="primary">Confirmar</button>
+        <!-- Si es 0, no hay conflicto, si es 1 hay conflicto, si hay 2 el equipo1 subio y equipo2 no, si 
+        es 3 equipo2 subio y equipo1 no, -->
+        <button *ngIf="!checkExisteGanadorVersus() && estadoResultados != 4" 
+        (click)="updatePuntosEquipos(conflicto)" [disabled]="ganador.idequipoganador == 0"
+         mat-raised-button color="primary">Confirmar</button>
+
+         <!-- cuando es 4 es que ninguno subio el resultado -->
         <button *ngIf="estadoResultados == 4" mat-raised-button color="primary">Confirmar</button>
         <button mat-button mat-dialog-close>Cerrar</button>
+        <!--
         <button *ngIf="!checkExisteGanadorVersus()" (click)="updatePuntosEquipos(conflicto)" 
         [disabled]="ganador.idequipoganador == 0" mat-raised-button color="primary">Confirmar</button>
+        -->
     </div>
 </div>
