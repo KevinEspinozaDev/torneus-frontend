@@ -253,6 +253,7 @@ export class FixtureMainComponent implements OnInit {
           idequipo1: versus.home.idusuario,
           idequipo2: versus.away.idusuario,
           idequipoganadorfinal: 0,
+          estado: 0,
         }
         arrayVersus.push(objetoVersus);
       }
