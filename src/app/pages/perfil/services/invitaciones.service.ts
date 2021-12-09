@@ -45,7 +45,7 @@ export class InvitacionesService {
   updateEquipoEstado(objetoSolicitud:any, accion:boolean):Observable<any>{
     const query = 'actualizarsolic/'+objetoSolicitud.idsolicitud; 
     //let params = new HttpParams().set('idusuario', idusuario);
-    if(accion){ //Solicitud aceptada
+    if(accion == true){ //Solicitud aceptada
       objetoSolicitud.estado = 1;
     }
     else{ //Solicitud rechazada

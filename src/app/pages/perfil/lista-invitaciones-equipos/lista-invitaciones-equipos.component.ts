@@ -61,6 +61,7 @@ export class ListaInvitacionesEquiposComponent implements OnInit {
     this.invitacionesService.updateEquipoEstado(objetoSolicitud, false)
     .subscribe(
       (res) => {                           //next() callback
+        window.location.reload();
       },
       (error) => {                              //error() callback
         console.error(error)

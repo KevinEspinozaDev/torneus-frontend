@@ -21,10 +21,13 @@ export class InvitarJugadoresService {
   ) { }
 
 
-  getJugadores():Observable<any>{
-    const query = 'alljugadoresnopertenece'; 
+  getJugadores(idequipo:any):Observable<any>{
+    const query = 'alljugadoresdisponibles'; 
+    const body = {
+      idequipo : idequipo
+    }
     return this.httpClient
-    .post(`${this.API_URL}${query}`,
+    .post(`${this.API_URL}${query}`, body,
       {headers: this.headers});
   }
 

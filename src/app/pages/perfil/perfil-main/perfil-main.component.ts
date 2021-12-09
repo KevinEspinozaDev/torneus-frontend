@@ -91,6 +91,17 @@ export class PerfilMainComponent implements OnInit {
     
 
     this.usuarioActual = this.userService.getCurrentUser();
+    this.perfilService.getUserSecure(this.usuarioActual.idusuario)
+    .subscribe(res => {
+      if (res) {
+        this.allDataUser = res[0];
+        this.dataReady = true;
+      }
+    },
+    error => {
+      console.log(error);
+    })
+
     this.rolUsuarioActual = this.userService.getRolPalabras();
     //console.log(this.invitaciones);
 

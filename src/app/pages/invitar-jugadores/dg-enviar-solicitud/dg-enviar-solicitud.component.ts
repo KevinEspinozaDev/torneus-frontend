@@ -12,4 +12,8 @@ export class DgEnviarSolicitudComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  confirmar():void{
+    window.location.reload();
+  }
+
 }

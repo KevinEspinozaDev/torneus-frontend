@@ -31,6 +31,22 @@ export class PerfilService {
     return dataUsuario;
   }
 
+  getUserSecure(idusuario:any):Observable<any>{
+    const query = 'getusersecure'; 
+
+    const body = {
+      idusuario : idusuario
+    }
+
+    let usuario = this.httpClient
+    .post(
+      `${this.API_URL}${query}`, body,
+      {headers: this.headers}
+    );
+    //console.log(invitaciones);
+    return usuario;
+  }
+
   getListaJugadoresEquipo(idequipo:any):Observable<any>{
     const query = 'jugadoresxequipo'; 
     //let params = new HttpParams().set('idusuario', idusuario);

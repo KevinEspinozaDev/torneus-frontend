@@ -7,27 +7,35 @@
             </div>
 
             <div class="col-12 col-md-8">
-                <mat-card class="h-100 mh-100">
-                    <h2 class="text-center">Datos del Usuario</h2>
-                    <div class="d-flex align-items-center">
-                        <mat-icon class="mx-1">account_circle</mat-icon> {{usuarioActual.username}}
-                    </div>
-                    <hr/>
-                    <div class="d-flex align-items-center">
-                        <mat-icon class="mx-1">email</mat-icon> {{usuarioActual.email}}
-                    </div>
-                    <hr/>
-                    <div class="d-flex align-items-center">
-                        <mat-icon class="mx-1">badge</mat-icon> {{rolUsuarioActual}}
-                    </div>
-                    <hr/>
-                    <ng-container *ngIf="usuarioActual.idrol == 4">
+                <mat-card class="h-100 mh-100 w-100 d-flex justify-content-center">
+                    <div *ngIf="dataReady == true" class="data w-100">
+                        <h2 class="text-center">Datos del Usuario</h2>
                         <div class="d-flex align-items-center">
-                            <mat-icon class="mx-1">emoji_events</mat-icon>
-                            <a [routerLink]="'/torneos/mis-torneos'">Ver mis torneos</a>
+                            <mat-icon class="mx-1">account_circle</mat-icon> {{allDataUser.nametorneus}}
                         </div>
                         <hr/>
-                    </ng-container>
+                        <div class="d-flex align-items-center">
+                            <mat-icon class="mx-1">email</mat-icon> {{allDataUser.email}}
+                        </div>
+                        <hr/>
+                        <div class="d-flex align-items-center">
+                            <mat-icon class="mx-1">badge</mat-icon> {{rolUsuarioActual}}
+                        </div>
+                        <hr/>
+                        <ng-container *ngIf="usuarioActual.idrol == 4">
+                            <div class="d-flex align-items-center">
+                                <mat-icon class="mx-1">emoji_events</mat-icon>
+                                <a [routerLink]="'/torneos/mis-torneos'">Ver mis torneos</a>
+                            </div>
+                            <hr/>
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="dataReady == false">
+                        <mat-spinner mode="indeterminate">
+                        </mat-spinner>
+                    </div>
+                    
                     <!--
                     <div class="text-end edit-link">
                         <a (click)="editarPerfil()" href="javascript:void(0)">Editar</a>

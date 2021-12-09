@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/shared/services/user.service';
 
 import { DgEnviarSolicitudComponent } from '../dg-enviar-solicitud/dg-enviar-solicitud.component';
 import { InvitarJugadoresService } from '../services/invitar-jugadores.service';
@@ -28,12 +29,14 @@ export class SearchUserComponent implements OnInit {
   items: User[] = [];
   selectedItems: User[] = [];
   dataReady:boolean = false;
+  userData:any;
 
   invitacionOk:boolean;
 
   constructor(
     public dialog: MatDialog,
     private invitarJugadoresService : InvitarJugadoresService,
+    private userService : UserService,
     private router: Router
     ) { 
       this.jugadores = [];
@@ -43,7 +46,9 @@ export class SearchUserComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.jugadores = this.invitarJugadoresService.getJugadores().
+    this.userData = this.userService.getCurrentUser();
+
+    this.jugadores = this.invitarJugadoresService.getJugadores(this.userData.idusuario).
     subscribe( res => {
       if (res) {
         this.jugadores = res;
