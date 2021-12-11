@@ -24,7 +24,8 @@ export class RegisterFormularioComponent implements OnInit {
   provincias:any;
   localidades:any;
 
-  successCuadro:boolean;
+  successCuadro:boolean = false;
+  loading : boolean = false;
 
   registerJugadorOrganizadorForm: FormGroup;
   registerEquipoForm: FormGroup;
@@ -163,6 +164,8 @@ export class RegisterFormularioComponent implements OnInit {
       }
 
     }
+
+    this.loading = true;
     
     this.authenticationService.register(this.body).subscribe(
       (response:any) => {
@@ -171,7 +174,7 @@ export class RegisterFormularioComponent implements OnInit {
           console.log('se registró al usuario correctamente!');
 
           this.successCuadro = true;
-
+          this.loading = false;
           setTimeout(() => {
             this.router.navigateByUrl("/login");
           }, 3000);

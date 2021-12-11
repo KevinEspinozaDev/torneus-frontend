@@ -18,10 +18,8 @@
 
     .mat-card{
         height: fit-content;
-        max-height: 90%;
-        .info{
-            overflow-y: auto;
-        }
+        max-height: 100%;
+        overflow-y: auto;
     }
 }
 

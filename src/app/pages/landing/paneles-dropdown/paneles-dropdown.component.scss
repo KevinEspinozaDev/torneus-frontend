@@ -17,10 +17,12 @@ h1, h2, h3, h4, h5, h6{
     background:rgba(0, 0, 0, 0.5);
 }
 .land-toggle-title h1,
-.land-toggle-title p{
+.land-toggle-title p,
+.land-toggle-title div{
     color:white;
 }
-.land-toggle-title p{
+.land-toggle-title p,
+.land-toggle-title div{
     padding-top: 3%;
 }
 /*Solo escritorio*/
