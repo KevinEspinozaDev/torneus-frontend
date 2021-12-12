@@ -40,37 +40,6 @@ export class RegisterFormularioComponent implements OnInit {
   ) {
     this.nombreRol = "";
     this.successCuadro = false;
-    /*
-    this.paises = [
-      {
-        id: 1,
-        nombre: 'Argentina'
-      },
-      {
-        id: 2,
-        nombre: 'Brasil'
-      },
-      {
-        id: 3,
-        nombre: 'Japón'
-      }
-    ];
-    this.provincias = [
-      {
-        id: 1,
-        idPais: 1,
-        nombre: 'Río Negro'
-      }
-    ];
-    this.localidades = [
-      {
-        id: 1,
-        idProvincia: 1,
-        idPais: 1,
-        nombre: 'Bariloche'
-      }
-    ];
-    */
 
     this.registerJugadorOrganizadorForm = this.formBuilder.group({
       nombre: new FormControl('',[

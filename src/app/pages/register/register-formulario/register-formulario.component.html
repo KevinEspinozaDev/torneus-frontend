@@ -189,7 +189,7 @@
 
                 <div class="buttonsContainer mt-3">
                     <button mat-raised-button color="default" type="reset">Limpiar</button>
-                    <div>
+                    <div class="d-flex align-items-center justify-content-between">
                         <button [disabled]="this.registerEquipoForm.invalid" (click)="registrarUsuario()" mat-raised-button color="primary" type="submit">Registrarse</button>
                         <mat-spinner *ngIf="loading == true " style="zoom:0.3;" class="ml-4"
                             mode="indeterminate">

@@ -13,6 +13,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Nombre</th>
+                                <th scope="col">Juego</th>
                                 <th scope="col">Fecha Inicio</th>
                                 <th scope="col">Fecha Fin</th>
                                 <th scope="col">Estado</th>
@@ -21,6 +22,10 @@
                         <tbody>
                             <tr class="cadaTorneo" *ngFor="let torneo of listaTorneos" (click)="objetoTorneo(torneo)">
                                 <th scope="row">{{torneo.nombre}}</th>
+                                <td>
+                                    <img width="20" [src]="'../../../../assets/videogames/'+torneo.url" alt="{{torneo.nombrevideojuego}}" />
+                                    {{torneo.nombrevideojuego}}
+                                </td>
                                 <td>{{torneo.fechainicio}}</td>
                                 <td>{{torneo.fechafin}}</td>
                                 <td *ngIf="torneoExpirado(torneo) == true" class="text-danger">Finalizado</td>
