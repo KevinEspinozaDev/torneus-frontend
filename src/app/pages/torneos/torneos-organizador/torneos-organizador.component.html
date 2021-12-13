@@ -27,8 +27,8 @@
                                     <img width="20" [src]="'../../../../assets/videogames/'+torneo.url" alt="{{torneo.nombrevideojuego}}" />
                                     {{torneo.nombrevideojuego}}
                                 </td>
-                                <td>{{torneo.fechainicio}}</td>
-                                <td>{{torneo.fechafin}}</td>
+                                <td>{{torneo.fechainicio | date : "dd/MM/yyyy"}}</td>
+                                <td>{{torneo.fechafin | date : "dd/MM/yyyy"}}</td>
                                 <td *ngIf="torneoExpirado(torneo) == true" class="text-danger">Finalizado</td>
                                 <td *ngIf="torneoExpirado(torneo) == false" class="text-success">Abierto</td>
                             </tr>

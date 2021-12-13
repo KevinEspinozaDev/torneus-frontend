@@ -30,7 +30,7 @@ export class SearchTournamentComponent implements OnInit {
   rolEquipo: any;
   
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['nombre', 'fechainicio', 'fechafin', 'nroequipos'];
+  displayedColumns: string[] = ['nombre', 'videojuego', 'fechainicio', 'fechafin', 'nroequipos'];
 
   hoy:any = new Date();
   fechaFinTorneo:any;

@@ -31,13 +31,15 @@ export class DgInformarResultadoComponent implements OnInit {
       partida3: new FormControl('', [
         Validators.required
       ]),
+      idequipo: new FormControl(''),
+      idversus: new FormControl('')
     });
   }
 
   ngOnInit(): void {
+    console.log(this.data)
     this.torneosService.getListaInfoVersus(this.data.versus.idtorneo, this.data.versus.idversus)
     .subscribe(res => {
-      console.log(res)
       // info versus
       console.log(res[0]);
       this.infoversus = res[0][0];
@@ -54,6 +56,7 @@ export class DgInformarResultadoComponent implements OnInit {
   }
 
   confirmar(){
+    this.resultados.controls['idequipo'].setValue();
     console.log(this.resultados.value);
   }
 

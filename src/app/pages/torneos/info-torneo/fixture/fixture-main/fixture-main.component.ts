@@ -181,7 +181,7 @@ export class FixtureMainComponent implements OnInit {
     //this.arregloVersus = this.acomodarArregloParaVista(this.arregloVersus)
 
     for(let versus of arregloVersus){
-      console.log(versus)
+      //console.log(versus)
       this.asignarEstadoEnCurso(versus);
       this.asignarEstadoHayConflicto(versus);
       this.asignarEstadoSinResultados(versus);
