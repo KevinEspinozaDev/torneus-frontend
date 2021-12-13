@@ -1,0 +1,21 @@
+.containerFotoPerfil{
+    margin: auto;
+    border-style: solid;
+    /*border-color: var(--primary-color);*/
+    /*border-color:white;*/
+    border-width: 6px;
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+
+    .fotoPerfil{
+        
+    }
+}
+.container-juego-image{
+    width: 162px;
+    height: 162px;
+    padding: 6px;
+    background-image: linear-gradient(#4361EE, #800080);
+    margin:auto;
+}

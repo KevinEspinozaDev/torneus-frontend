@@ -29,6 +29,7 @@ export class CrearTorneoFormularioComponent implements OnInit {
   registerTipoTorneoForm: FormGroup;
 
   numEquipos:Array<number> = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30];
+  videojuegos:any;
 
   createdOk:boolean = false;
   listaNumeroEquipos:any;
@@ -60,12 +61,16 @@ export class CrearTorneoFormularioComponent implements OnInit {
         Validators.min(1),
         Validators.max(10000)
       ]),
+      idvideojuego: new FormControl('',[
+        Validators.required,
+      ]),
       nroequipos: new FormControl('',[
         Validators.required,
         Validators.min(2)
       ]),
       idtipotorneo: new FormControl(1),
       idorganizador: new FormControl(''),
+      idequipoganador: new FormControl(0),
     });
   }
 
@@ -84,6 +89,15 @@ export class CrearTorneoFormularioComponent implements OnInit {
         this.router.navigate(['/crear-torneo']);
       }
     }
+
+    /* obtener los videjuegos */
+    this.crearTorneosService.getVideojuegos()
+    .subscribe(res => {
+      if (res) {
+        this.videojuegos = res;
+        console.log(this.videojuegos)
+      }
+    })
   }
 
   selectNumeroEquipos(){
@@ -114,11 +128,6 @@ export class CrearTorneoFormularioComponent implements OnInit {
 
       }
     );
-  }
-
-
-  test(param:any){
-    console.log(param);
   }
 
 }

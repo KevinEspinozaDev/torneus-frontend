@@ -15,6 +15,7 @@ import { DialogEditarFechaComponent } from './fixture/dialog-editar-fecha/dialog
 import { DgModificarFechaInicioComponent } from './fixture/dg-modificar-fecha-inicio/dg-modificar-fecha-inicio.component';
 import { InformarResultadoComponent } from './informar-resultado/informar-resultado.component';
 import { DgInformarResultadoComponent } from './dg-informar-resultado/dg-informar-resultado.component';
+import { InfoJuegoMainComponent } from './info-juego/info-juego-main/info-juego-main.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { DgInformarResultadoComponent } from './dg-informar-resultado/dg-informa
     DgAsignarGanadorComponent,
     DgModificarFechaInicioComponent,
     InformarResultadoComponent,
-    DgInformarResultadoComponent
+    DgInformarResultadoComponent,
+    InfoJuegoMainComponent
   ],
   imports: [
     CommonModule,

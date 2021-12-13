@@ -62,11 +62,6 @@ export class MenuService {
               'nombre' : 'Ver Torneos',
               'click' : '',
             },
-            {
-              'url' : '/torneos/versus-resultados',
-              'nombre' : 'Informar mi Resultado',
-              'click' : ''
-            }
           ]
         },
         {

@@ -11,6 +11,7 @@ export class RankingsMainComponent implements OnInit {
   rankings : any;
   topEquipos:any;
   topJugadores:any;
+  dataReady:boolean = false;
 
   constructor(
     private rankingsService : RankingsService
@@ -20,7 +21,9 @@ export class RankingsMainComponent implements OnInit {
     this.rankingsService.getRankings()
     .subscribe(res => {
       this.topEquipos = res[0];
-      console.log(this.topEquipos)
+      this.topJugadores = res[1];
+      this.dataReady = true;
+      console.log(this.topJugadores)
     })
   }
 

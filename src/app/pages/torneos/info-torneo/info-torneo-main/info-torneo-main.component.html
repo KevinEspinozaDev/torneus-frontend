@@ -40,6 +40,10 @@
                         -->
                 </mat-card> 
             </div>
+
+            <div class="col-6 my-2" *ngIf="dataReady == true">
+                <app-info-juego-main [dataTorneo]="dataTorneo"></app-info-juego-main>
+            </div>
             
             <div class="col-6 my-2" *ngIf="dataReady == true">
                 <app-lista-participantes-main></app-lista-participantes-main>

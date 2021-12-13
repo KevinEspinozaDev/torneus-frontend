@@ -15,7 +15,7 @@
    fill="#000000"
    version="1.1"
    id="svg1821"
-   sodipodi:docname="logo-torneus-main.svg"
+   sodipodi:docname="logo-torneus-white.svg"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
   <metadata
      id="metadata1827">
@@ -25,6 +25,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -51,16 +52,6 @@
        x2="21.089218"
        y2="3.1226761"
        gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient2394-9"
-       id="linearGradient862"
-       x1="3.2098849"
-       y1="24.015947"
-       x2="32.461319"
-       y2="23.95286"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.97026022,0,0,0.97026022,0.35813417,-0.76514227)" />
   </defs>
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -76,8 +67,8 @@
      id="namedview1823"
      showgrid="false"
      inkscape:zoom="22.416668"
-     inkscape:cx="10.143643"
-     inkscape:cy="4.9249558"
+     inkscape:cx="11.810118"
+     inkscape:cy="10.994287"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -96,7 +87,7 @@
      style="opacity:1">
     <g
        id="g846"
-       transform="matrix(0.97026022,0,0,0.97026022,0.35813417,0)">
+       transform="matrix(0.97026022,0,0,0.97026022,0.31352451,0)">
       <g
          id="g1517-4"
          style="fill:#f2b942;fill-opacity:1"
@@ -128,14 +119,14 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.6223px;line-height:1.25;font-family:sans-serif;fill:url(#linearGradient862);fill-opacity:1;stroke:none;stroke-width:0.97026"
-       x="3.4725578"
+       style="font-style:normal;font-weight:normal;font-size:3.6223px;line-height:1.25;font-family:sans-serif;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:0.97026"
+       x="3.4279518"
        y="23.813438"
        id="text2433"><tspan
          sodipodi:role="line"
          id="tspan2431"
-         x="3.4725578"
+         x="3.4279518"
          y="23.813438"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.6223px;font-family:Nunito;-inkscape-font-specification:'Nunito Bold';fill:url(#linearGradient862);fill-opacity:1;stroke-width:0.97026">TORNEUS</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.6223px;font-family:Nunito;-inkscape-font-specification:'Nunito Bold';fill:#ececec;fill-opacity:1;stroke-width:0.97026">TORNEUS</tspan></text>
   </g>
 </svg>

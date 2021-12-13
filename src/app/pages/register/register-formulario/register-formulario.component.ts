@@ -24,7 +24,8 @@ export class RegisterFormularioComponent implements OnInit {
   provincias:any;
   localidades:any;
 
-  successCuadro:boolean;
+  successCuadro:boolean = false;
+  loading : boolean = false;
 
   registerJugadorOrganizadorForm: FormGroup;
   registerEquipoForm: FormGroup;
@@ -39,37 +40,6 @@ export class RegisterFormularioComponent implements OnInit {
   ) {
     this.nombreRol = "";
     this.successCuadro = false;
-    /*
-    this.paises = [
-      {
-        id: 1,
-        nombre: 'Argentina'
-      },
-      {
-        id: 2,
-        nombre: 'Brasil'
-      },
-      {
-        id: 3,
-        nombre: 'Japón'
-      }
-    ];
-    this.provincias = [
-      {
-        id: 1,
-        idPais: 1,
-        nombre: 'Río Negro'
-      }
-    ];
-    this.localidades = [
-      {
-        id: 1,
-        idProvincia: 1,
-        idPais: 1,
-        nombre: 'Bariloche'
-      }
-    ];
-    */
 
     this.registerJugadorOrganizadorForm = this.formBuilder.group({
       nombre: new FormControl('',[
@@ -163,6 +133,8 @@ export class RegisterFormularioComponent implements OnInit {
       }
 
     }
+
+    this.loading = true;
     
     this.authenticationService.register(this.body).subscribe(
       (response:any) => {
@@ -171,7 +143,7 @@ export class RegisterFormularioComponent implements OnInit {
           console.log('se registró al usuario correctamente!');
 
           this.successCuadro = true;
-
+          this.loading = false;
           setTimeout(() => {
             this.router.navigateByUrl("/login");
           }, 3000);

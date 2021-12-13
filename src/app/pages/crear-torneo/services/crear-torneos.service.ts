@@ -21,6 +21,14 @@ export class CrearTorneosService {
     private httpClient: HttpClient,
   ) { }
 
+  getVideojuegos():Observable<any>{
+    const query = 'getvideojuegos'; 
+    return this.httpClient
+    .get(`${this.API_URL}${query}`,
+      {headers: this.headers}
+    );
+  }
+
 
   crearTorneo(dataTorneo:any): Observable<any>{
     //console.log(dataTorneo)

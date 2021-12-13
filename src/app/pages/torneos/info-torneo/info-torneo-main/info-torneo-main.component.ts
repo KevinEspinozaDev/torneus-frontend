@@ -45,6 +45,7 @@ export class InfoTorneoMainComponent implements OnInit {
           if (this.dataReady == true) {
             /* Verifica si yo soy organizador */
              this.evaluarSoyOrganizador();
+             console.log(this.dataTorneo);
           }
           
         }
@@ -65,7 +66,7 @@ export class InfoTorneoMainComponent implements OnInit {
         console.log(res);
     });
     */
-
+    
   }
 
   evaluarSoyOrganizador(){

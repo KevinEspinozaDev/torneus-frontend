@@ -1,32 +1,121 @@
+<!-- d-flex flex-column justify-content-center align-items-center -->
 <div class="background">
-    <div class="container">
-        <mat-card class="w-50 mat-card">
-            <div class="titulo my-3 text-center">
-                <h3>Raking de Equipos Torneus</h3>
-            </div>
-
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Equipo</th>
-                    <th scope="col">Torneos Ganados</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <!-- por cada equipo en orden de torneos ganados -->
-                    <tr *ngFor="let equipo of topEquipos; let i = index" >
-                        <td *ngIf="i+1 == 1" class="bg-warning" scope="row">{{i+1}}</td>
-                        <td *ngIf="i+1 == 1" class="bg-warning" scope="row">{{equipo.nametorneus}}</td>
-                        <td *ngIf="i+1 == 1" class="bg-warning" scope="row">{{equipo.torneosganados}}</td>
-
-                        <td *ngIf="i+1 != 1" scope="row">{{i+1}}</td>
-                        <td *ngIf="i+1 != 1" scope="row">{{equipo.nametorneus}}</td>
-                        <td *ngIf="i+1 != 1" scope="row">{{equipo.torneosganados}}</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="container d-flex align-items-center">
+        <mat-card class="w-auto mat-card d-flex justify-content-center">
+            <mat-tab-group class="w-100 d-flex justify-content-between">
+                <!-- Equipos -->
+                <mat-tab class="pt-2" label="Ranking de Jugadores">
+                    <div class="info w-100">
+                        <div class="titulo my-3 text-center">
+                            <h3>Ranking histórico de Jugadores</h3>
+                        </div>
+            
+                        <div *ngIf="dataReady == false " class="row w-100 d-flex justify-content-center mt-4 align-items-center">
+                            <mat-spinner style="zoom:0.8;"
+                                mode="indeterminate">
+                            </mat-spinner>
+                        </div>
+            
+                        <table *ngIf="dataReady == true" class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Jugador</th>
+                                <th scope="col">Prestigio</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <!-- por cada equipo en orden de torneos ganados -->
+                                <tr *ngFor="let jugador of topJugadores; let i = index" >
+                                    <td [class.primero]="i+1 == 1"
+                                        [class.py-4]="i+1 == 1"
+                                        [class.segundo]="i+1 == 2"
+                                        [class.tercero]="i+1 == 3"
+                                        class="w-25"
+                                         scope="row">
+                                        <b>{{i+1}}</b>
+                                    </td>
+            
+                                    <td 
+                                        [class.primero]="i+1 == 1" 
+                                        [class.py-4]="i+1 == 1"
+                                        [class.segundo]="i+1 == 2"
+                                        [class.tercero]="i+1 == 3"
+                                        class="w-50"
+                                         scope="row"><b>{{jugador.nametorneus}}</b>
+                                    </td>
+                                    <td [class.primero]="i+1 == 1" 
+                                        [class.py-4]="i+1 == 1"
+                                        [class.segundo]="i+1 == 2"
+                                        [class.tercero]="i+1 == 3"
+                                        class="w-25"
+                                        scope="row">
+                                        <b>{{jugador.prestigio}}</b>
+                                    </td>
+            
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </mat-tab>
+                <!-- Jugadores -->
+                <mat-tab label="Ranking de Equipos">
+                    <div class=" w-100">
+                        <div class="titulo my-3 text-center">
+                            <h3>Ranking histórico de Equipos</h3>
+                        </div>
+            
+                        <div *ngIf="dataReady == false " class="row w-100 d-flex justify-content-center mt-4 align-items-center">
+                            <mat-spinner style="zoom:0.8;"
+                                mode="indeterminate">
+                            </mat-spinner>
+                        </div>
+            
+                        <table *ngIf="dataReady == true" class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Equipo</th>
+                                <th scope="col">Torneos Ganados</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <!-- por cada equipo en orden de torneos ganados -->
+                                <tr *ngFor="let equipo of topEquipos; let i = index" >
+                                    <td [class.primero]="i+1 == 1"
+                                        [class.py-4]="i+1 == 1"
+                                        [class.segundo]="i+1 == 2"
+                                        [class.tercero]="i+1 == 3"
+                                        class="w-25"
+                                         scope="row">
+                                        <b>{{i+1}}</b>
+                                    </td>
+            
+                                    <td 
+                                        [class.primero]="i+1 == 1" 
+                                        [class.py-4]="i+1 == 1"
+                                        [class.segundo]="i+1 == 2"
+                                        [class.tercero]="i+1 == 3"
+                                        class="w-50"
+                                         scope="row"><b>{{equipo.nametorneus}}</b>
+                                    </td>
+                                    <td [class.primero]="i+1 == 1" 
+                                        [class.py-4]="i+1 == 1"
+                                        [class.segundo]="i+1 == 2"
+                                        [class.tercero]="i+1 == 3"
+                                        class="w-25"
+                                        scope="row">
+                                        <b>{{equipo.torneosganados}}</b>
+                                    </td>
+            
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </mat-tab>
+              </mat-tab-group>
         </mat-card>
+        
         
     </div>
 </div>

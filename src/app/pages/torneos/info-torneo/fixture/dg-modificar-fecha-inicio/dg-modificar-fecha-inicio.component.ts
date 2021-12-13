@@ -25,7 +25,7 @@ export class DgModificarFechaInicioComponent implements OnInit {
   updateFechasVersus(fechaInicio:any){
     let fechaInicioModificada = new Date(fechaInicio);
     let fechaFinModificada = new Date(fechaInicio);
-    fechaFinModificada.setDate(fechaFinModificada.getDate() + 1);
+    fechaFinModificada.setDate(fechaFinModificada.getDate() + 2);
 
     fechaInicioModificada = this.javascriptDateToSqlDate(fechaInicioModificada);
     fechaFinModificada = this.javascriptDateToSqlDate(fechaFinModificada);

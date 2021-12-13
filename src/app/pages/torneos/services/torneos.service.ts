@@ -30,6 +30,18 @@ export class TorneosService {
     return this.httpClient.post<any>(url, {'headers':this.headers});
   }
 
+  getListaTorneosOrganizador(idusuario:any): Observable<any>{
+    const query = `listartorneos`;
+
+    const objetoIdUsuario = {
+      'idusuario' : idusuario
+    }
+
+    const url = this.API_URL + query;
+
+    return this.httpClient.post<any>(url, objetoIdUsuario, {'headers':this.headers});
+  }
+
   getDataTorneo(idtorneo: any):Observable<any>{
     const query = 'getdatostorneo'; 
     //let params = new HttpParams().set('idusuario', idusuario);
@@ -85,18 +97,6 @@ export class TorneosService {
     );
     //console.log(versus);
     return versus;
-  }
-
-  getListaTorneosOrganizador(idusuario:any): Observable<any>{
-    const query = `listartorneos`;
-
-    const objetoIdUsuario = {
-      'idusuario' : idusuario
-    }
-
-    const url = this.API_URL + query;
-
-    return this.httpClient.post<any>(url, objetoIdUsuario, {'headers':this.headers});
   }
 
   getListaInfoVersus(idtorneo:any, idversus:any):Observable<any>{

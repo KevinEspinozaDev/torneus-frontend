@@ -1,5 +1,5 @@
 .background{
-    background-image: url('/assets/images/login-background.png');
+    background-image: url('/assets/images/background-rankings.jpg');
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -18,6 +18,21 @@
 
     .mat-card{
         height: fit-content;
-        max-height: 90%;
+        max-height: 100%;
+        overflow-y: auto;
     }
+}
+
+.primero{
+    background-color: #33fd87;
+}
+.segundo{
+    background-color: #7effb4;
+}
+.tercero{
+    background-color: #ccfde0;
+}
+
+.mat-tab-labels{
+    justify-content: space-between;
 }

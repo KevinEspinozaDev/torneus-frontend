@@ -1,13 +1,20 @@
 <div class="background">
     <div class="container">
         <mat-card class="my-2 px-4">
-            <h4 class="text-center">Mis torneos creados</h4>
-            <div class="row w-100">
-                <div *ngIf="dataReady == true && listaTorneos.length > 0">
+            <h3 class="text-center mb-3">Mis torneos creados</h3>
+            <p class="mb-2">Aquí se listan los torneos que organizaste en Torneus, ordenados de más nuevos a más antiguos:</p>
+            <div *ngIf="dataReady == false " class="row w-100 d-flex justify-content-center mt-4 align-items-center">
+                <mat-spinner style="zoom:0.8;"
+                    mode="indeterminate">
+                </mat-spinner>
+            </div>
+            <div  *ngIf="dataReady == true " class="row w-100">
+                <div *ngIf="listaTorneos.length > 0">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Nombre</th>
+                                <th scope="col">Juego</th>
                                 <th scope="col">Fecha Inicio</th>
                                 <th scope="col">Fecha Fin</th>
                                 <th scope="col">Estado</th>
@@ -16,8 +23,12 @@
                         <tbody>
                             <tr class="cadaTorneo" *ngFor="let torneo of listaTorneos" (click)="objetoTorneo(torneo)">
                                 <th scope="row">{{torneo.nombre}}</th>
-                                <td>{{torneo.fechainicio}}</td>
-                                <td>{{torneo.fechafin}}</td>
+                                <td>
+                                    <img width="20" [src]="'../../../../assets/videogames/'+torneo.url" alt="{{torneo.nombrevideojuego}}" />
+                                    {{torneo.nombrevideojuego}}
+                                </td>
+                                <td>{{torneo.fechainicio | date : "dd/MM/yyyy"}}</td>
+                                <td>{{torneo.fechafin | date : "dd/MM/yyyy"}}</td>
                                 <td *ngIf="torneoExpirado(torneo) == true" class="text-danger">Finalizado</td>
                                 <td *ngIf="torneoExpirado(torneo) == false" class="text-success">Abierto</td>
                             </tr>

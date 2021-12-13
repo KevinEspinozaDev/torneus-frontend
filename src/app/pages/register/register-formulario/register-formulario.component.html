@@ -99,7 +99,12 @@
 
                 <div class="buttonsContainer mt-3">
                     <button mat-raised-button color="default" type="reset">Limpiar</button>
-                    <button [disabled]="this.registerJugadorOrganizadorForm.invalid" (click)="registrarUsuario()" mat-raised-button color="primary" type="submit">Registrarse</button>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <button [disabled]="this.registerJugadorOrganizadorForm.invalid" (click)="registrarUsuario()" mat-raised-button color="primary" type="submit">Registrarse</button>
+                        <mat-spinner *ngIf="loading == true " style="zoom:0.3;" class="ml-4"
+                            mode="indeterminate">
+                        </mat-spinner>
+                    </div>               
                 </div>
             </form>
         </div>
@@ -176,7 +181,6 @@
                 <div *ngIf="successCuadro == true" class="alert alert-success" role="alert">
                     Usuario Creado correctamente! Serás redirigido/a para Iniciar Sesión.
                 </div>
-
                 <!--
                 <div *ngIf="!loginOk" class="alert alert-success" role="success">
                     Usuario Creado correctamente! Serás redirigido/a para Iniciar Sesión.
@@ -185,7 +189,13 @@
 
                 <div class="buttonsContainer mt-3">
                     <button mat-raised-button color="default" type="reset">Limpiar</button>
-                    <button [disabled]="this.registerEquipoForm.invalid" (click)="registrarUsuario()" mat-raised-button color="primary" type="submit">Registrarse</button>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <button [disabled]="this.registerEquipoForm.invalid" (click)="registrarUsuario()" mat-raised-button color="primary" type="submit">Registrarse</button>
+                        <mat-spinner *ngIf="loading == true " style="zoom:0.3;" class="ml-4"
+                            mode="indeterminate">
+                        </mat-spinner>
+                    </div>
+                    
                 </div>
             </form>
         </div>

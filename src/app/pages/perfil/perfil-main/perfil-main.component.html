@@ -1,25 +1,31 @@
 <div class="background">
     <div class="container text-dark">
         <!--<h1>Mi Perfil</h1>-->
-        <div class="row my-4">
+        <div class="row my-4 d-flex justify-content-center align-items-center">
             <div class="col-12 col-md-4">
-                <div class="containerFotoPerfil rounded-circle" [ngStyle]="{'background-image' : 'url(./assets/images/logo-torneus-main.svg)'}"></div>
+                <div class="containerFotoPerfil rounded-circle bg-white" 
+                    [ngStyle]="{'background-image' : 'url(./assets/images/logo-torneus-main.svg)'}">
+                </div>
             </div>
 
             <div class="col-12 col-md-8">
                 <mat-card class="h-100 mh-100 w-100 d-flex justify-content-center">
                     <div *ngIf="dataReady == true" class="data w-100">
-                        <h2 class="text-center">Datos del Usuario</h2>
+                        <h2 class="text-center">Mis Datos</h2>
                         <div class="d-flex align-items-center">
-                            <mat-icon class="mx-1">account_circle</mat-icon> {{allDataUser.nametorneus}}
+                            <mat-icon class="mx-1">person</mat-icon><b>Nombre y Apellido:&nbsp;</b>  {{allDataUser.name}}
                         </div>
                         <hr/>
                         <div class="d-flex align-items-center">
-                            <mat-icon class="mx-1">email</mat-icon> {{allDataUser.email}}
+                            <mat-icon class="mx-1">account_circle</mat-icon><b>Nombre Torneus:&nbsp;</b> {{allDataUser.nametorneus}}
                         </div>
                         <hr/>
                         <div class="d-flex align-items-center">
-                            <mat-icon class="mx-1">badge</mat-icon> {{rolUsuarioActual}}
+                            <mat-icon class="mx-1">email</mat-icon><b>Email:&nbsp;</b> {{allDataUser.email}}
+                        </div>
+                        <hr/>
+                        <div class="d-flex align-items-center">
+                            <mat-icon class="mx-1">badge</mat-icon><b>Rol:&nbsp;</b> {{rolUsuarioActual}}
                         </div>
                         <hr/>
                         <ng-container *ngIf="usuarioActual.idrol == 4">

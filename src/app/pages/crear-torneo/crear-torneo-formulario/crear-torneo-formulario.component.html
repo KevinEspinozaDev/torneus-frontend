@@ -74,6 +74,19 @@
                     </mat-select>
                 </mat-form-field>
 
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Videojuego del torneo</mat-label>
+                    <mat-select required formControlName="idvideojuego">
+                        <mat-option [value]="">- Selecciona Videojuego -</mat-option>
+                        <mat-option *ngFor="let videojuego of videojuegos" [value]="videojuego.idvideojuego">
+                            {{videojuego.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="registerTipoTorneoForm.controls.idvideojuego.errors?.required">
+                        Elige el videojuego del torneo
+                    </mat-error>
+                </mat-form-field>
+
                 <!-- Cantidad maxima de equipos -->
                 <!--<mat-form-field class="form-field" appearance="outline">
                     

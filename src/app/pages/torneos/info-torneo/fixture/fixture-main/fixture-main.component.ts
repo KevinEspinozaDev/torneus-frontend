@@ -125,6 +125,7 @@ export class FixtureMainComponent implements OnInit {
     let fechaActual = new Date();
     let fechaInicio = new Date(objetoVersus.fechainicio);
     let fechaFin = new Date(objetoVersus.fechafin);
+    fechaFin = this.fechaToJavascriptDate(fechaFin);
     let equipoUnoSubioResultados = await this.comprobarResultadosEquipo(objetoVersus, objetoVersus.idequipo1);
     let equipoDosSubioResultados = await this.comprobarResultadosEquipo(objetoVersus, objetoVersus.idequipo2);
     if(objetoVersus.estado == 1 && fechaActual >= fechaFin){
@@ -137,6 +138,15 @@ export class FixtureMainComponent implements OnInit {
       }
       await this.callGetUpdateEstadoVersusFromService(objetoVersus);
     }
+  }
+
+  fechaToJavascriptDate(fecha:any){
+    let fechaNueva = new Date(fecha)
+    fechaNueva.setDate(fechaNueva.getDate() + 1);
+    fechaNueva.setHours(0);
+    fechaNueva.setMinutes(0);
+    fechaNueva.setSeconds(0);
+    return fechaNueva;
   }
 
   async ngOnInit() { //:void
@@ -181,7 +191,7 @@ export class FixtureMainComponent implements OnInit {
     //this.arregloVersus = this.acomodarArregloParaVista(this.arregloVersus)
 
     for(let versus of arregloVersus){
-      console.log(versus)
+      //console.log(versus)
       this.asignarEstadoEnCurso(versus);
       this.asignarEstadoHayConflicto(versus);
       this.asignarEstadoSinResultados(versus);
@@ -247,7 +257,7 @@ export class FixtureMainComponent implements OnInit {
     for (let fecha of arrayEquipos) {
       for (let versus of fecha) {
         let fechaFinVersus = new Date(this.dataTorneo.fechainicio);
-        fechaFinVersus.setDate(fechaFinVersus.getDate() + 1);;
+        fechaFinVersus.setDate(fechaFinVersus.getDate() + 2);;
         fechaFinVersus = this.javascriptDateToSqlDate(fechaFinVersus)
 
         objetoVersus = {
