@@ -115,7 +115,7 @@ export class FixtureMainComponent implements OnInit {
   async comprobarResultadosEquipo(objetoVersus:any, idequipo:any){
     let resultados:any = await this.callGetEncuentrosSinResultadosFromService(objetoVersus, idequipo);
     let equipoSubioResultados = false;
-    if(resultados.length = 0){
+    if(resultados.length == 0){
       equipoSubioResultados = true;
     }
     return equipoSubioResultados;
@@ -128,14 +128,18 @@ export class FixtureMainComponent implements OnInit {
     fechaFin = this.fechaToJavascriptDate(fechaFin);
     let equipoUnoSubioResultados = await this.comprobarResultadosEquipo(objetoVersus, objetoVersus.idequipo1);
     let equipoDosSubioResultados = await this.comprobarResultadosEquipo(objetoVersus, objetoVersus.idequipo2);
+    console.log(equipoUnoSubioResultados)
+    console.log(equipoDosSubioResultados)
+
     if(objetoVersus.estado == 1 && fechaActual >= fechaFin){
       if(!equipoUnoSubioResultados && !equipoDosSubioResultados){
         objetoVersus.estado = 4
         
       }
-      else if(equipoUnoSubioResultados && equipoDosSubioResultados){
-        objetoVersus.estado = 5;
-      }
+      
+      await this.callGetUpdateEstadoVersusFromService(objetoVersus);
+    }else if(objetoVersus.estado == 1 && equipoUnoSubioResultados && equipoDosSubioResultados){
+      objetoVersus.estado = 5;
       await this.callGetUpdateEstadoVersusFromService(objetoVersus);
     }
   }
