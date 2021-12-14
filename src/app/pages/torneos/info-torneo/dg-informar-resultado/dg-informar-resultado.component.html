@@ -7,8 +7,8 @@
         <div class="infotorneo py-4">
             <p><b>Torneo:</b> {{infotorneo.nombre}}</p>
             <p><b>Organizador:</b> {{infotorneo.nametorneus}} - {{infotorneo.name}}</p>
-            <p><b>Fecha de inicio:</b> {{infotorneo.fechainicio}}</p>
-            <p><b>Fecha de fin:</b> {{infotorneo.fechafin}}</p>        
+            <p><b>Fecha de inicio:</b> {{infotorneo.fechainicio | date : "dd/MM/yyyy"}}</p>
+            <p><b>Fecha de fin:</b> {{infotorneo.fechafin | date : "dd/MM/yyyy"}}</p>        
         </div>
     </div>
 
@@ -16,43 +16,50 @@
         
     <div class="infoVersusContainer mt-4">
             <h4 class="text-center">
-                {{infoversus.idequipo1}} <span class="text-success">(vs)</span> 
-                {{infoversus.idequipo2}}
+                {{nameequipo1}} <span class="text-success">(vs)</span> 
+                {{nameequipo2}}
             </h4>
 
             <div class="d-flex justify-content-center flex-column resultados w-50 mx-auto">
                 <p>Ingresar resultados del versus</p>
-    
                 <form [formGroup]="resultados">
                     <div class="unaPartida">
                         <!-- Una partida -->
                         <i>Partida #1</i>
-                        <mat-button-toggle-group formControlName="partida1" aria-label="Resultado">
-                            <mat-button-toggle class="botonGane w-100 " value="1">Gané</mat-button-toggle>
-                            <mat-button-toggle class="botonPerdi w-100 " value="0">Perdí</mat-button-toggle>
+                        <mat-button-toggle-group formControlName="partida1" aria-label="Resultado" #seleccion1="matButtonToggleGroup">
+                            <mat-button-toggle class="botonGane w-100 text-light" value="1">Gané</mat-button-toggle>
+                            <mat-button-toggle class="botonPerdi w-100 text-light" value="0">Perdí</mat-button-toggle>
                         </mat-button-toggle-group>
-                        <p class="text-danger" *ngIf="resultados.controls.partida1.value == 0"><b>Seleccionaste: Perdí</b></p>
-                        <p class="text-success" *ngIf="resultados.controls.partida1.value == 1"><b>Seleccionaste: Gané</b></p>
+                        <!--
+                        <p class="">
+                            <b>Seleccionaste: {{seleccion1.value}}</b>
+                        </p>
+                        -->
+                        <p class="" *ngIf="!seleccion1.value"><b>Seleccione una opción</b></p>
+                        <p class="text-danger" *ngIf="seleccion1.value == 0"><b>Seleccionaste: Perdí</b></p>
+                        <p class="text-success" *ngIf="seleccion1.value == 1"><b>Seleccionaste: Gané</b></p>
                     </div>
                     <div class="unaPartida">
                         <!-- Una partida -->
                         <i>Partida #2</i>
-                        <mat-button-toggle-group formControlName="partida2" aria-label="Resultado">
-                            <mat-button-toggle class="botonGane w-100 " value="1">Gané</mat-button-toggle>
-                            <mat-button-toggle class="botonPerdi w-100 " value="0">Perdí</mat-button-toggle>
+                        <mat-button-toggle-group formControlName="partida2" aria-label="Resultado" #seleccion2="matButtonToggleGroup">
+                            <mat-button-toggle class="botonGane w-100 text-light" value="1">Gané</mat-button-toggle>
+                            <mat-button-toggle class="botonPerdi w-100 text-light" value="0">Perdí</mat-button-toggle>
                         </mat-button-toggle-group>
-                        <p class="text-danger" *ngIf="resultados.controls.partida2.value == 0"><b>Seleccionaste: Perdí</b></p>
-                        <p class="text-success" *ngIf="resultados.controls.partida2.value == 1"><b>Seleccionaste: Gané</b></p>
+                        <p class="" *ngIf="!seleccion2.value"><b>Seleccione una opción</b></p>
+                        <p class="text-danger" *ngIf="seleccion2.value == 0"><b>Seleccionaste: Perdí</b></p>
+                        <p class="text-success" *ngIf="seleccion2.value == 1"><b>Seleccionaste: Gané</b></p>
                     </div>
                     <div class="unaPartida">
                         <!-- Una partida -->
                         <i>Partida #3</i>
-                        <mat-button-toggle-group formControlName="partida3" aria-label="Resultado">
-                            <mat-button-toggle class="botonGane w-100 " value="1">Gané</mat-button-toggle>
-                            <mat-button-toggle class="botonPerdi w-100 " value="0">Perdí</mat-button-toggle>
+                        <mat-button-toggle-group formControlName="partida3" aria-label="Resultado" #seleccion3="matButtonToggleGroup">
+                            <mat-button-toggle class="botonGane w-100 text-light" value="1">Gané</mat-button-toggle>
+                            <mat-button-toggle class="botonPerdi w-100 text-light" value="0">Perdí</mat-button-toggle>
                         </mat-button-toggle-group>
-                        <p class="text-danger" *ngIf="resultados.controls.partida3.value == 0"><b>Seleccionaste: Perdí</b></p>
-                        <p class="text-success" *ngIf="resultados.controls.partida3.value == 1"><b>Seleccionaste: Gané</b></p>
+                        <p class="" *ngIf="!seleccion3.value"><b>Seleccione una opción</b></p>
+                        <p class="text-danger" *ngIf="seleccion3.value == 0"><b>Seleccionaste: Perdí</b></p>
+                        <p class="text-success" *ngIf="seleccion3.value == 1"><b>Seleccionaste: Gané</b></p>
                     </div>
               
                 </form>
