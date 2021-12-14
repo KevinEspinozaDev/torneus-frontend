@@ -199,7 +199,7 @@ export class TorneosService {
     const query = 'getencuentrossinresultados'; 
     let encuentros = this.httpClient
     .post(
-      `${this.API_URL}${query}`, {idversus: idversus, idequipoganador: idequipo},
+      `${this.API_URL}${query}`, {idversus: idversus, idequipo: idequipo},
       {headers: this.headers}
     );
     return encuentros;
@@ -212,7 +212,7 @@ export class TorneosService {
     .post(
       `${this.API_URL}${query}`, {
         idversus: idversus, 
-        idequipoganador: idequipo,
+        idequipo: idequipo,
       },
       {headers: this.headers}
     );

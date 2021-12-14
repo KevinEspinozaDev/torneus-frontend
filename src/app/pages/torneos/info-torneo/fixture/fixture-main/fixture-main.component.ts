@@ -365,14 +365,14 @@ export class FixtureMainComponent implements OnInit {
           for(let i=1; i<=3; i++){
             let objetoEncuentroEquipo1 = {
               idversus: versus.idversus,
-              idequipoganador: versus.idequipo1,
+              idequipo: versus.idequipo1,
               victoria: -1,
             }
             //console.log(objetoEncuentroEquipo1);
 
             let objetoEncuentroEquipo2 = {
               idversus: versus.idversus,
-              idequipoganador: versus.idequipo2,
+              idequipo: versus.idequipo2,
               victoria: -1,
             }
             //console.log(objetoEncuentroEquipo2);

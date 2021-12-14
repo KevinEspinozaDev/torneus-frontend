@@ -69,8 +69,8 @@
                     <ng-container matColumnDef="informar_resultado"> <!--Esto lo ven los equipos y el organizador -->
                         <th mat-header-cell *matHeaderCellDef> Acciones </th>
                         <td mat-cell *matCellDef="let versus"> 
-                            <a *ngIf="participoEnEsteVersus(versus.idequipo1, versus.idequipo2) && versus.estado == 1" 
-                            (click)="dialogInformarResultado(versus)" class="btn btn-primary" href="javascript:void(0);">
+                            <a *ngIf="participoEnEsteVersus(versus.idequipo1, versus.idequipo2) && versus.estado == 1"
+                            (click)="dialogInformarResultado(versus)" class="btn btn-primary" href="javascript:void(0);"><!--&& !subiMiResultado(versus)-->
                                 Informar resultado
                             </a>
                             <a *ngIf="soyElOrganizadorDelTorneo() && checkVersusCerrado(versus) && checkConflicto(versus) && !checkExisteGanadorVersus(versus) && versus.estado != 0 && versus.estado != 1" (click)="asignarGanador(versus)" class="btn btn-primary mx-1" href="javascript:void(0);">

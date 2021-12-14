@@ -227,12 +227,12 @@ export class DgAsignarGanadorComponent implements OnInit {
     equipoGanador.nombreequipo2 = this.data.versus.nameequipo2;
 
     for(let encuentro of this.data.encuentros){
-      if(encuentro.idequipoganador == this.data.versus.idequipo1){ //Equipo 1
+      if(encuentro.idequipo == this.data.versus.idequipo1){ //Equipo 1
         if(encuentro.victoria == 1){
           victoriasEquipo1++;
         }
       }
-      if(encuentro.idequipoganador == this.data.versus.idequipo2){ //Equipo 2
+      if(encuentro.idequipo == this.data.versus.idequipo2){ //Equipo 2
         if(encuentro.victoria == 1){
           victoriasEquipo2++;
         }

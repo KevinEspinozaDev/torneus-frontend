@@ -97,14 +97,14 @@ export class DgInformarResultadoComponent implements OnInit {
     }
     console.log(encuentrosModificado);
 
-    /*
+    
     this.torneosService.updateEncuentroVictoria(encuentrosModificado)
     .subscribe(
       (res) => {
-
+        window.location.reload();
       }
     );
-    */
+    
     
   }
 
