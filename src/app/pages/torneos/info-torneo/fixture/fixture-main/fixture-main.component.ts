@@ -601,6 +601,7 @@ export class FixtureMainComponent implements OnInit {
 
     dialogConfig.data = {
       versus: versus,
+      idusuario: this.sessionData.idusuario,
     }; //Mandar también la lista de resultados
     this.dialog.open(DgInformarResultadoComponent, dialogConfig);
   }
