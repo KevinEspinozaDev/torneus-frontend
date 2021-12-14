@@ -1,3 +1,12 @@
+
+<div *ngIf="flagVersus == true && !flagTorneoFinalizado" class="col-12 my-2 position-sticky sticky-top">
+    <div class="alert alert-success text-center blob " role="alert">
+        <p>Se han jugado todas las partidas del torneo! <b>Ya puedes finalizar el torneo</b></p>
+        <button mat-raised-button color="primary" (click)="finalizarTorneo()"><b>Finalizar Torneo</b></button>
+    </div>
+</div>
+ 
+
 <mat-card class="lista-aplicantes px-4">
     <h2 class="text-center py-2">Enfrentamientos</h2>
     <div class="w-100 h-100" *ngIf="arregloVersus.length == 0">

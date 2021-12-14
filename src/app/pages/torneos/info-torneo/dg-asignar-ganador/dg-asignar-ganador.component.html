@@ -14,12 +14,15 @@
         <div *ngIf="estadoResultados == 4">Los equipos no subieron sus resultados. Ningún equipo obtendrá puntos.</div>
 
         <div class="my-2" *ngIf="estadoResultados != 4">
-            <mat-radio-group [(ngModel)]="ganador.idequipoganador" 
-            [disabled]="estadoResultados == 2 || estadoResultados == 3 || estadoResultados == 0" 
-            color="primary" [required]="true" aria-label="Seleccione un ganador">
-                <mat-radio-button [value]="idequipo1">{{nameequipo1}}</mat-radio-button>
-                <mat-radio-button [value]="idequipo2">{{nameequipo2}}</mat-radio-button>
-            </mat-radio-group>
+            <form [formGroup]="ganadorGroup">
+                <mat-radio-group formControlName="radioGroup"
+                [disabled]="estadoResultados == 2 || estadoResultados == 3 || estadoResultados == 0" 
+                color="primary" [required]="true" aria-label="Seleccione un ganador">
+                    <mat-radio-button [value]="idequipo1">{{nameequipo1}}</mat-radio-button>
+                    <mat-radio-button [value]="idequipo2">{{nameequipo2}}</mat-radio-button>
+                </mat-radio-group>
+            </form>
+            
         </div>
 
         <div *ngIf="checkExisteGanadorVersus()">

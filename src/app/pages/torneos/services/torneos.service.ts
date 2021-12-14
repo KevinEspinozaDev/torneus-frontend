@@ -257,4 +257,18 @@ export class TorneosService {
   }
 
 
+
+  finalizarTorneo(idtorneo:any):Observable<any>{
+    const body = {
+      idtorneo : idtorneo
+    }
+    const query = 'finaltorneo'; 
+    return this.httpClient
+    .post(
+      `${this.API_URL}${query}`, body,
+      {headers: this.headers}
+    );
+  }
+
+
 }

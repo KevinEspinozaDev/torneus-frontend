@@ -35,6 +35,10 @@ export class FixtureMainComponent implements OnInit {
 
   sessionData:any;
 
+  flagVersus:boolean = true;
+
+  flagTorneoFinalizado:boolean = false;
+
   constructor(
     private torneosService: TorneosService,
     private authenticationService: AuthenticationService,
@@ -105,7 +109,7 @@ export class FixtureMainComponent implements OnInit {
   }
 
   async asignarEstadoHayGanador(objetoVersus: any){
-    if((objetoVersus.estado == 1 || objetoVersus.estado == 3 || objetoVersus.estado == 4) 
+    if((objetoVersus.estado == 1 || objetoVersus.estado == 3 || objetoVersus.estado == 4 || objetoVersus.estado == 5) 
     && objetoVersus.idequipoganadorfinal != 0){
       objetoVersus.estado = 2;
       await this.callGetUpdateEstadoVersusFromService(objetoVersus);
@@ -193,16 +197,40 @@ export class FixtureMainComponent implements OnInit {
 
     let arregloVersus = await this.callGetVersusSinAgruparFromService();
     //this.arregloVersus = this.acomodarArregloParaVista(this.arregloVersus)
-
     for(let versus of arregloVersus){
       //console.log(versus)
       this.asignarEstadoEnCurso(versus);
       this.asignarEstadoHayConflicto(versus);
       this.asignarEstadoSinResultados(versus);
       this.asignarEstadoHayGanador(versus);
-    }
-    
 
+      if (versus.estado == 1 || versus.estado == 3 || versus.estado == 5) {
+        this.flagVersus = false;
+      }
+      
+    }
+
+    if (this.flagVersus == true) {
+      /* obtener el estado del torneoi */
+      if (this.dataTorneo.estado == '4') {
+        this.flagTorneoFinalizado = true;
+      }
+    }
+
+  }
+
+  finalizarTorneo(){
+    if (this.soyElOrganizador == true) {
+      this.torneosService.finalizarTorneo(this.dataTorneo.idtorneo)
+      .subscribe(res => {
+        console.log(res);
+        if (res) {
+          window.location.reload();
+        }
+      })
+    }
+
+    
   }
 
   longitudObjeto(objeto:any){

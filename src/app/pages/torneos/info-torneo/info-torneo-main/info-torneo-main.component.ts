@@ -82,10 +82,4 @@ export class InfoTorneoMainComponent implements OnInit {
     //this.soyElOrganizador = false;
   }
 
-  finalizarTorneo(){
-    if (this.soyElOrganizador == true) {
-      console.log(this.dataTorneo);
-    }
-  }
-
 }

@@ -6,15 +6,6 @@
                 <mat-spinner mode="indeterminate"></mat-spinner>
             </div>
 
-            <!--
-            <div class="col-12 my-2 position-sticky sticky-top">
-                <div class="alert alert-success text-center blob " role="alert">
-                    <p>Se han jugado todas las partidas del torneo! <b>Ya puedes finalizar el torneo</b></p>
-                    <button mat-raised-button color="primary" (click)="finalizarTorneo()"><b>Finalizar Torneo</b></button>
-                </div>
-            </div>
-            -->
-
             <div class="col-6 my-2" *ngIf="dataReady == true">
                 <mat-card class="h-100 mh-100" *ngIf="dataReady == true">
                     <h2 class="text-center py-2">Datos del Torneo</h2>
@@ -32,6 +23,14 @@
                     <hr/>
                     <div class="d-flex align-items-center">
                         <mat-icon class="mx-1">badge</mat-icon> {{dataTorneo.nametorneus}}
+                    </div>
+                    <hr/>
+                    <div class="d-flex align-items-center">
+                        <mat-icon class="mx-1">info</mat-icon> 
+                        <span *ngIf="dataTorneo.estado == '1'">Abierto</span>
+                        <span *ngIf="dataTorneo.estado == '2'">Cupo Lleno</span>
+                        <span *ngIf="dataTorneo.estado == '3'">Iniciado</span>
+                        <span *ngIf="dataTorneo.estado == '4'" class="text-danger">Finalizado</span>
                     </div>
                     <hr/>
 

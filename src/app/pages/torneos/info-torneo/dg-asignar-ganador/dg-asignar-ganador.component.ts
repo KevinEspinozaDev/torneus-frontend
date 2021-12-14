@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TorneosService } from '../../services/torneos.service';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -34,11 +35,18 @@ export class DgAsignarGanadorComponent implements OnInit {
 
   itemParticipa: any;
 
+  ganadorGroup = this.formBuilder.group({
+    radioGroup: [],
+  })
+
   constructor(
     public dialog: MatDialog, 
     @Inject(MAT_DIALOG_DATA) public data: any,
     private torneosService: TorneosService,
-  ) { }
+    private formBuilder : FormBuilder
+  ) { 
+    
+  }
 
   ngOnInit(): void {
     this.fechaNro = this.data.versus.fechaNro;
@@ -120,8 +128,9 @@ export class DgAsignarGanadorComponent implements OnInit {
       //Update a la base de datos
       await this.callUpdatePuntosTorneoFromService(objetoParticipaGanador);
     }
-
+    
     this.dialog.closeAll();
+    window.location.reload();
     /*
       Asignar puntos en la tabla participa segun los encuentros
       1 punto si gana, 0 si pierde
@@ -248,6 +257,8 @@ export class DgAsignarGanadorComponent implements OnInit {
     //Retornar id del ganador
     this.ganador = equipoGanador;
     //return equipoGanador;
+
+    this.ganadorGroup.controls['radioGroup'].setValue(this.ganador.idequipoganador);
   }
 
 }
