@@ -1,5 +1,5 @@
 
-<div *ngIf="flagVersus == true && !flagTorneoFinalizado" class="col-12 my-2 position-sticky sticky-top">
+<div *ngIf="flagVersus == true && flagTorneoFinalizado == false" class="col-12 my-2 position-sticky sticky-top">
     <div class="alert alert-success text-center blob " role="alert">
         <p>Se han jugado todas las partidas del torneo! <b>Ya puedes finalizar el torneo</b></p>
         <button mat-raised-button color="primary" (click)="finalizarTorneo()"><b>Finalizar Torneo</b></button>

@@ -210,6 +210,10 @@ export class FixtureMainComponent implements OnInit {
       
     }
 
+    if (arregloVersus.length < 1) {
+      this.flagVersus = false;
+    }
+
     if (this.flagVersus == true) {
       /* obtener el estado del torneoi */
       if (this.dataTorneo.estado == '4') {
