@@ -38,12 +38,18 @@
                         <th mat-header-cell *matHeaderCellDef> Equipo local </th>
                         <td mat-cell *matCellDef="let versus"> 
                             <b class="link">{{versus.nameequipo1}}</b>
+                            <span *ngIf="versus.idequipo1 == versus.idequipoganadorfinal">
+                                <mat-icon>emoji_events</mat-icon>
+                            </span>
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="idequipo2">
                         <th mat-header-cell *matHeaderCellDef> Equipo visitante </th>
                         <td mat-cell *matCellDef="let versus"> 
                             <b class="link">{{versus.nameequipo2}}</b>
+                            <span *ngIf="versus.idequipo2 == versus.idequipoganadorfinal">
+                                <mat-icon>emoji_events</mat-icon>
+                            </span>
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="fechainicio">
