@@ -185,7 +185,7 @@ export class TorneosService {
     return encuentros;
   }
 
-  getItemParticipa(idtorneo:any, idequipo:any){
+  getItemParticipa(idtorneo:any, idequipo:any):Observable<any>{
     const query = 'getparticipaxtorneoyequipo'; 
     let itemParticipa = this.httpClient
     .post(
@@ -195,7 +195,7 @@ export class TorneosService {
     return itemParticipa;
   }
 
-  getEncuentrosSinResultados(idversus:any, idequipo:any){
+  getEncuentrosSinResultados(idversus:any, idequipo:any):Observable<any>{
     const query = 'getencuentrossinresultados'; 
     let encuentros = this.httpClient
     .post(
@@ -205,7 +205,22 @@ export class TorneosService {
     return encuentros;
   }
 
-  updatePuntosTorneo(objetoParticipa:any){
+  getEncuentrosDeEquipo(idversus:any, idequipo:any):Observable<any>{
+    const query = 'getencuentrosxversusyequipo'; 
+    //let params = new HttpParams().set('idusuario', idusuario);
+    let encuentros = this.httpClient
+    .post(
+      `${this.API_URL}${query}`, {
+        idversus: idversus, 
+        idequipoganador: idequipo,
+      },
+      {headers: this.headers}
+    );
+    //console.log(versus);
+    return encuentros;
+  }
+
+  updatePuntosTorneo(objetoParticipa:any):Observable<any>{
     const query = 'asignarpuntaje/'+objetoParticipa.id; 
     return this.httpClient
     .put(
@@ -214,7 +229,7 @@ export class TorneosService {
     );
   }
 
-  updateIdGanadorVersus(objetoVersus:any){
+  updateIdGanadorVersus(objetoVersus:any):Observable<any>{
     const query = 'actualizaridganador/'+objetoVersus.idversus; 
     return this.httpClient
     .put(
@@ -223,11 +238,20 @@ export class TorneosService {
     );
   }
 
-  updateEstadoVersus(objetoVersus:any){
+  updateEstadoVersus(objetoVersus:any):Observable<any>{
     const query = 'actualizarestadoversus/'+objetoVersus.idversus; 
     return this.httpClient
     .put(
       `${this.API_URL}${query}`, objetoVersus,
+      {headers: this.headers}
+    );
+  }
+
+  updateEncuentroVictoria(arregloEncuentros:any):Observable<any>{
+    const query = 'updatevictorias'; 
+    return this.httpClient
+    .put(
+      `${this.API_URL}${query}`, arregloEncuentros,
       {headers: this.headers}
     );
   }
