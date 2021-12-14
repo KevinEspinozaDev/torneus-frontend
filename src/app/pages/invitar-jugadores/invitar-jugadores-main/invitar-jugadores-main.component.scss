@@ -5,6 +5,10 @@
     color:white;
     text-align: center;
     position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .inv-jugadores div{
     position: absolute;
