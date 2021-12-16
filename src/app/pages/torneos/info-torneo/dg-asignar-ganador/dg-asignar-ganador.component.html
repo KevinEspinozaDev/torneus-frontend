@@ -2,9 +2,9 @@
     <h1 mat-dialog-title>Asignar ganador</h1>
     <div mat-dialog-content>
         <p>¿Quién es el ganador del equipo?</p>
-        <div *ngIf="estadoResultados == 1">Hay conflicto.</div>
+        <div class="text-danger" *ngIf="estadoResultados == 1">Hay conflicto.</div>
         <div *ngIf="estadoResultados == 0">
-            <div>No hay conflicto.</div>
+            <div class="text-success">No hay conflicto.</div>
             <div>{{ganador.nombreequipo1}}: {{ganador.puntosequipo1}} puntos.</div>
             <div>{{ganador.nombreequipo2}}: {{ganador.puntosequipo2}} puntos.</div>
             <div>El equipo ganador es <b>{{ganador.nombreequipoganador}}</b></div>
@@ -33,7 +33,7 @@
         <!-- Si es 0, no hay conflicto, si es 1 hay conflicto, si hay 2 el equipo1 subio y equipo2 no, si 
         es 3 equipo2 subio y equipo1 no, -->
         <button *ngIf="!checkExisteGanadorVersus() && estadoResultados != 4" 
-        (click)="updatePuntosEquipos(conflicto)" [disabled]="ganador.idequipoganador == 0"
+        (click)="updatePuntosEquipos(conflicto)" [disabled]="this.ganadorGroup.invalid"
          mat-raised-button color="primary">Confirmar</button>
 
          <!-- cuando es 4 es que ninguno subio el resultado -->

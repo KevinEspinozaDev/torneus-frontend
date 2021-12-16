@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TorneosService } from '../../services/torneos.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -36,7 +36,9 @@ export class DgAsignarGanadorComponent implements OnInit {
   itemParticipa: any;
 
   ganadorGroup = this.formBuilder.group({
-    radioGroup: [],
+    radioGroup: new FormControl('',[
+      Validators.required,
+    ]),
   })
 
   constructor(
@@ -79,7 +81,7 @@ export class DgAsignarGanadorComponent implements OnInit {
   async updateIdGanador(idganador:any){
     //Asignacion de idganador al idganador del objeto versus
     let objetoVersus = this.data.versus;
-    console.log(objetoVersus);
+    //console.log(objetoVersus);
     objetoVersus.idequipoganadorfinal = idganador;
 
     //Update a la base
@@ -88,6 +90,7 @@ export class DgAsignarGanadorComponent implements OnInit {
 
   async updatePuntosEquipos(hayConflicto: any){
     //Actualizar id ganador de versus
+    this.ganador.idequipoganador = this.ganadorGroup.controls.radioGroup.value;
     this.updateIdGanador(this.ganador.idequipoganador);
     //console.log(this.ganador.idequipoganador);
     if(!hayConflicto){
